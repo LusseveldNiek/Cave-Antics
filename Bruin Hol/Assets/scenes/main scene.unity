@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 362832035}
   - component: {fileID: 362832034}
   - component: {fileID: 362832033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 758432575}
   - component: {fileID: 758432574}
   - component: {fileID: 758432573}
+  - component: {fileID: 758432579}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -253,8 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09187c4a8bd81744b074c499d1d5816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 4
-  player: {fileID: 758432574}
+  speedPlayer: 10
+  jumpForce: 10
+  feetRadius: 0.1
+  playerRigidbody: {fileID: 758432574}
+  isGrounded: 0
+  feet: {fileID: 0}
 --- !u!54 &758432574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -269,7 +274,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 1
 --- !u!65 &758432575
 BoxCollider:
@@ -342,13 +347,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758432572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.16, y: 0.71, z: 0.4}
+  m_LocalPosition: {x: 13.16, y: 1.58, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 0.36945}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &758432579
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758432572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.109823346
+  m_Center: {x: 0, y: -0.5048604, z: 0}
 --- !u!1 &789210612
 GameObject:
   m_ObjectHideFlags: 0
