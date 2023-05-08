@@ -19,12 +19,22 @@ public class MovementPlayer : MonoBehaviour
     void Update()
     {
         //horizontal movement
-        transform.Translate(Input.GetAxis("Horizontal") * speedPlayer, 0, 0);
+        transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
 
         //jumping
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
+        }
+
+        if(isGrounded == false)
+        {
+            GetComponent<Rigidbody>().mass += Time.deltaTime * 8;
+        }
+
+        else
+        {
+            GetComponent<Rigidbody>().mass = 1;
         }
     }
 
