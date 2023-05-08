@@ -21,7 +21,7 @@ public class MovementPlayer : MonoBehaviour
     void Update()
     {
 
-        playerRigidbody.AddForce(Input.GetAxis("Horizontal") * speedPlayer, 0, 0);
+        transform.Translate(Input.GetAxis("Horizontal") * speedPlayer, 0, 0);
 
         if(Input.GetKey("w") && isGrounded)
         {

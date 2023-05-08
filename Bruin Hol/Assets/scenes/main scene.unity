@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09187c4a8bd81744b074c499d1d5816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 10
-  jumpForce: 10
+  speedPlayer: 0.1
+  jumpForce: 20
   feetRadius: 0.1
   playerRigidbody: {fileID: 758432574}
   isGrounded: 0
