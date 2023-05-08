@@ -6,11 +6,9 @@ public class MovementPlayer : MonoBehaviour
 {
     public float speedPlayer;
     public float jumpForce;
-    public float feetRadius;
     public Rigidbody playerRigidbody;
 
     public bool isGrounded;
-    public Transform feet;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +21,7 @@ public class MovementPlayer : MonoBehaviour
 
         transform.Translate(Input.GetAxis("Horizontal") * speedPlayer, 0, 0);
 
-        if(Input.GetKey("w") && isGrounded)
+        if(Input.GetKey(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
