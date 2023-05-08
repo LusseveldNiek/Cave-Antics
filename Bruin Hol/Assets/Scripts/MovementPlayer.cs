@@ -9,24 +9,26 @@ public class MovementPlayer : MonoBehaviour
     public Rigidbody playerRigidbody;
 
     public bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        //horizontal movement
         transform.Translate(Input.GetAxis("Horizontal") * speedPlayer, 0, 0);
 
-        if(Input.GetKey(KeyCode.Space) && isGrounded)
+        //jumping
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
     }
 
+    //is on ground
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Ground")
