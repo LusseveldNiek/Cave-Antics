@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class MovementPlayer : MonoBehaviour
 {
-    public float speedPlayer;
-    public float jumpForce;
+    public float speedPlayer, jumpForce, fallSpeed;
     public Rigidbody playerRigidbody;
 
     public bool isGrounded;
-
-    // Start is called before the first frame update
+    private RaycastHit groundHit;
+    public float height;
     void Start()
     {
         
@@ -26,16 +25,31 @@ public class MovementPlayer : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
+        
+        //maakt springen korter
+        IncreaseMass();
+        Sprinting();
+    }
 
-        if(isGrounded == false)
+    void IncreaseMass()
+    {
+        height = groundHit.distance;
+        if (isGrounded == false)
         {
-            GetComponent<Rigidbody>().mass += Time.deltaTime * 8;
+            Physics.Raycast(transform.position, -transform.up, out groundHit, 100);          
+            Physics.gravity = new Vector3(0, -groundHit.distance * fallSpeed, 0);
+
         }
 
         else
         {
-            GetComponent<Rigidbody>().mass = 1;
+            Physics.gravity = new Vector3(0, -10, 0);
         }
+    }
+
+    void Sprinting()
+    {
+
     }
 
     //is on ground
