@@ -10,9 +10,12 @@ public class MovementPlayer : MonoBehaviour
     public bool isGrounded;
     private RaycastHit groundHit;
     public float height;
+    public float sprintSpeed;
+    private float sprintCounter;
+    private float beginPlayerSpeed;
     void Start()
     {
-        
+        beginPlayerSpeed = speedPlayer;
     }
 
     void Update()
@@ -49,7 +52,16 @@ public class MovementPlayer : MonoBehaviour
 
     void Sprinting()
     {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            speedPlayer = sprintCounter * sprintCounter;
+            sprintCounter += sprintSpeed * Time.deltaTime;
+        }
 
+        else
+        {
+            speedPlayer = beginPlayerSpeed;
+        }
     }
 
     //is on ground
