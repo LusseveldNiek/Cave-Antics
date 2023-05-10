@@ -17,11 +17,17 @@ public class MovementPlayer : MonoBehaviour
 
     [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
+    public float fastSprintSpeed; //fast sprint snelheid
     private float sprintCounter; // speler wordt langzaam sneller
     private float beginPlayerSpeed; // reset snelheid speler
     private float sprintMultiplier; //voor andere sprint fase verdubbelaar
     private float sprintTimer; //timer hoelang sprint fase
-    public float maxSprintSpeed; 
+    public float maxSprintSpeed;
+
+    [Header("WallJumping")]
+    float idk;
+    
+
     void Start()
     {
         beginPlayerSpeed = speedPlayer;
@@ -32,9 +38,9 @@ public class MovementPlayer : MonoBehaviour
         //horizontal movement
         transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
         
-        //maakt springen korter
         IncreaseMass();
         Sprinting();
+        WallJumping();
     }
 
     void FixedUpdate()
@@ -48,6 +54,7 @@ public class MovementPlayer : MonoBehaviour
 
     void IncreaseMass()
     {
+        //maakt springen korter
         height = groundHit.distance;
         if (isGrounded == false)
         {
@@ -61,9 +68,14 @@ public class MovementPlayer : MonoBehaviour
         }
     }
 
-    void Sprinting()
+    void WallJumping()
     {
 
+    }
+
+    void Sprinting()
+    {
+        //sprinten
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
@@ -72,7 +84,7 @@ public class MovementPlayer : MonoBehaviour
             sprintTimer += Time.deltaTime;
             if(sprintTimer > 0.3f)
             {
-                sprintMultiplier = 3;
+                sprintMultiplier = fastSprintSpeed;
                 print("sprintingFast");
             }
         }
