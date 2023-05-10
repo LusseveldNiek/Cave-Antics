@@ -9,10 +9,14 @@ public class MovementPlayer : MonoBehaviour
 
     public bool isGrounded;
     private RaycastHit groundHit;
-    public float height;
-    public float sprintSpeed;
-    private float sprintCounter;
-    private float beginPlayerSpeed;
+    public float height; //hoogte tussen speler en grond
+
+    public float sprintSpeed; //sprint snelheid
+    private float sprintCounter; // speler wordt langzaam sneller
+    private float beginPlayerSpeed; // reset snelheid speler
+    private float sprintMultiplier; //voor andere sprint fase verdubbelaar
+    private float sprintTimer; //timer hoelang sprint fase
+    public float maxSprintSpeed; 
     void Start()
     {
         beginPlayerSpeed = speedPlayer;
@@ -44,7 +48,6 @@ public class MovementPlayer : MonoBehaviour
         {
             Physics.Raycast(transform.position, -transform.up, out groundHit, 100);          
             Physics.gravity = new Vector3(0, -groundHit.distance * fallSpeed, 0);
-
         }
 
         else
@@ -55,16 +58,32 @@ public class MovementPlayer : MonoBehaviour
 
     void Sprinting()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            speedPlayer = sprintCounter * sprintCounter;
+            speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
             sprintCounter += sprintSpeed * Time.deltaTime;
+
+            sprintTimer += Time.deltaTime;
+            if(sprintTimer > 0.3f)
+            {
+                sprintMultiplier = 3;
+                print("sprintingFast");
+            }
         }
 
         else
         {
             speedPlayer = beginPlayerSpeed;
+            sprintCounter = 0;
+            print("reset");
+            sprintTimer = 0;
+            sprintMultiplier = 1;
         }
+
+        speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
+
+
     }
 
     //is on ground
