@@ -381,7 +381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417587015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.16, y: 0.64, z: -9.6}
+  m_LocalPosition: {x: 13.16, y: 1.71, z: -9.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedPlayer: 8
-  jumpForce: 40
+  jumpForce: 300
   fallSpeed: 8
   playerRigidbody: {fileID: 758432574}
   isGrounded: 0
@@ -631,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758432572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.16, y: 0.64, z: 0.4}
+  m_LocalPosition: {x: 13.16, y: 1.71, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 0.36945}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -855,7 +855,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019112538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.16, y: 0.64, z: -9.6}
+  m_LocalPosition: {x: 13.16, y: 1.71, z: -9.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

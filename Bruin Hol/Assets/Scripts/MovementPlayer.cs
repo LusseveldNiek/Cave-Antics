@@ -22,16 +22,19 @@ public class MovementPlayer : MonoBehaviour
     {
         //horizontal movement
         transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+        
+        //maakt springen korter
+        IncreaseMass();
+        Sprinting();
+    }
 
+    void FixedUpdate()
+    {
         //jumping
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
-        
-        //maakt springen korter
-        IncreaseMass();
-        Sprinting();
     }
 
     void IncreaseMass()
