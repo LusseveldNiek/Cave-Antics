@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class MovementPlayer : MonoBehaviour
 {
-    public float speedPlayer, jumpForce, fallSpeed;
+    [Header("Player")]
+    public float speedPlayer;
+    public float jumpForce; 
+    public float fallSpeed;
     public Rigidbody playerRigidbody;
 
+    [Header("Jumping")]
     public bool isGrounded;
     private RaycastHit groundHit;
     public float height; //hoogte tussen speler en grond
 
+    [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
     private float sprintCounter; // speler wordt langzaam sneller
     private float beginPlayerSpeed; // reset snelheid speler
