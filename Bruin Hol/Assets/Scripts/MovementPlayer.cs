@@ -25,7 +25,8 @@ public class MovementPlayer : MonoBehaviour
     public float maxSprintSpeed;
 
     [Header("WallJumping")]
-    float idk;
+    private RaycastHit wallRight, wallLeft;
+    public float slideSpeed;
     
 
     void Start()
@@ -70,7 +71,16 @@ public class MovementPlayer : MonoBehaviour
 
     void WallJumping()
     {
+        /*
+        Physics.Raycast(transform.position, transform.right, out wallRight, 3);
+        Physics.Raycast(transform.position, -transform.right, out wallLeft, 3);
 
+        if (wallRight.transform.gameObject.tag == "wall" || wallLeft.transform.gameObject.tag == "wall")
+        {
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
+            print("isOnWall");
+        }
+        */
     }
 
     void Sprinting()
