@@ -835,12 +835,15 @@ MonoBehaviour:
   jumpForce: 300
   fallSpeed: 8
   playerRigidbody: {fileID: 758432574}
+  sprintParticle: {fileID: 7085355569166042840, guid: fccc3c8aa7febb6439a25c1ac02f64aa,
+    type: 3}
   isGrounded: 0
   height: 0
   sprintSpeed: 1.2
   fastSprintSpeed: 7
   maxSprintSpeed: 16
   slideSpeed: 1
+  damage: 0
 --- !u!54 &758432574
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class MovementPlayer : MonoBehaviour
     public float fallSpeed;
     public Rigidbody playerRigidbody;
 
+    public GameObject sprintParticle;
+    private bool isNotSpawning;
+
     [Header("Jumping")]
     public bool isGrounded;
     private RaycastHit groundHit;
@@ -29,6 +32,10 @@ public class MovementPlayer : MonoBehaviour
     private RaycastHit wallLeft;
     public float slideSpeed;
     private bool isOnWall;
+
+    [Header("Attacking")]
+    public int damage;
+
     
 
     void Start()
@@ -47,6 +54,7 @@ public class MovementPlayer : MonoBehaviour
         IncreaseMass();
         Sprinting();
         WallJumping();
+        Attacking();
     }
 
     void FixedUpdate()
@@ -116,6 +124,11 @@ public class MovementPlayer : MonoBehaviour
             {
                 sprintMultiplier = fastSprintSpeed;
                 //print("sprintingFast");
+
+
+                //sprint particle
+                GameObject particle = Instantiate(sprintParticle, transform.position, Quaternion.identity);
+                Destroy(particle, 1);
             }
         }
 
@@ -129,8 +142,14 @@ public class MovementPlayer : MonoBehaviour
         }
 
         speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
+    }
 
+    void Attacking()
+    {
+        if(Input.GetKey(KeyCode.E))
+        {
 
+        }
     }
 
     //is on ground
