@@ -28,6 +28,7 @@ public class MovementPlayer : MonoBehaviour
     private RaycastHit wallRight;
     private RaycastHit wallLeft;
     public float slideSpeed;
+    private bool isOnWall;
     
 
     void Start()
@@ -37,8 +38,11 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
-        //horizontal movement
-        transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+        if(isOnWall == false)
+        {
+            //horizontal movement
+            transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+        }
         
         IncreaseMass();
         Sprinting();
@@ -73,16 +77,15 @@ public class MovementPlayer : MonoBehaviour
     void WallJumping()
     {
 
-        Physics.Raycast(transform.position, -transform.right, out wallLeft, 1);
-        Physics.Raycast(transform.position, transform.right, out wallRight, 1);
+        Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
+        Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
 
-        Debug.DrawRay(transform.position, -transform.right * 10, Color.red);
-        Debug.DrawRay(transform.position, transform.right * 10, Color.red);
         if(wallLeft.transform != null)
         {
             if(wallLeft.transform.gameObject.tag == "wall")
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
+                isOnWall = true;
             }
         }
         else if (wallRight.transform != null)
@@ -90,7 +93,13 @@ public class MovementPlayer : MonoBehaviour
             if(wallRight.transform.gameObject.tag == "wall")
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
+                isOnWall = true;
             }
+        }
+
+        else
+        {
+            isOnWall = false;
         }
     }
 
