@@ -25,7 +25,8 @@ public class MovementPlayer : MonoBehaviour
     public float maxSprintSpeed;
 
     [Header("WallJumping")]
-    private RaycastHit wallRight, wallLeft;
+    private RaycastHit wallRight;
+    private RaycastHit wallLeft;
     public float slideSpeed;
     
 
@@ -71,16 +72,26 @@ public class MovementPlayer : MonoBehaviour
 
     void WallJumping()
     {
-        /*
-        Physics.Raycast(transform.position, transform.right, out wallRight, 3);
-        Physics.Raycast(transform.position, -transform.right, out wallLeft, 3);
 
-        if (wallRight.transform.gameObject.tag == "wall" || wallLeft.transform.gameObject.tag == "wall")
+        Physics.Raycast(transform.position, -transform.right, out wallLeft, 1);
+        Physics.Raycast(transform.position, transform.right, out wallRight, 1);
+
+        Debug.DrawRay(transform.position, -transform.right * 10, Color.red);
+        Debug.DrawRay(transform.position, transform.right * 10, Color.red);
+        if(wallLeft.transform != null)
         {
-            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
-            print("isOnWall");
+            if(wallLeft.transform.gameObject.tag == "wall")
+            {
+                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
+            }
         }
-        */
+        else if (wallRight.transform != null)
+        {
+            if(wallRight.transform.gameObject.tag == "wall")
+            {
+                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
+            }
+        }
     }
 
     void Sprinting()
@@ -95,7 +106,7 @@ public class MovementPlayer : MonoBehaviour
             if(sprintTimer > 0.3f)
             {
                 sprintMultiplier = fastSprintSpeed;
-                print("sprintingFast");
+                //print("sprintingFast");
             }
         }
 
@@ -103,7 +114,7 @@ public class MovementPlayer : MonoBehaviour
         {
             speedPlayer = beginPlayerSpeed;
             sprintCounter = 0;
-            print("reset");
+            //print("reset");
             sprintTimer = 0;
             sprintMultiplier = 1;
         }
