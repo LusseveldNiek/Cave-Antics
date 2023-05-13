@@ -27,6 +27,8 @@ public class MovementPlayer : MonoBehaviour
     private float sprintTimer; //timer hoelang sprint fase
     public float maxSprintSpeed;
 
+    private bool sprinting;
+
     [Header("WallJumping")]
     public float wallJumpForce;
     private RaycastHit wallRight;
@@ -39,19 +41,23 @@ public class MovementPlayer : MonoBehaviour
     public bool rightWallJumping;
     public bool leftWallJumping;
 
-    [Header("Attacking")]
-    public int damage;
+    [Header("Rolling")]
+    public float rollingSpeed;
+    private bool isRolling;
+    public GameObject testBall;
+    private float beginRollingSpeed;
 
     
 
     void Start()
     {
         beginPlayerSpeed = speedPlayer;
+        beginRollingSpeed = rollingSpeed;
     }
 
     void Update()
     {
-        if(isOnRightWall == false && isOnLeftWall == false)
+        if(isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
@@ -60,7 +66,7 @@ public class MovementPlayer : MonoBehaviour
         IncreaseMass();
         Sprinting();
         WallJumping();
-        Attacking();
+        Rolling();
     }
 
     void FixedUpdate()
@@ -93,6 +99,7 @@ public class MovementPlayer : MonoBehaviour
             leftWallJumping = false;
             rightWallJumping = false;
         }
+        
     }
 
     void IncreaseMass()
@@ -119,6 +126,7 @@ public class MovementPlayer : MonoBehaviour
             Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
             if(rightWallJumping)
             {
+                print("rightWallJumping");
                 wallRight = new RaycastHit();
             }
         }
@@ -129,6 +137,7 @@ public class MovementPlayer : MonoBehaviour
             Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
             if(leftWallJumping)
             {
+                print("leftWallJumping");
                 wallLeft = new RaycastHit();
             }
         }
@@ -140,6 +149,7 @@ public class MovementPlayer : MonoBehaviour
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
                 isOnLeftWall = true;
+                print("onWallLeft");
             }
         }
         else if (wallRight.transform != null)
@@ -148,6 +158,7 @@ public class MovementPlayer : MonoBehaviour
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
                 isOnRightWall = true;
+                print("onWallright");
             }
         }
 
@@ -160,20 +171,25 @@ public class MovementPlayer : MonoBehaviour
         // ik check wanneer de wall jumping klaar is als de speler de grond aan heeft geraakt, maar als de speler een andere muur raakt, is het springen ook klaar
         if(isOnLeftWall)
         {
+            print("enteredLeft");
             rightWallJumping = false;
+            wallRight = new RaycastHit();
         }
 
         if(isOnRightWall)
         {
+            print("enteredRight");
             leftWallJumping = false;
+            wallLeft = new RaycastHit();
         }
     }
 
     void Sprinting()
     {
         //sprinten
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && isRolling == false)
         {
+            sprinting = true;
             speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
             sprintCounter += sprintSpeed * Time.deltaTime;
 
@@ -197,16 +213,32 @@ public class MovementPlayer : MonoBehaviour
             //print("reset");
             sprintTimer = 0;
             sprintMultiplier = 1;
+
         }
 
         speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
     }
 
-    void Attacking()
+    void Rolling()
     {
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKey(KeyCode.E) && sprinting)
         {
+            isRolling = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            testBall.SetActive(true);
 
+            speedPlayer -= rollingSpeed * rollingSpeed;
+            rollingSpeed += rollingSpeed * Time.deltaTime;
+
+            speedPlayer = Mathf.Clamp(speedPlayer, 0, 1000);
+        }
+
+        else
+        {
+            isRolling = false;
+            GetComponent<MeshRenderer>().enabled = true;
+            testBall.SetActive(false);
+            rollingSpeed = beginRollingSpeed;
         }
     }
 
