@@ -28,10 +28,16 @@ public class MovementPlayer : MonoBehaviour
     public float maxSprintSpeed;
 
     [Header("WallJumping")]
+    public float wallJumpForce;
     private RaycastHit wallRight;
     private RaycastHit wallLeft;
     public float slideSpeed;
-    private bool isOnWall;
+
+    public bool isOnRightWall;
+    public bool isOnLeftWall;
+
+    public bool rightWallJumping;
+    public bool leftWallJumping;
 
     [Header("Attacking")]
     public int damage;
@@ -45,7 +51,7 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
-        if(isOnWall == false)
+        if(isOnRightWall == false && isOnLeftWall == false)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
@@ -63,6 +69,29 @@ public class MovementPlayer : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
+        }
+
+        //jumping from right wall
+        if (Input.GetKey(KeyCode.Space) && isOnRightWall && rightWallJumping == false)
+        {
+            rightWallJumping = true;
+            playerRigidbody.AddForce(-Vector3.right * wallJumpForce);
+            playerRigidbody.AddForce(Vector3.up * wallJumpForce);
+        }
+
+        //jumping from left wall
+        if (Input.GetKey(KeyCode.Space) && isOnLeftWall && leftWallJumping == false)
+        {
+            leftWallJumping = true;
+            playerRigidbody.AddForce(Vector3.right * wallJumpForce);
+            playerRigidbody.AddForce(Vector3.up * wallJumpForce);
+        }
+
+        //als de speler de grond aanraakt springt de speler niet meer van een muur
+        if(isGrounded)
+        {
+            leftWallJumping = false;
+            rightWallJumping = false;
         }
     }
 
@@ -84,30 +113,59 @@ public class MovementPlayer : MonoBehaviour
 
     void WallJumping()
     {
+        //raycast left checking for wall
+        if(leftWallJumping == false)
+        {
+            Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
+            if(rightWallJumping)
+            {
+                wallRight = new RaycastHit();
+            }
+        }
+        
+        //raycast right checking for wall
+        if(rightWallJumping == false)
+        {
+            Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
+            if(leftWallJumping)
+            {
+                wallLeft = new RaycastHit();
+            }
+        }
 
-        Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
-        Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
-
+        //player hitting wall
         if(wallLeft.transform != null)
         {
-            if(wallLeft.transform.gameObject.tag == "wall")
+            if(wallLeft.transform.gameObject.tag == "wall" && leftWallJumping == false)
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
-                isOnWall = true;
+                isOnLeftWall = true;
             }
         }
         else if (wallRight.transform != null)
         {
-            if(wallRight.transform.gameObject.tag == "wall")
+            if(wallRight.transform.gameObject.tag == "wall" && rightWallJumping == false)
             {
                 playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
-                isOnWall = true;
+                isOnRightWall = true;
             }
         }
 
         else
         {
-            isOnWall = false;
+            isOnRightWall = false;
+            isOnLeftWall = false;
+        }
+
+        // ik check wanneer de wall jumping klaar is als de speler de grond aan heeft geraakt, maar als de speler een andere muur raakt, is het springen ook klaar
+        if(isOnLeftWall)
+        {
+            rightWallJumping = false;
+        }
+
+        if(isOnRightWall)
+        {
+            leftWallJumping = false;
         }
     }
 
@@ -127,8 +185,8 @@ public class MovementPlayer : MonoBehaviour
 
 
                 //sprint particle
-                GameObject particle = Instantiate(sprintParticle, transform.position, Quaternion.identity);
-                Destroy(particle, 1);
+                //GameObject particle = Instantiate(sprintParticle, transform.position, Quaternion.identity);
+                //Destroy(particle, 1);
             }
         }
 
