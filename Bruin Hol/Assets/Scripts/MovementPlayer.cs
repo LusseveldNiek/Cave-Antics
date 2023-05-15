@@ -47,6 +47,9 @@ public class MovementPlayer : MonoBehaviour
     public GameObject testBall;
     private float beginRollingSpeed;
 
+    [Header("SlopeRotation")]
+    public float slopeRotationSpeed;
+
     
 
     void Start()
@@ -67,6 +70,7 @@ public class MovementPlayer : MonoBehaviour
         Sprinting();
         WallJumping();
         Rolling();
+        SlopeRotation();
     }
 
     void FixedUpdate()
@@ -240,6 +244,19 @@ public class MovementPlayer : MonoBehaviour
             testBall.SetActive(false);
             rollingSpeed = beginRollingSpeed;
         }
+    }
+
+    void SlopeRotation()
+    {
+        RaycastHit hit;
+        Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity);
+        Vector3 surfaceNormal = hit.normal;
+
+        // Calculate the angle between the surface normal and the player's up vector
+        Quaternion targetRotation = Quaternion.FromToRotation(transform.up, surfaceNormal) * transform.rotation;
+
+        // Rotate the player towards the surface normal
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * slopeRotationSpeed);
     }
 
     //is on ground
