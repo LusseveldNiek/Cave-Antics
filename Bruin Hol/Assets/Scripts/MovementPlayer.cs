@@ -249,7 +249,7 @@ public class MovementPlayer : MonoBehaviour
     void SlopeRotation()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity);
+        Physics.Raycast(transform.position, -Vector3.up, out hit, 1);
         Vector3 surfaceNormal = hit.normal;
 
         // Calculate the angle between the surface normal and the player's up vector
