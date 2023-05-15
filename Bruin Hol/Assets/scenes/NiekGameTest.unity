@@ -3050,7 +3050,7 @@ GameObject:
   - component: {fileID: 1768303443}
   - component: {fileID: 1768303442}
   - component: {fileID: 1768303441}
-  - component: {fileID: 1768303440}
+  - component: {fileID: 1768303446}
   m_Layer: 2
   m_Name: player
   m_TagString: Untagged
@@ -3076,19 +3076,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1768303440
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768303438}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.075896025
-  m_Center: {x: 0, y: -0.47093308, z: 0}
 --- !u!114 &1768303441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3148,8 +3135,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.0007591, z: 0.9999999}
+  m_Center: {x: 0, y: 0.00037956238, z: 0}
 --- !u!23 &1768303444
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3200,6 +3187,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768303438}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1768303446
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768303438}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.003902, y: 0.035752654, z: 0.9999999}
+  m_Center: {x: -0.0019509792, y: -0.5089099, z: 0}
 --- !u!1 &1793328645
 GameObject:
   m_ObjectHideFlags: 0
