@@ -99,7 +99,16 @@ public class MovementPlayer : MonoBehaviour
             playerRigidbody.AddForce(Vector3.right * wallJumpSideForce);
             playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
         }
-        
+
+        //als de speler de grond aanraakt springt de speler niet meer van een muur
+        if (isGrounded)
+        {
+            leftWallJumping = false;
+            rightWallJumping = false;
+            isOnLeftWall = false;
+            isOnRightWall = false;
+        }
+
     }
 
     void IncreaseMass()
@@ -157,12 +166,7 @@ public class MovementPlayer : MonoBehaviour
             leftWallJumping = false;
         }
 
-        //als de speler de grond aanraakt springt de speler niet meer van een muur
-        if (isGrounded)
-        {
-            leftWallJumping = false;
-            rightWallJumping = false;
-        }
+       
     }
 
     void Sprinting()
