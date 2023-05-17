@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class pickaxe : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class pickaxe : MonoBehaviour
 
     void Damage()
     {
-        if (Input.GetButtonDown("Fire1") && pickaxeObject != null)
+        if (Gamepad.all[0].buttonWest.isPressed && pickaxeObject != null)
         {
             pickaxeObject.GetComponent<SphereCollider>().enabled = true;
             pickaxeObject.GetComponent<MeshRenderer>().enabled = true; 

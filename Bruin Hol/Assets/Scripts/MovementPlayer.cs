@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementPlayer : MonoBehaviour
 {
@@ -77,13 +78,13 @@ public class MovementPlayer : MonoBehaviour
     void FixedUpdate()
     {
         //jumping
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
-
+    
         //jumping from right wall
-        if (Input.GetKey(KeyCode.Space) && isOnRightWall)
+        if (Gamepad.all[0].buttonSouth.isPressed && isOnRightWall)
         {
             rightWallJumping = true;
             isOnRightWall = false;
@@ -92,7 +93,7 @@ public class MovementPlayer : MonoBehaviour
         }
 
         //jumping from left wall
-        if (Input.GetKey(KeyCode.Space) && isOnLeftWall)
+        if (Gamepad.all[0].buttonSouth.isPressed && isOnLeftWall)
         {
             leftWallJumping = true;
             isOnLeftWall = false;
@@ -172,7 +173,7 @@ public class MovementPlayer : MonoBehaviour
     void Sprinting()
     {
         //sprinten
-        if (Input.GetKey(KeyCode.LeftShift) && isRolling == false)
+        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && isRolling == false)
         {
             sprinting = true;
             speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
@@ -206,7 +207,7 @@ public class MovementPlayer : MonoBehaviour
 
     void Rolling()
     {
-        if(Input.GetKey(KeyCode.E) && sprinting)
+        if(Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
             isRolling = true;
             GetComponent<MeshRenderer>().enabled = false;
