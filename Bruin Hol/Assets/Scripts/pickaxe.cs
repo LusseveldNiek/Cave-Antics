@@ -7,34 +7,53 @@ public class pickaxe : MonoBehaviour
     private float attackTime;
     public float attackSpeed;
     private bool doingDamage;
+    public GameObject pickaxeLeftObject;
+    public GameObject pickaxeRightObject;
+    private GameObject pickaxeObject;
+
+    public float rotationAxis;
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        Damage();
+        PickaxeRotation();
+
+    }
+
+    void Damage()
+    {
+        if (Input.GetButtonDown("Fire1") && pickaxeObject != null)
         {
-            GetComponent<SphereCollider>().enabled = true;
+            pickaxeObject.GetComponent<SphereCollider>().enabled = true;
+            pickaxeObject.GetComponent<MeshRenderer>().enabled = true; 
             //attack
             doingDamage = true;
         }
 
-        if(doingDamage)
+        if (doingDamage)
         {
             attackTime += Time.deltaTime;
             if (attackTime > attackSpeed)
             {
-                GetComponent<SphereCollider>().enabled = false;
+                pickaxeObject.GetComponent<MeshRenderer>().enabled = false;
+                pickaxeObject.GetComponent<MeshRenderer>().enabled = false;
                 attackTime = 0;
                 doingDamage = false;
             }
         }
-
     }
 
-    private void OnTriggerEnter(Collider other)
+    void PickaxeRotation()
     {
-        if(other.gameObject.tag == "stone")
+        rotationAxis = Input.GetAxis("Horizontal");
+        if(rotationAxis > 0 && doingDamage == false)
         {
-            Destroy(other.gameObject);
+            pickaxeObject = pickaxeRightObject;
+        }
+
+        if(rotationAxis < 0 && doingDamage == false)
+        {
+            pickaxeObject = pickaxeLeftObject;
         }
     }
 }

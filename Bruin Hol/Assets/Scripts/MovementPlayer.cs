@@ -30,7 +30,8 @@ public class MovementPlayer : MonoBehaviour
     private bool sprinting;
 
     [Header("WallJumping")]
-    public float wallJumpForce;
+    public float wallJumpSideForce;
+    public float wallJumpUpForce;
     private RaycastHit wallRight;
     private RaycastHit wallLeft;
     public float slideSpeed;
@@ -82,26 +83,21 @@ public class MovementPlayer : MonoBehaviour
         }
 
         //jumping from right wall
-        if (Input.GetKey(KeyCode.Space) && isOnRightWall && rightWallJumping == false)
+        if (Input.GetKey(KeyCode.Space) && isOnRightWall)
         {
             rightWallJumping = true;
-            playerRigidbody.AddForce(-Vector3.right * wallJumpForce);
-            playerRigidbody.AddForce(Vector3.up * wallJumpForce);
+            isOnRightWall = false;
+            playerRigidbody.AddForce(-Vector3.right * wallJumpSideForce);
+            playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
         }
 
         //jumping from left wall
-        if (Input.GetKey(KeyCode.Space) && isOnLeftWall && leftWallJumping == false)
+        if (Input.GetKey(KeyCode.Space) && isOnLeftWall)
         {
             leftWallJumping = true;
-            playerRigidbody.AddForce(Vector3.right * wallJumpForce);
-            playerRigidbody.AddForce(Vector3.up * wallJumpForce);
-        }
-
-        //als de speler de grond aanraakt springt de speler niet meer van een muur
-        if(isGrounded)
-        {
-            leftWallJumping = false;
-            rightWallJumping = false;
+            isOnLeftWall = false;
+            playerRigidbody.AddForce(Vector3.right * wallJumpSideForce);
+            playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
         }
         
     }
@@ -124,30 +120,11 @@ public class MovementPlayer : MonoBehaviour
 
     void WallJumping()
     {
-        //raycast left checking for wall
-        if(leftWallJumping == false)
-        {
-            Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
-            if(rightWallJumping)
-            {
-                print("rightWallJumping");
-                wallRight = new RaycastHit();
-            }
-        }
-        
-        //raycast right checking for wall
-        if(rightWallJumping == false)
-        {
-            Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
-            if(leftWallJumping)
-            {
-                print("leftWallJumping");
-                wallLeft = new RaycastHit();
-            }
-        }
 
+        Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
+        Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
         //player hitting wall
-        if(wallLeft.transform != null)
+        if (wallLeft.transform != null)
         {
             if(wallLeft.transform.gameObject.tag == "wall" && leftWallJumping == false)
             {
@@ -156,7 +133,8 @@ public class MovementPlayer : MonoBehaviour
                 print("onWallLeft");
             }
         }
-        else if (wallRight.transform != null)
+
+        if (wallRight.transform != null)
         {
             if(wallRight.transform.gameObject.tag == "wall" && rightWallJumping == false)
             {
@@ -166,25 +144,24 @@ public class MovementPlayer : MonoBehaviour
             }
         }
 
-        else
-        {
-            isOnRightWall = false;
-            isOnLeftWall = false;
-        }
-
         // ik check wanneer de wall jumping klaar is als de speler de grond aan heeft geraakt, maar als de speler een andere muur raakt, is het springen ook klaar
         if(isOnLeftWall)
         {
             print("enteredLeft");
             rightWallJumping = false;
-            wallRight = new RaycastHit();
         }
 
         if(isOnRightWall)
         {
             print("enteredRight");
             leftWallJumping = false;
-            wallLeft = new RaycastHit();
+        }
+
+        //als de speler de grond aanraakt springt de speler niet meer van een muur
+        if (isGrounded)
+        {
+            leftWallJumping = false;
+            rightWallJumping = false;
         }
     }
 

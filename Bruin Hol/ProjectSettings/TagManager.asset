@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - wall
   - stone
+  - pickaxe
   layers:
   - Default
   - TransparentFX
