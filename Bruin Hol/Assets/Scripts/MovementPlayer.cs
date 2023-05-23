@@ -28,7 +28,7 @@ public class MovementPlayer : MonoBehaviour
     private float sprintTimer; //timer hoelang sprint fase
     public float maxSprintSpeed;
 
-    private bool sprinting;
+    public bool sprinting;
 
     [Header("WallJumping")]
     public float wallJumpSideForce;
@@ -43,11 +43,12 @@ public class MovementPlayer : MonoBehaviour
     public bool rightWallJumping;
     public bool leftWallJumping;
 
-    [Header("Rolling")]
+    [Header("Rolling/Crouching")]
     public float rollingSpeed;
-    private bool isRolling;
-    public GameObject testBall;
+    public bool isRolling;
     private float beginRollingSpeed;
+
+    public float crouchSpeed;
 
     [Header("SlopeRotation")]
     public float slopeRotationSpeed;
@@ -71,7 +72,7 @@ public class MovementPlayer : MonoBehaviour
         IncreaseMass();
         Sprinting();
         WallJumping();
-        Rolling();
+        RollingAndCrouching();
         SlopeRotation();
     }
 
@@ -173,7 +174,7 @@ public class MovementPlayer : MonoBehaviour
     void Sprinting()
     {
         //sprinten
-        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && isRolling == false)
+        if (Gamepad.all[0].rightTrigger.ReadValue() > 0)
         {
             sprinting = true;
             speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
@@ -199,19 +200,24 @@ public class MovementPlayer : MonoBehaviour
             //print("reset");
             sprintTimer = 0;
             sprintMultiplier = 1;
-
+            sprinting = false;
         }
 
         speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
     }
 
-    void Rolling()
+    void RollingAndCrouching()
     {
-        if(Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
+        //crouching
+        if (Gamepad.all[0].buttonEast.ReadValue() > 0)
+        {
+            speedPlayer = crouchSpeed;
+        }
+
+        //isRolling
+        if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
             isRolling = true;
-            GetComponent<MeshRenderer>().enabled = false;
-            testBall.SetActive(true);
 
             speedPlayer -= rollingSpeed * rollingSpeed;
             rollingSpeed += rollingSpeed * Time.deltaTime;
@@ -222,8 +228,6 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             isRolling = false;
-            GetComponent<MeshRenderer>().enabled = true;
-            testBall.SetActive(false);
             rollingSpeed = beginRollingSpeed;
         }
     }
