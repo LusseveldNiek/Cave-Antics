@@ -63,7 +63,7 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
-        if(isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false)
+        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
@@ -218,6 +218,21 @@ public class MovementPlayer : MonoBehaviour
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
             isRolling = true;
+
+            if (transform.rotation.z > 1)
+            {
+                //goingLeft
+                transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / 7);
+                speedPlayer = beginPlayerSpeed * 2;
+            }
+
+            else if(transform.rotation.z < 1)
+            {
+                //goingRight
+                float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / 7);
+                transform.Translate(Vector3.right * positiveNumber);
+                speedPlayer = beginPlayerSpeed * 2;
+            }
 
             speedPlayer -= rollingSpeed * rollingSpeed;
             rollingSpeed += rollingSpeed * Time.deltaTime;
