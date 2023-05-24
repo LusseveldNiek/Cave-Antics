@@ -109,8 +109,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: bedrock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c55ff82b86208244d9f1835a4b570705,
+        type: 3}
+      propertyPath: m_TagString
+      value: wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55ff82b86208244d9f1835a4b570705, type: 3}
+--- !u!1 &2331616431393093746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c55ff82b86208244d9f1835a4b570705,
+    type: 3}
+  m_PrefabInstance: {fileID: 3214155181086934307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4794594437637179538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331616431393093746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9946734, y: 0.93215775, z: 0.9980089}
+  m_Center: {x: -0.4973367, y: 0.46607888, z: -0.4990045}
 --- !u!4 &3103050953899008712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c55ff82b86208244d9f1835a4b570705,
@@ -509,6 +533,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 547b85d683d76f347898ed555ed91581,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 547b85d683d76f347898ed555ed91581, type: 3}
 --- !u!4 &8156356014556381567 stripped
@@ -517,3 +546,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8555585753252128404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8825615150602083269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 547b85d683d76f347898ed555ed91581,
+    type: 3}
+  m_PrefabInstance: {fileID: 8555585753252128404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1340556946239385662
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8825615150602083269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.08604336, z: 2}
+  m_Center: {x: 0, y: 0.9569783, z: 0}

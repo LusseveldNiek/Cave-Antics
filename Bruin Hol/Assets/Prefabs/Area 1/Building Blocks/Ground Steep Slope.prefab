@@ -268,6 +268,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: steep slope
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cf096cf717068d64b8a5c4cc879553a2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf096cf717068d64b8a5c4cc879553a2, type: 3}
 --- !u!4 &6191218665923563914 stripped
@@ -447,6 +452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: steep slope
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cf096cf717068d64b8a5c4cc879553a2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf096cf717068d64b8a5c4cc879553a2, type: 3}
