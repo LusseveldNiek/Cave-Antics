@@ -35,7 +35,8 @@ public class MovementPlayer : MonoBehaviour
     public float wallJumpUpForce;
     private RaycastHit wallRight;
     private RaycastHit wallLeft;
-    public float slideSpeed;
+
+    public float wallHangSpeed;
 
     public bool isOnRightWall;
     public bool isOnLeftWall;
@@ -132,43 +133,57 @@ public class MovementPlayer : MonoBehaviour
     void WallJumping()
     {
 
-        Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
-        Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
+        bool raycastLeftHit = Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
+        bool raycastRightHit = Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
         //player hitting wall
-        if (wallLeft.transform != null)
+        if (raycastLeftHit)
         {
-            if(wallLeft.transform.gameObject.tag == "wall" && leftWallJumping == false)
+            if(wallLeft.collider.CompareTag("wall") && leftWallJumping == false)
             {
-                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
                 isOnLeftWall = true;
                 print("onWallLeft");
             }
         }
 
-        if (wallRight.transform != null)
+        else
         {
-            if(wallRight.transform.gameObject.tag == "wall" && rightWallJumping == false)
+            isOnLeftWall = false;
+        }
+
+        if (raycastRightHit)
+        {
+            if(wallRight.collider.CompareTag("wall") && rightWallJumping == false)
             {
-                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -slideSpeed, playerRigidbody.velocity.z);
                 isOnRightWall = true;
                 print("onWallright");
             }
         }
 
+        else
+        {
+            isOnRightWall = false;
+        }
+
         // ik check wanneer de wall jumping klaar is als de speler de grond aan heeft geraakt, maar als de speler een andere muur raakt, is het springen ook klaar
-        if(isOnLeftWall)
+        if (isOnLeftWall)
         {
             print("enteredLeft");
             rightWallJumping = false;
+
+            Vector3 vel = playerRigidbody.velocity;
+            vel.y = wallHangSpeed;
+            playerRigidbody.velocity = vel;
         }
 
         if(isOnRightWall)
         {
             print("enteredRight");
             leftWallJumping = false;
-        }
 
-       
+            Vector3 vel = playerRigidbody.velocity;
+            vel.y = wallHangSpeed;
+            playerRigidbody.velocity = vel;
+        }
     }
 
     void Sprinting()
