@@ -57,6 +57,9 @@ public class MovementPlayer : MonoBehaviour
     [Header("pickaxe")]
     public GameObject pickaxe;
 
+    [Header("Extra")]
+    private bool gameStarted;
+    public GameObject startButton;
     
 
     void Start()
@@ -70,10 +73,16 @@ public class MovementPlayer : MonoBehaviour
         //pickaxe following player
         pickaxe.transform.position = transform.position;
 
-        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false)
+        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false && gameStarted)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+        }
+
+        //check if game started
+        if(gameStarted == false)
+        {
+            gameStarted = startButton.GetComponent<StartButton>().startTimer;
         }
         
         IncreaseMass();
@@ -86,7 +95,7 @@ public class MovementPlayer : MonoBehaviour
     void FixedUpdate()
     {
         //jumping
-        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded)
+        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }

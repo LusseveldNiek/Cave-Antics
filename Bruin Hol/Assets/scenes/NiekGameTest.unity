@@ -3160,7 +3160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117076967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.58, y: -0.47, z: 1.08}
+  m_LocalPosition: {x: 6.56, y: -0.47, z: 1.08}
   m_LocalScale: {x: 2.8602, y: 0.8800718, z: 8.392406}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3997,6 +3997,7 @@ MonoBehaviour:
   crouchSpeed: 4
   slopeRotationSpeed: 12
   pickaxe: {fileID: 498083816}
+  startButton: {fileID: 468946832}
 --- !u!54 &160511950
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6796,6 +6797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854264578239747624, guid: 219b55aa2e44cd144bf400b9874bcd93,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219b55aa2e44cd144bf400b9874bcd93, type: 3}
@@ -12005,6 +12011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1985095337}
+  startTimer: 0
 --- !u!114 &468946834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16600,6 +16607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8854264578239747624, guid: 219b55aa2e44cd144bf400b9874bcd93,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219b55aa2e44cd144bf400b9874bcd93, type: 3}
 --- !u!1001 &656150785
@@ -18799,6 +18811,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1342845635}
     m_Modifications:
+    - target: {fileID: 3252321171330297494, guid: 90df009b909d8bf45a1596386a57c65b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6967339970326165809, guid: 90df009b909d8bf45a1596386a57c65b,
         type: 3}
       propertyPath: m_Name
@@ -25968,6 +25985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854264578239747624, guid: 219b55aa2e44cd144bf400b9874bcd93,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219b55aa2e44cd144bf400b9874bcd93, type: 3}

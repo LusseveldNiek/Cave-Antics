@@ -7,7 +7,7 @@ public class StartButton : MonoBehaviour
 {
     public GameObject mainMenu;
     private float timer;
-    private bool startTimer;
+    public bool startTimer;
 
     // Start is called before the first frame update
     void Start()
