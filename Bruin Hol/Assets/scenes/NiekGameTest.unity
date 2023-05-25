@@ -44467,6 +44467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1725526650}
   - component: {fileID: 1725526649}
+  - component: {fileID: 1725526651}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -44520,7 +44521,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1725526651}
+        m_TargetAssemblyTypeName: FullScreen, Assembly-CSharp
+        m_MethodName: ToggleFullScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!224 &1725526650
 RectTransform:
@@ -44544,6 +44557,18 @@ RectTransform:
   m_AnchoredPosition: {x: 620, y: -170}
   m_SizeDelta: {x: 440, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1725526651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725526648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a61a93917b7e64bbd46bc94adfd1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1727061122
 PrefabInstance:
   m_ObjectHideFlags: 0
