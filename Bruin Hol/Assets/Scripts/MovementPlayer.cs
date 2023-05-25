@@ -73,6 +73,9 @@ public class MovementPlayer : MonoBehaviour
         //pickaxe following player
         pickaxe.transform.position = transform.position;
 
+        //player cannot move backward or forward
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
         if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false && gameStarted)
         {
             //horizontal movement
