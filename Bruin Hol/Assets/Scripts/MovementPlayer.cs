@@ -121,15 +121,6 @@ public class MovementPlayer : MonoBehaviour
             playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
         }
 
-        //als de speler de grond aanraakt springt de speler niet meer van een muur
-        if (isGrounded)
-        {
-            leftWallJumping = false;
-            rightWallJumping = false;
-            isOnLeftWall = false;
-            isOnRightWall = false;
-        }
-
     }
 
     void IncreaseMass()
@@ -156,7 +147,7 @@ public class MovementPlayer : MonoBehaviour
         //player hitting wall
         if (raycastLeftHit)
         {
-            if(wallLeft.collider.CompareTag("wall") && leftWallJumping == false)
+            if(wallLeft.collider.CompareTag("wall"))
             {
                 isOnLeftWall = true;
                 print("onWallLeft");
@@ -166,11 +157,12 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             isOnLeftWall = false;
+            leftWallJumping = false;
         }
 
         if (raycastRightHit)
         {
-            if(wallRight.collider.CompareTag("wall") && rightWallJumping == false)
+            if(wallRight.collider.CompareTag("wall"))
             {
                 isOnRightWall = true;
                 print("onWallright");
@@ -180,6 +172,7 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             isOnRightWall = false;
+            rightWallJumping = false;
         }
 
         // ik check wanneer de wall jumping klaar is als de speler de grond aan heeft geraakt, maar als de speler een andere muur raakt, is het springen ook klaar
@@ -191,6 +184,7 @@ public class MovementPlayer : MonoBehaviour
             Vector3 vel = playerRigidbody.velocity;
             vel.y = wallHangSpeed;
             playerRigidbody.velocity = vel;
+            transform.rotation = Quaternion.identity;
         }
 
         if(isOnRightWall)
@@ -201,6 +195,7 @@ public class MovementPlayer : MonoBehaviour
             Vector3 vel = playerRigidbody.velocity;
             vel.y = wallHangSpeed;
             playerRigidbody.velocity = vel;
+            transform.rotation = Quaternion.identity;
         }
     }
 
