@@ -54,6 +54,9 @@ public class MovementPlayer : MonoBehaviour
     [Header("SlopeRotation")]
     public float slopeRotationSpeed;
 
+    [Header("pickaxe")]
+    public GameObject pickaxe;
+
     
 
     void Start()
@@ -64,6 +67,9 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
+        //pickaxe following player
+        pickaxe.transform.position = transform.position;
+
         if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false)
         {
             //horizontal movement

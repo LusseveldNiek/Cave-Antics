@@ -25,8 +25,7 @@ public class pickaxe : MonoBehaviour
     {
         if (Gamepad.all[0].buttonWest.isPressed && pickaxeObject != null)
         {
-            pickaxeObject.GetComponent<SphereCollider>().enabled = true;
-            pickaxeObject.GetComponent<MeshRenderer>().enabled = true; 
+            pickaxeObject.SetActive(true);
             //attack
             doingDamage = true;
         }
@@ -36,16 +35,17 @@ public class pickaxe : MonoBehaviour
             attackTime += Time.deltaTime;
             if (attackTime > attackSpeed)
             {
-                pickaxeObject.GetComponent<MeshRenderer>().enabled = false;
-                pickaxeObject.GetComponent<MeshRenderer>().enabled = false;
+                pickaxeObject.SetActive(false);
                 attackTime = 0;
                 doingDamage = false;
+                //attackTime
             }
         }
     }
 
     void PickaxeRotation()
     {
+        //turn weapon 
         rotationAxis = Input.GetAxis("Horizontal");
         if(rotationAxis > 0 && doingDamage == false)
         {
