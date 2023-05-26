@@ -11,13 +11,11 @@ public class MovementPlayer : MonoBehaviour
     public float fallSpeed;
     public Rigidbody playerRigidbody;
 
-    public GameObject sprintParticle;
-    private bool isNotSpawning;
-
     [Header("Jumping")]
     public bool isGrounded;
     private RaycastHit groundHit;
     public float height; //hoogte tussen speler en grond
+    public GameObject groundParticle;
 
     [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
@@ -29,6 +27,13 @@ public class MovementPlayer : MonoBehaviour
     public float maxSprintSpeed;
 
     public bool sprinting;
+    private bool timerParticleBool;
+    private float timerParticle;
+
+    public GameObject sprintParticle;
+    public GameObject sprintParticle1;
+
+    public float particleSpawnTime;
 
     [Header("WallJumping")]
     public float wallJumpSideForce;
@@ -209,15 +214,38 @@ public class MovementPlayer : MonoBehaviour
             sprintCounter += sprintSpeed * Time.deltaTime;
 
             sprintTimer += Time.deltaTime;
-            if(sprintTimer > 1)
+            if(sprintTimer > 1 && isGrounded && !playerRigidbody.IsSleeping())
             {
                 sprintMultiplier = fastSprintSpeed;
                 //print("sprintingFast");
 
 
                 //sprint particle
-                //GameObject particle = Instantiate(sprintParticle, transform.position, Quaternion.identity);
-                //Destroy(particle, 1);
+                int randomChance = Random.Range(1, 3);
+                if(randomChance == 1 && timerParticleBool == false)
+                {
+                    GameObject particle = Instantiate(sprintParticle, transform.GetChild(0).position, Quaternion.identity);
+                    Destroy(particle, 0.3f);
+                    timerParticleBool = true;
+                    
+                }
+
+                if (randomChance == 2 && timerParticleBool == false)
+                {
+                    GameObject particle = Instantiate(sprintParticle1, transform.GetChild(0).position, Quaternion.identity);
+                    Destroy(particle, 0.3f);
+                    timerParticleBool = true;
+                }
+
+                if (timerParticleBool)
+                {
+                    timerParticle += Time.deltaTime;
+                    if(timerParticle > particleSpawnTime)
+                    {
+                        timerParticleBool = false;
+                        timerParticle = 0;
+                    }
+                }
             }
         }
 
@@ -229,6 +257,8 @@ public class MovementPlayer : MonoBehaviour
             sprintTimer = 0;
             sprintMultiplier = 0.7f;
             sprinting = false;
+            timerParticle = 0;
+            timerParticleBool = false;
         }
 
         speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
@@ -286,6 +316,15 @@ public class MovementPlayer : MonoBehaviour
 
         // Rotate the player towards the surface normal
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * slopeRotationSpeed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
+            Destroy(particle, 1);
+        }
     }
 
     //is on ground
