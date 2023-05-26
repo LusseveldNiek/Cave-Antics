@@ -13964,10 +13964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9d23cb542853845bde9c14a85897bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceUp: 0
-  forceSide: 2
-  rightSideDirection: {fileID: 0}
-  leftSideDirection: {fileID: 0}
+  forceUp: 1
 --- !u!135 &533334764
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13979,8 +13976,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7493347
-  m_Center: {x: 0.06025535, y: -0.29497588, z: -0.053242683}
+  m_Radius: 0.76152694
+  m_Center: {x: 0.06025535, y: -0.43688846, z: -0.053242683}
 --- !u!23 &533334765
 MeshRenderer:
   m_ObjectHideFlags: 0

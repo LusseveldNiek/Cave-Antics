@@ -5,60 +5,11 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     public float forceUp;
-    public float forceSide;
 
-    private RaycastHit rightSideMushroom;
-    private RaycastHit leftSideMushroom;
-    public Transform rightSideDirection;
-    public Transform leftSideDirection;
-
-    private bool playerIsRightJumping;
-    private bool playerIsLeftJumping;
     // Start is called before the first frame update
     void Start()
     {
 
-    }
-
-    private void Update()
-    {
-
-        if(Physics.Raycast(transform.position, transform.right, out rightSideMushroom, 1)) //right
-        {
-            if (rightSideMushroom.transform.gameObject.tag == "Player")
-            {
-                GetComponent<SphereCollider>().enabled = false;
-                rightSideMushroom.transform.GetComponent<Rigidbody>().AddForce(rightSideDirection.forward * forceSide);
-                playerIsRightJumping = true;
-            }
-        }
-
-        if (Physics.Raycast(transform.position, -transform.right, out leftSideMushroom, 1)) //left
-        {
-            if (leftSideMushroom.transform.gameObject.tag == "Player")
-            {
-                GetComponent<SphereCollider>().enabled = false;
-                leftSideMushroom.transform.GetComponent<Rigidbody>().AddForce(leftSideDirection.forward * forceSide);
-            }
-        }
-
-        if(playerIsRightJumping)
-        {
-            if(rightSideMushroom.transform.GetComponent<MovementPlayer>().isGrounded)
-            {
-                GetComponent<SphereCollider>().enabled = true;
-                playerIsRightJumping = false;
-            }
-        }
-
-        if (playerIsLeftJumping)
-        {
-            if (leftSideMushroom.transform.GetComponent<MovementPlayer>().isGrounded)
-            {
-                GetComponent<SphereCollider>().enabled = true;
-                playerIsLeftJumping = false;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
