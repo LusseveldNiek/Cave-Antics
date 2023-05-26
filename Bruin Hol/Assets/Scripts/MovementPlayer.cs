@@ -322,8 +322,8 @@ public class MovementPlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
-            GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
-            Destroy(particle, 1);
+            //GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
+            //Destroy(particle, 1);
         }
     }
 
