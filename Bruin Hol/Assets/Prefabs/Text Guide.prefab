@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed0ce4044d242946a3787489c6f3140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionArea: {fileID: 5505559606119754900}
+  text: {fileID: 5505559605285362639}
 --- !u!1 &5505559606239906835
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TextGuide : MonoBehaviour
 {
-    public GameObject collisionArea;
+    public GameObject text;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.gameObject.tag == "Player")
         {
-            collisionArea.SetActive(true);
+            text.SetActive(true);
         }
     }
 
@@ -18,7 +18,7 @@ public class TextGuide : MonoBehaviour
     {
         if (other.transform.gameObject.tag == "Player")
         {
-            collisionArea.SetActive(false);
+            text.SetActive(false);
         }
     }
 }
