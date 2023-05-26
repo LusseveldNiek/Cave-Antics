@@ -24,7 +24,7 @@ public class MovementPlayer : MonoBehaviour
     public float fastSprintSpeed; //fast sprint snelheid
     private float sprintCounter; // speler wordt langzaam sneller
     private float beginPlayerSpeed; // reset snelheid speler
-    private float sprintMultiplier; //voor andere sprint fase verdubbelaar
+    public float sprintMultiplier; //voor andere sprint fase verdubbelaar
     private float sprintTimer; //timer hoelang sprint fase
     public float maxSprintSpeed;
 
@@ -209,7 +209,7 @@ public class MovementPlayer : MonoBehaviour
             sprintCounter += sprintSpeed * Time.deltaTime;
 
             sprintTimer += Time.deltaTime;
-            if(sprintTimer > 0.3f)
+            if(sprintTimer > 1)
             {
                 sprintMultiplier = fastSprintSpeed;
                 //print("sprintingFast");
@@ -227,7 +227,7 @@ public class MovementPlayer : MonoBehaviour
             sprintCounter = 0;
             //print("reset");
             sprintTimer = 0;
-            sprintMultiplier = 1;
+            sprintMultiplier = 0.7f;
             sprinting = false;
         }
 
