@@ -63,8 +63,9 @@ public class MovementPlayer : MonoBehaviour
     public GameObject pickaxe;
 
     [Header("Extra")]
-    private bool gameStarted;
+    public bool gameStarted;
     public GameObject startButton;
+    public GameObject inGameMenu;
     
 
     void Start()
@@ -81,7 +82,7 @@ public class MovementPlayer : MonoBehaviour
         //player cannot move backward or forward
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
-        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false && gameStarted)
+        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false && gameStarted && !inGameMenu.activeInHierarchy)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
