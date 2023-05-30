@@ -65,7 +65,7 @@ public class MovementPlayer : MonoBehaviour
     [Header("Extra")]
     public bool gameStarted;
     public GameObject startButton;
-    public GameObject inGameMenu;
+    public bool menuActive;
     
 
     void Start()
@@ -82,7 +82,7 @@ public class MovementPlayer : MonoBehaviour
         //player cannot move backward or forward
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
-        if (isOnRightWall == false && isOnLeftWall == false && rightWallJumping == false && leftWallJumping == false && gameStarted && !inGameMenu.activeInHierarchy)
+        if (!isOnRightWall && !isOnLeftWall && !rightWallJumping && !leftWallJumping && gameStarted && !menuActive)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
@@ -104,7 +104,7 @@ public class MovementPlayer : MonoBehaviour
     void FixedUpdate()
     {
         //jumping
-        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted)
+        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted && !menuActive)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
         }
