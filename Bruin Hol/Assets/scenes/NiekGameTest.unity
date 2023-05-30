@@ -16052,6 +16052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceUp: 1
+  forceSide: 0.4
 --- !u!135 &533334764
 SphereCollider:
   m_ObjectHideFlags: 0

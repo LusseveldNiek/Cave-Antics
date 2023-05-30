@@ -5,7 +5,8 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     public float forceUp;
-
+    public float forceSide;
+    private bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +28,30 @@ public class Mushroom : MonoBehaviour
             // Calculate the mirrored direction based on the x-axis of the sphere
             Vector3 throwDirection = new Vector3(-collisionDirection.x, -collisionDirection.y, 0).normalized;
 
-            // Apply the throw by adding force to the object
-            rb.AddForce(throwDirection * speed * forceUp, ForceMode.Impulse);
+            isGrounded = other.GetComponent<MovementPlayer>().isGrounded;
+
+            if(isGrounded)
+            {
+                if (other.transform.position.x < transform.position.x)
+                {
+                    Debug.Log("Player is on the left side of the mushroom.");
+                    Vector3 diagonalForce = new Vector3(5, 5, 0f);
+                    other.GetComponent<Rigidbody>().AddForce(diagonalForce * forceSide, ForceMode.Impulse);
+                }
+
+                else
+                {
+                    Debug.Log("Player is on the right side of the mushroom.");
+                    Vector3 diagonalForce = new Vector3(-5, 5, 0f);
+                    other.GetComponent<Rigidbody>().AddForce(diagonalForce * forceSide, ForceMode.Impulse);
+                }
+            }
+
+            else
+            {
+                // Apply the throw by adding force to the object
+                rb.AddForce(throwDirection * speed * forceUp, ForceMode.Impulse);
+            }
         }
     }
 }
