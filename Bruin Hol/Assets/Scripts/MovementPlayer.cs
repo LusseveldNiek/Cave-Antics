@@ -127,6 +127,13 @@ public class MovementPlayer : MonoBehaviour
             playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
         }
 
+        //jump particle
+        if(height > 1 && height < 1.2)
+        {
+            GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
+            Destroy(particle, 1);
+        }
+
     }
 
     void IncreaseMass()
