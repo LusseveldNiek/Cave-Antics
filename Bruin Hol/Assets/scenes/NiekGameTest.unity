@@ -7783,12 +7783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431602b9f22b89f4f886716afcac9177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsInInventory: []
+  objectsInInventory:
+  - {fileID: 0}
   inventory:
-  - {fileID: 1058225862}
-  - {fileID: 248969496}
-  sulfur: {fileID: 0}
-  coal: {fileID: 0}
+  - {fileID: 1058225866}
+  - {fileID: 248969500}
+  sulfur: {fileID: 8400000, guid: 3b4ba9097bd6be640974311ae26b740b, type: 2}
+  coal: {fileID: 8400000, guid: c54a07256e7d32042b01a8b7ff325911, type: 2}
 --- !u!4 &237845988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1890395784697248665, guid: 2b2ae4aa5e010c94789db6a8ae2894a2,
@@ -8368,7 +8369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 3b4ba9097bd6be640974311ae26b740b, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -34550,7 +34551,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: c54a07256e7d32042b01a8b7ff325911, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
