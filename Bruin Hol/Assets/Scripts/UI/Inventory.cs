@@ -10,33 +10,46 @@ public class Inventory : MonoBehaviour
     public RenderTexture sulfur;
     public RenderTexture coal;
 
+    private bool hasSulfur;
+    private bool hasCoal;
+
     void Update()
     {
         //sulfur == yellow & coal == black
 
         foreach(GameObject material in objectsInInventory)
         {
-            if(material.tag == "Sulfur")
+            if(material.gameObject != null)
             {
-                for(int i = 0; i < inventory.Length; i++)
+                if (material.tag == "Sulfur")
                 {
-                    if (inventory[i].gameObject != null)
+                    for (int i = 0; i < inventory.Length; i++)
                     {
-                        inventory[i].texture = sulfur;
+                        if (inventory[i].texture == null && hasSulfur == false)
+                        {
+                            inventory[i].texture = sulfur;
+                            print("sulfurCollected");
+                            hasSulfur = true;
+                            break;
+                        }
+                    }
+                }
+
+                else if (material.tag == "Coal")
+                {
+                    for (int i = 0; i < inventory.Length; i++)
+                    {
+                        if (inventory[i].texture == null && hasCoal == false)
+                        {
+                            inventory[i].texture = coal;
+                            print("coalCollected");
+                            hasCoal = true;
+                            break;
+                        }
                     }
                 }
             }
 
-            else if (material.tag == "Coal")
-            {
-                for (int i = 0; i < inventory.Length; i++)
-                {
-                    if (inventory[i].gameObject != null)
-                    {
-                        inventory[i].texture = coal;
-                    }
-                }
-            }
         }
     }
 }

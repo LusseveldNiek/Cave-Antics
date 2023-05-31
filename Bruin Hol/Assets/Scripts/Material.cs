@@ -10,6 +10,7 @@ public class Material : MonoBehaviour
         if (other.gameObject.tag == "pickaxe")
         {
             inventory.GetComponent<Inventory>().objectsInInventory.Add(gameObject);
+            print("material");
         }
     }
 }
