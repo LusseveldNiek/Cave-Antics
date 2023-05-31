@@ -109,10 +109,29 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c55ff82b86208244d9f1835a4b570705,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55ff82b86208244d9f1835a4b570705, type: 3}
+--- !u!1 &188745251129489058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c55ff82b86208244d9f1835a4b570705,
+    type: 3}
+  m_PrefabInstance: {fileID: 1035800562510089203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2879357471589004018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188745251129489058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 0}
+  m_Center: {x: -0.5, y: 0.5, z: 0.000000026077029}
 --- !u!4 &708576294940257304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c55ff82b86208244d9f1835a4b570705,
