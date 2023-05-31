@@ -7787,6 +7787,8 @@ MonoBehaviour:
   inventory:
   - {fileID: 1058225862}
   - {fileID: 248969496}
+  sulfur: {fileID: 0}
+  coal: {fileID: 0}
 --- !u!4 &237845988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1890395784697248665, guid: 2b2ae4aa5e010c94789db6a8ae2894a2,
@@ -29424,6 +29426,7 @@ MonoBehaviour:
   - {fileID: 148190040}
   menuIsActive: 0
   player: {fileID: 160511947}
+  inGameMenu: {fileID: 472051157}
 --- !u!1 &915987117
 GameObject:
   m_ObjectHideFlags: 0
@@ -30900,6 +30903,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623217045775407006, guid: 3ff99a6f5665d4c4ebde16dd07cd192d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Coal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ff99a6f5665d4c4ebde16dd07cd192d, type: 3}
@@ -61704,6 +61712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sulfur
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967339970326165809, guid: 90df009b909d8bf45a1596386a57c65b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Sulfur
       objectReference: {fileID: 0}
     - target: {fileID: 6967339970326165809, guid: 90df009b909d8bf45a1596386a57c65b,
         type: 3}

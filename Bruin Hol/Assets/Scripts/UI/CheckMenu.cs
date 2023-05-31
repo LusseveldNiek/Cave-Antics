@@ -7,9 +7,20 @@ public class CheckMenu : MonoBehaviour
     public GameObject[] menu;
     public bool menuIsActive;
     public GameObject player;
+    public GameObject inGameMenu;
 
     private void Update()
     {
+        if(menuIsActive == false)
+        {
+            inGameMenu.SetActive(true);
+        }
+
+        else
+        {
+            inGameMenu.SetActive(false);
+        }
+
         player.GetComponent<MovementPlayer>().menuActive = menuIsActive;
         foreach (GameObject obj in menu)
         {

@@ -8,6 +8,8 @@ TagManager:
   - wall
   - stone
   - pickaxe
+  - Coal
+  - Sulfur
   layers:
   - Default
   - TransparentFX
