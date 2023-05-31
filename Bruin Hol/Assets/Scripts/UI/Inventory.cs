@@ -10,8 +10,8 @@ public class Inventory : MonoBehaviour
     public RenderTexture sulfur;
     public RenderTexture coal;
 
-    private bool hasSulfur;
-    private bool hasCoal;
+    public bool hasSulfur;
+    public bool hasCoal;
 
     void Update()
     {
