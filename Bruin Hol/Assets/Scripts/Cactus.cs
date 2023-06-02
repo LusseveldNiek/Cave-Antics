@@ -43,6 +43,7 @@ public class Cactus : MonoBehaviour
 
         if(cactusIsWalking)
         {
+            cactusActivated = false;
             if (Vector3.Distance(cactusUp.position, player.transform.position) > 4)
             {
    
