@@ -13,7 +13,7 @@ public class Cactus : MonoBehaviour
     public float moveSpeed;
     private bool cactusIsWalking;
     private RaycastHit hit;
-    // Start is called before the first frame update
+   
     void Start()
     {
         beginHeight = transform.position.y;

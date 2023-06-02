@@ -9,12 +9,6 @@ public class StartButton : MonoBehaviour
     private float timer;
     public bool startTimer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void PlayAnimation()
     {
         // Trigger the animation transition

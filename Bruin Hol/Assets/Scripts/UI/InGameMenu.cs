@@ -10,11 +10,6 @@ public class InGameMenu : MonoBehaviour
     private bool gameStarted;
     public GameObject menu;
     public Button pauseButton;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void Update()
     {

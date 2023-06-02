@@ -11,7 +11,7 @@ public class ResolutionButton : MonoBehaviour
 
     private float currentRefreshRate;
     private int resolutionIndex = 0;
-    // Start is called before the first frame update
+    
     void Start()
     {
         resolutions = Screen.resolutions;
