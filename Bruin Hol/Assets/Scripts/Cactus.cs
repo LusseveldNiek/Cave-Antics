@@ -12,6 +12,7 @@ public class Cactus : MonoBehaviour
     public float upHeight;
     public float moveSpeed;
     private bool cactusIsWalking;
+    private RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +63,13 @@ public class Cactus : MonoBehaviour
             {
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             }
+
+            Physics.Raycast(-Vector3.up, transform.position + new Vector3(0, 0.1f, 0), out hit, 0.1f);
+            if(hit.transform.gameObject == null)
+            {
+                transform.Translate(-Vector3.up * upSpeed * Time.deltaTime);
+            }
+
         }
     }
 }

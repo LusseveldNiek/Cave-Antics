@@ -154,6 +154,15 @@ public class MovementPlayer : MonoBehaviour
 
     void WallJumping()
     {
+        if(isOnRightWall && rightWallJumping)
+        {
+            rightWallJumping = false;
+        }
+
+        else if(isOnLeftWall && leftWallJumping)
+        {
+            leftWallJumping = false;
+        }
 
         bool raycastLeftHit = Physics.Raycast(transform.position, -transform.right, out wallLeft, 0.5f);
         bool raycastRightHit = Physics.Raycast(transform.position, transform.right, out wallRight, 0.5f);
@@ -170,7 +179,6 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             isOnLeftWall = false;
-            leftWallJumping = false;
         }
 
         if (raycastRightHit)
@@ -185,6 +193,11 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             isOnRightWall = false;
+        }
+
+        if(isGrounded)
+        {
+            leftWallJumping = false;
             rightWallJumping = false;
         }
 
