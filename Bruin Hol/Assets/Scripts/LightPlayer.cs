@@ -8,20 +8,25 @@ public class LightPlayer : MonoBehaviour
     public GameObject leftLight;
     public GameObject rightLight;
     public float rotationAxis;
+    public GameObject menuManager;
 
     void Update()
     {
         rotationAxis = Input.GetAxis("Horizontal");
-        if (rotationAxis > 0)
+        if(menuManager.GetComponent<CheckMenu>().menuIsActive == false)
         {
-            rightLight.SetActive(true);
-            leftLight.SetActive(false);
-        }
+            if (rotationAxis > 0)
+            {
+                rightLight.SetActive(true);
+                leftLight.SetActive(false);
+            }
 
-        if (rotationAxis < 0)
-        {
-            leftLight.SetActive(true);
-            rightLight.SetActive(false);
+            if (rotationAxis < 0)
+            {
+                leftLight.SetActive(true);
+                rightLight.SetActive(false);
+            }
         }
+        
     }
 }
