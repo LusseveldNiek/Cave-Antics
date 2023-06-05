@@ -11,6 +11,8 @@ TagManager:
   - Coal
   - Sulfur
   - flower
+  - flowerBullet
+  - cactus
   layers:
   - Default
   - TransparentFX

@@ -79,6 +79,7 @@ public class Cactus : MonoBehaviour
                 cactusGoingDown = true;
                 cactusIsWalking = false;
                 //player out of sight while walking
+                beginHeight = transform.position.y - 2.4f;
             }
 
             else if(cactusGoingDown == false && hittingWall == false)
@@ -101,18 +102,22 @@ public class Cactus : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        if(hittingWall)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (hittingWall)
         {
-            if (other.gameObject.tag != "Player" && cactusIsWalking && other.gameObject.tag != "Ground")
+            if (collision.gameObject.tag != "Player" && cactusIsWalking && collision.gameObject.tag != "Ground")
             {
                 hittingWall = false;
             }
         }
 
-        else if(other.gameObject.tag != "Player" && cactusIsWalking && other.gameObject.tag != "Ground")
+        else if (collision.gameObject.tag != "Player" && cactusIsWalking && collision.gameObject.tag != "Ground")
         {
             hittingWall = true;
+            print("working");
         }
     }
 }
