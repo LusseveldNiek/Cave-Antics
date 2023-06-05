@@ -19,7 +19,7 @@ public class Flower : MonoBehaviour
             if (bulletTimer > bulletTimerLimit)
             {
                 GameObject instantiatedBullet = Instantiate(bullet, spawnPosition.position, Quaternion.identity);
-                Vector3 direction = (player.transform.position - transform.position).normalized;
+                Vector3 direction = ((player.transform.position - transform.position) - new Vector3(0, 1, 0)).normalized;
                 FlowerBullet bulletScript = instantiatedBullet.GetComponent<FlowerBullet>();
                 bulletScript.ShootInDirection(direction);
                 Destroy(instantiatedBullet, bulletLifetime);
