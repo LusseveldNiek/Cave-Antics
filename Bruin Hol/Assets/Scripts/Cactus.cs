@@ -5,15 +5,18 @@ using UnityEngine;
 public class Cactus : MonoBehaviour
 {
     public GameObject player;
+    public Animator animator;
     public Transform cactusUp;
-    private bool cactusActivated;
+    public bool cactusActivated;
     private float beginHeight;
     public float upSpeed;
     public float upHeight;
     public float moveSpeed;
-    private bool cactusIsWalking;
-    private RaycastHit hit;
-   
+    public bool cactusIsWalking;
+    public bool cactusGoingDown;
+    public float cactusGoingUpDistance;
+    public float groundOffset;
+    public bool hittingWall;
     void Start()
     {
         beginHeight = transform.position.y;
@@ -21,7 +24,17 @@ public class Cactus : MonoBehaviour
 
     void Update()
     {
-        if(Vector3.Distance(cactusUp.position, player.transform.position) < 2)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit) && cactusIsWalking)
+        {
+            // Get the height of the ground at the hit point
+            float groundHeight = hit.point.y + groundOffset;
+
+            // Adjust the position of the object to stay on the ground
+            transform.position = new Vector3(transform.position.x, groundHeight, transform.position.z);
+        }
+
+        if (Vector3.Distance(cactusUp.position, player.transform.position) < cactusGoingUpDistance && cactusGoingDown == false && cactusIsWalking == false)
         {
             cactusActivated = true;
         }
@@ -31,6 +44,7 @@ public class Cactus : MonoBehaviour
             if(transform.position.y < beginHeight + upHeight)
             {
                 transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
+                animator.SetBool("isGoingUp", true);
             }
 
             else if(transform.position.y > beginHeight + upHeight)
@@ -38,38 +52,69 @@ public class Cactus : MonoBehaviour
                 
                 cactusActivated = false;
                 cactusIsWalking = true;
-    
+                animator.SetBool("isGoingUp", false);
+
+            }
+        }
+
+        if(cactusGoingDown)
+        {
+            if (transform.position.y > beginHeight)
+            {
+                transform.Translate(-Vector3.up * upSpeed * Time.deltaTime);
+                //going down
+            }
+
+            else if (transform.position.y < beginHeight)
+            {
+                cactusGoingDown = false;
+                //cactus in ground again
             }
         }
 
         if(cactusIsWalking)
         {
-            cactusActivated = false;
-            if (Vector3.Distance(cactusUp.position, player.transform.position) > 4)
+            if (Vector3.Distance(cactusUp.position, player.transform.position) > cactusGoingUpDistance)
             {
-   
-                if(transform.position.y > beginHeight)
-                {
-                    transform.Translate(-Vector3.up * upSpeed * Time.deltaTime);
-                }
-
-                else if(transform.position.y < beginHeight)
-                {
-                    cactusIsWalking = false;
-                }
+                cactusGoingDown = true;
+                cactusIsWalking = false;
+                //player out of sight while walking
             }
 
-            else
+            else if(cactusGoingDown == false && hittingWall == false)
             {
+                //walking
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             }
 
-            Physics.Raycast(-Vector3.up, transform.position + new Vector3(0, 0.1f, 0), out hit, 0.1f);
-            if(hit.transform.gameObject == null)
+            else if(hittingWall)
             {
-                transform.Translate(-Vector3.up * upSpeed * Time.deltaTime);
+                transform.Translate(-Vector3.right * moveSpeed * Time.deltaTime);
             }
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("hoi2");
+        if (other.gameObject.tag == "pickaxe" && cactusIsWalking)
+        {
+            Destroy(gameObject);
+        }
+
+        if(hittingWall)
+        {
+            if (other.gameObject.tag != "Player" && cactusIsWalking && other.gameObject.tag != "Ground")
+            {
+                hittingWall = false;
+            }
+        }
+
+        else if(other.gameObject.tag != "Player" && cactusIsWalking && other.gameObject.tag != "Ground")
+        {
+            hittingWall = true;
+            print("working");
         }
     }
 }

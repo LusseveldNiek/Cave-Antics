@@ -5,9 +5,20 @@ using UnityEngine;
 public class FlowerBullet : MonoBehaviour
 {
     public float speed;
-    void Update()
+
+    // Shoot the bullet in the specified direction
+    public void ShootInDirection(Vector3 direction)
     {
-        transform.Translate(transform.forward * speed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        // Set the initial velocity of the bullet
+        GetComponent<Rigidbody>().velocity = direction * speed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if(other.gameObject.tag != "flower")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -9,18 +9,30 @@ public class Flower : MonoBehaviour
     private float bulletTimer;
     public float bulletTimerLimit;
     public int bulletLifetime;
+    public float flowerRange;
+    public Transform spawnPosition;
     void Update()
     {
-        if(Vector3.Distance(player.transform.position, transform.position) < 10)
+        if (Vector3.Distance(player.transform.position, transform.position) < flowerRange)
         {
             bulletTimer += Time.deltaTime;
-            if(bulletTimer > bulletTimerLimit)
+            if (bulletTimer > bulletTimerLimit)
             {
-                GameObject instantiatedBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                instantiatedBullet.transform.LookAt(player.transform.position);
+                GameObject instantiatedBullet = Instantiate(bullet, spawnPosition.position, Quaternion.identity);
+                Vector3 direction = (player.transform.position - transform.position).normalized;
+                FlowerBullet bulletScript = instantiatedBullet.GetComponent<FlowerBullet>();
+                bulletScript.ShootInDirection(direction);
                 Destroy(instantiatedBullet, bulletLifetime);
                 bulletTimer = 0;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "pickaxe")
+        {
+            Destroy(gameObject);
         }
     }
 }
