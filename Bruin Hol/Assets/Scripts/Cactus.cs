@@ -97,7 +97,6 @@ public class Cactus : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("hoi2");
         if (other.gameObject.tag == "pickaxe" && cactusIsWalking)
         {
             Destroy(gameObject);
@@ -114,7 +113,6 @@ public class Cactus : MonoBehaviour
         else if(other.gameObject.tag != "Player" && cactusIsWalking && other.gameObject.tag != "Ground")
         {
             hittingWall = true;
-            print("working");
         }
     }
 }
