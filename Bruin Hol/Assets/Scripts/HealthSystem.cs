@@ -5,6 +5,9 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     public GameObject[] hearts;
+    private float damageTimer;
+    public float damageWaitTime;
+    public bool canDoDamage;
     
 
     void Update()
@@ -12,6 +15,16 @@ public class HealthSystem : MonoBehaviour
         if(hearts[2].activeInHierarchy == false)
         {
             print("gameOver");
+        }
+
+        if(canDoDamage == false)
+        {
+            damageTimer += Time.deltaTime;
+            if(damageTimer > damageWaitTime)
+            {
+                canDoDamage = true;
+                damageTimer = 0;
+            }
         }
     }
 
@@ -21,9 +34,26 @@ public class HealthSystem : MonoBehaviour
         {
             for(int i = 0; i < hearts.Length; i++)
             {
-                if(hearts[i].gameObject.activeInHierarchy)
+                if(hearts[i].gameObject.activeInHierarchy && canDoDamage)
                 {
                     hearts[i].SetActive(false);
+                    canDoDamage = false;
+                    break;
+                }
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "doesDamage")
+        {
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
+                {
+                    hearts[i].SetActive(false);
+                    canDoDamage = false;
                     break;
                 }
             }
