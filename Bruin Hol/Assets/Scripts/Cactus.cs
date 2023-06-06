@@ -93,7 +93,7 @@ public class Cactus : MonoBehaviour
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             }
 
-            else if (hittingWall)
+            else if (hittingWall && cactusGoingDown == false)
             {
                 transform.Translate(-Vector3.right * moveSpeed * Time.deltaTime);
             }
