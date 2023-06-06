@@ -17,6 +17,8 @@ public class Cactus : MonoBehaviour
     public float cactusGoingUpDistance;
     public float groundOffset;
     public bool hittingWall;
+    private float wallHitTimeOut;
+    public float wallHitTimeOutTime;
     void Start()
     {
         beginHeight = transform.position.y;
@@ -24,6 +26,9 @@ public class Cactus : MonoBehaviour
 
     void Update()
     {
+        Physics.IgnoreCollision(player.GetComponent<BoxCollider>(), GetComponent<BoxCollider>());
+        //speler kan de cactus niet geweldadig de grond in duwen
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit) && cactusIsWalking)
         {
@@ -39,17 +44,17 @@ public class Cactus : MonoBehaviour
             cactusActivated = true;
         }
 
-        if(cactusActivated)
+        if (cactusActivated)
         {
-            if(transform.position.y < beginHeight + upHeight)
+            if (transform.position.y < beginHeight + upHeight)
             {
                 transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
                 animator.SetBool("isGoingUp", true);
             }
 
-            else if(transform.position.y > beginHeight + upHeight)
+            else if (transform.position.y > beginHeight + upHeight)
             {
-                
+
                 cactusActivated = false;
                 cactusIsWalking = true;
                 animator.SetBool("isGoingUp", false);
@@ -57,7 +62,7 @@ public class Cactus : MonoBehaviour
             }
         }
 
-        if(cactusGoingDown)
+        if (cactusGoingDown)
         {
             if (transform.position.y > beginHeight)
             {
@@ -72,7 +77,7 @@ public class Cactus : MonoBehaviour
             }
         }
 
-        if(cactusIsWalking)
+        if (cactusIsWalking)
         {
             if (Vector3.Distance(cactusUp.position, player.transform.position) > cactusGoingUpDistance)
             {
@@ -82,17 +87,22 @@ public class Cactus : MonoBehaviour
                 beginHeight = transform.position.y - 2.4f;
             }
 
-            else if(cactusGoingDown == false && hittingWall == false)
+            else if (cactusGoingDown == false && hittingWall == false)
             {
                 //walking
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             }
 
-            else if(hittingWall)
+            else if (hittingWall)
             {
                 transform.Translate(-Vector3.right * moveSpeed * Time.deltaTime);
             }
 
+        }
+
+        if(hittingWall)
+        {
+            wallHitTimeOut += Time.deltaTime;
         }
     }
 
@@ -104,13 +114,21 @@ public class Cactus : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.gameObject.tag == "Ground" && cactusIsWalking == false)
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<BoxCollider>());
+        }
+
         if (hittingWall)
         {
-            if (collision.gameObject.tag != "Player" && cactusIsWalking && collision.gameObject.tag != "Ground")
+            if (collision.gameObject.tag != "Player" && cactusIsWalking && collision.gameObject.tag != "Ground" && wallHitTimeOutTime < wallHitTimeOut)
             {
                 hittingWall = false;
+                print("goingFalse");
+                wallHitTimeOut = 0;
             }
         }
 
