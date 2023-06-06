@@ -17,7 +17,7 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "flowerBullet" || other.gameObject.tag == "cactus")
+        if(other.gameObject.tag == "doesDamage")
         {
             for(int i = 0; i < hearts.Length; i++)
             {
