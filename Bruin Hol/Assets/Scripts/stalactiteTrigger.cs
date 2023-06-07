@@ -5,6 +5,7 @@ using UnityEngine;
 public class stalactiteTrigger : MonoBehaviour
 {
     public Rigidbody stalactite;
+    public Animator animator;
 
     void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,7 @@ public class stalactiteTrigger : MonoBehaviour
         {
             stalactite.isKinematic = false;
             stalactite.useGravity = true;
+            animator.SetBool("Waiting", false);
         }
     }
 }
