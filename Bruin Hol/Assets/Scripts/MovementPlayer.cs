@@ -290,6 +290,9 @@ public class MovementPlayer : MonoBehaviour
     void RollingAndCrouching()
     {
         //crouching
+        float crouch = Gamepad.all[0].buttonEast.ReadValue();
+        animator.SetFloat("Crouch", crouch);
+        /*
         if (Gamepad.all[0].buttonEast.ReadValue() > 0)
         {
             speedPlayer = crouchSpeed;
@@ -299,7 +302,7 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             animator.SetBool("isCrouching", false);
-        }
+        }*/
 
         //isRolling
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
