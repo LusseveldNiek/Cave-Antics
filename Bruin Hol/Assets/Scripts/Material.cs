@@ -12,5 +12,10 @@ public class Material : MonoBehaviour
             inventory.GetComponent<Inventory>().objectsInInventory.Add(gameObject);
             print("material");
         }
+
+        if (other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(other.GetComponent<BoxCollider>(), GetComponent<BoxCollider>());
+        }
     }
 }
