@@ -10,6 +10,7 @@ public class MovementPlayer : MonoBehaviour
     public float jumpForce; 
     public float fallSpeed;
     public Rigidbody playerRigidbody;
+    public Animator animator;
 
     [Header("Jumping")]
     public bool isGrounded;
@@ -291,6 +292,12 @@ public class MovementPlayer : MonoBehaviour
         if (Gamepad.all[0].buttonEast.ReadValue() > 0)
         {
             speedPlayer = crouchSpeed;
+            animator.SetBool("isCrouching", true);
+        }
+
+        else
+        {
+            animator.SetBool("isCrouching", false);
         }
 
         //isRolling

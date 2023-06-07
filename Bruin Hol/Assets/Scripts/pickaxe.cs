@@ -11,6 +11,7 @@ public class pickaxe : MonoBehaviour
     public GameObject pickaxeLeftObject;
     public GameObject pickaxeRightObject;
     private GameObject pickaxeObject;
+    public Animator animator;
 
     public float rotationAxis;
     // Update is called once per frame
@@ -32,9 +33,11 @@ public class pickaxe : MonoBehaviour
 
         if (doingDamage)
         {
+            animator.SetBool("isMining", true);
             attackTime += Time.deltaTime;
             if (attackTime > attackSpeed)
             {
+                animator.SetBool("isMining", false);
                 pickaxeObject.SetActive(false);
                 attackTime = 0;
                 doingDamage = false;
