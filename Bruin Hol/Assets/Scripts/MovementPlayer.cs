@@ -108,6 +108,7 @@ public class MovementPlayer : MonoBehaviour
         if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted && !menuActive)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
+            animator.SetBool("isJumping", true);
         }
     
         //jumping from right wall
@@ -361,6 +362,7 @@ public class MovementPlayer : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            animator.SetBool("isJumping", false);
         }
     }
 
