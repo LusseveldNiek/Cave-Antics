@@ -54,6 +54,7 @@ public class MovementPlayer : MonoBehaviour
     public float rollingSpeed;
     public bool isRolling;
     private float beginRollingSpeed;
+    public float slowDownSliding;
 
     public float crouchSpeed;
 
@@ -67,6 +68,7 @@ public class MovementPlayer : MonoBehaviour
     public bool gameStarted;
     public GameObject startButton;
     public bool menuActive;
+    public bool canDoDamage;
     
 
     void Start()
@@ -83,7 +85,7 @@ public class MovementPlayer : MonoBehaviour
         //player cannot move backward or forward
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
-        if (!isOnRightWall && !isOnLeftWall && !rightWallJumping && !leftWallJumping && gameStarted && !menuActive)
+        if (!isOnRightWall && !isOnLeftWall && !rightWallJumping && !leftWallJumping && gameStarted && !menuActive && canDoDamage)
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
@@ -289,37 +291,22 @@ public class MovementPlayer : MonoBehaviour
 
     void RollingAndCrouching()
     {
-        //crouching
-        float crouch = Gamepad.all[0].buttonEast.ReadValue();
-        animator.SetFloat("Crouch", crouch);
-        /*
-        if (Gamepad.all[0].buttonEast.ReadValue() > 0)
-        {
-            speedPlayer = crouchSpeed;
-            animator.SetBool("isCrouching", true);
-        }
-
-        else
-        {
-            animator.SetBool("isCrouching", false);
-        }*/
-
         //isRolling
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
             isRolling = true;
-
+            animator.SetBool("isSliding", true);
             if (transform.rotation.z > 1)
             {
                 //goingLeft
-                transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / 7);
+                transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / slowDownSliding);
                 speedPlayer = beginPlayerSpeed * 2;
             }
 
-            else if(transform.rotation.z < 1)
+            else if (transform.rotation.z < 1)
             {
                 //goingRight
-                float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / 7);
+                float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / slowDownSliding);
                 transform.Translate(Vector3.right * positiveNumber);
                 speedPlayer = beginPlayerSpeed * 2;
             }
@@ -334,7 +321,22 @@ public class MovementPlayer : MonoBehaviour
         {
             isRolling = false;
             rollingSpeed = beginRollingSpeed;
+            animator.SetBool("isSliding", false);
         }
+
+        //crouching
+        if (Gamepad.all[0].buttonEast.ReadValue() > 0 && isRolling == false)
+        {
+            speedPlayer = crouchSpeed;
+            animator.SetBool("isCrouching", true);
+        }
+
+        else
+        {
+            animator.SetBool("isCrouching", false);
+        }
+
+        
     }
 
     void SlopeRotation()

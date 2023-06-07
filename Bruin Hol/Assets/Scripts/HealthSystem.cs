@@ -8,10 +8,14 @@ public class HealthSystem : MonoBehaviour
     private float damageTimer;
     public float damageWaitTime;
     public bool canDoDamage;
+    public Animator animator;
+    public float speed;
     
 
     void Update()
     {
+        GetComponent<MovementPlayer>().canDoDamage = canDoDamage;
+
         if(hearts[2].activeInHierarchy == false)
         {
             print("gameOver");
@@ -19,10 +23,12 @@ public class HealthSystem : MonoBehaviour
 
         if(canDoDamage == false)
         {
+            animator.SetBool("playerDamage", true);
             damageTimer += Time.deltaTime;
             if(damageTimer > damageWaitTime)
             {
                 canDoDamage = true;
+                animator.SetBool("playerDamage", false);
                 damageTimer = 0;
             }
         }
@@ -38,6 +44,7 @@ public class HealthSystem : MonoBehaviour
                 {
                     hearts[i].SetActive(false);
                     canDoDamage = false;
+                    GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - other.transform.position.x) * speed);
                     break;
                 }
             }
@@ -54,6 +61,7 @@ public class HealthSystem : MonoBehaviour
                 {
                     hearts[i].SetActive(false);
                     canDoDamage = false;
+                    GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - collision.transform.position.x) * speed);
                     break;
                 }
             }
