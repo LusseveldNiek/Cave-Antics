@@ -91,6 +91,8 @@ public class MovementPlayer : MonoBehaviour
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+
+            //walking animation
             if(Input.GetAxis("Horizontal") != 0)
             {
                 animator.SetBool("playerWalking", true);
