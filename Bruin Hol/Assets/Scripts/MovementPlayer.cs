@@ -11,6 +11,7 @@ public class MovementPlayer : MonoBehaviour
     public float fallSpeed;
     public Rigidbody playerRigidbody;
     public Animator animator;
+    public GameObject playerMesh;
 
     [Header("Jumping")]
     public bool isGrounded;
@@ -69,6 +70,7 @@ public class MovementPlayer : MonoBehaviour
     public GameObject startButton;
     public bool menuActive;
     public bool canDoDamage;
+    public float playerRotationSpeed;
     
 
     void Start()
@@ -102,6 +104,7 @@ public class MovementPlayer : MonoBehaviour
         WallJumping();
         RollingAndCrouching();
         SlopeRotation();
+        RotatePlayerMesh();
     }
 
     void FixedUpdate()
@@ -337,6 +340,28 @@ public class MovementPlayer : MonoBehaviour
         }
 
         
+    }
+
+    void RotatePlayerMesh()
+    {
+        float rotationAxis = Input.GetAxis("Horizontal");
+        if (rotationAxis > 0)
+        {
+
+            Quaternion target = Quaternion.Euler(playerMesh.transform.rotation.x, 90, playerMesh.transform.rotation.z);
+
+            // rotate player when turning
+            playerMesh.transform.localRotation = target;
+        }
+
+        if (rotationAxis < 0)
+        {
+
+            Quaternion target = Quaternion.Euler(playerMesh.transform.rotation.x, -90, playerMesh.transform.rotation.z);
+
+            // rotate player when turning
+            playerMesh.transform.localRotation = target;
+        }
     }
 
     void SlopeRotation()
