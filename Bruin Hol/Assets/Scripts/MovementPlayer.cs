@@ -91,6 +91,26 @@ public class MovementPlayer : MonoBehaviour
         {
             //horizontal movement
             transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+            if(Input.GetAxis("Horizontal") != 0)
+            {
+                animator.SetBool("playerWalking", true);
+                if(Input.GetAxis("Horizontal") > 0)
+                {
+                    animator.speed = Input.GetAxis("Horizontal");
+                }
+
+                else if(Input.GetAxis("Horizontal") < 0)
+                {
+                    float positiveNumberSpeed = Mathf.Abs(Input.GetAxis("Horizontal"));
+                    animator.speed = positiveNumberSpeed; //negative number speed
+                }
+            }
+
+            else
+            {
+                animator.speed = 1;
+                animator.SetBool("playerWalking", false);
+            }
         }
 
         //check if game started
