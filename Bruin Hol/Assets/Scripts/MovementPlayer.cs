@@ -259,6 +259,7 @@ public class MovementPlayer : MonoBehaviour
         //sprinten
         if (Gamepad.all[0].rightTrigger.ReadValue() > 0)
         {
+            animator.SetBool("isRunning", true);
             sprinting = true;
             speedPlayer += sprintCounter * sprintCounter * sprintMultiplier;
             sprintCounter += sprintSpeed * Time.deltaTime;
@@ -309,6 +310,7 @@ public class MovementPlayer : MonoBehaviour
             sprinting = false;
             timerParticle = 0;
             timerParticleBool = false;
+            animator.SetBool("isRunning", false);
         }
 
         speedPlayer = Mathf.Clamp(speedPlayer, 0, maxSprintSpeed);
