@@ -169,10 +169,13 @@ public class MovementPlayer : MonoBehaviour
     {
         //maakt springen korter
         height = groundHit.distance;
+
+        // limit player fall speed
+        height = Mathf.Clamp(height, 0, 4);
         if (isGrounded == false)
         {
             Physics.Raycast(transform.position, -transform.up, out groundHit, 100);          
-            Physics.gravity = new Vector3(0, -groundHit.distance * fallSpeed, 0);
+            Physics.gravity = new Vector3(0, -height * fallSpeed, 0);
         }
 
         else
