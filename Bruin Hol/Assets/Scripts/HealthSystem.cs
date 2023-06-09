@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -10,15 +11,19 @@ public class HealthSystem : MonoBehaviour
     public bool canDoDamage;
     public Animator animator;
     public float speed;
+    public GameObject gameOverCanvas;
+    public Button button;
     
 
     void Update()
     {
         GetComponent<MovementPlayer>().canDoDamage = canDoDamage;
 
-        if(hearts[2].activeInHierarchy == false)
+        if(hearts[2].activeInHierarchy == false && canDoDamage == false)
         {
             print("gameOver");
+            gameOverCanvas.SetActive(true);
+            button.Select();
         }
 
         if(canDoDamage == false)
