@@ -18,6 +18,7 @@ public class MovementPlayer : MonoBehaviour
     private RaycastHit groundHit;
     public float height; //hoogte tussen speler en grond
     public GameObject groundParticle;
+    public Transform bottomPlayer;
 
     [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
@@ -174,7 +175,7 @@ public class MovementPlayer : MonoBehaviour
         height = Mathf.Clamp(height, 0, 4);
         if (isGrounded == false)
         {
-            Physics.Raycast(transform.position, -transform.up, out groundHit, 100);          
+            Physics.Raycast(bottomPlayer.position, -transform.up, out groundHit, 100);          
             Physics.gravity = new Vector3(0, -height * fallSpeed, 0);
         }
 
