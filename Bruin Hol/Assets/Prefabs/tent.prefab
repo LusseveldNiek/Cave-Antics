@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9126073018025746029}
   - component: {fileID: 6431883843688688295}
   - component: {fileID: 8977841910457526710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
