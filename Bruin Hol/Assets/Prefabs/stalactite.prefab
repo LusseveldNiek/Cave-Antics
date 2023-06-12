@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 473422757145506504}
   - component: {fileID: 6079454700752957512}
   - component: {fileID: 2347046135720135154}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2794044653634644949}
   - component: {fileID: 4980180118718196891}
   - component: {fileID: 7167400931438379664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: stalactite
   m_TagString: doesDamage
   m_Icon: {fileID: 0}
