@@ -18,7 +18,8 @@ public class StrongStone : MonoBehaviour
                 {
                     inventory.GetComponent<Inventory>().inventory[i].texture = null;
                 }
-
+                inventory.GetComponent<Inventory>().hasCoal = false;
+                inventory.GetComponent<Inventory>().hasSulfur = false;
                 Destroy(gameObject);
             }
         }
