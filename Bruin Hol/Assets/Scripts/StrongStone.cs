@@ -11,8 +11,14 @@ public class StrongStone : MonoBehaviour
         {
             bool hasCoal = inventory.GetComponent<Inventory>().hasCoal;
             bool hasSulfur = inventory.GetComponent<Inventory>().hasSulfur;
-            if(hasSulfur && hasCoal)
+            if (hasSulfur && hasCoal)
             {
+                inventory.GetComponent<Inventory>().objectsInInventory.Clear();
+                for(int i = 0; i < inventory.GetComponent<Inventory>().inventory.Length; i ++)
+                {
+                    inventory.GetComponent<Inventory>().inventory[i].texture = null;
+                }
+
                 Destroy(gameObject);
             }
         }
