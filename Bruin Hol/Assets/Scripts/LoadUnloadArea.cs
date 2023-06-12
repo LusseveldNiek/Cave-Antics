@@ -32,7 +32,7 @@ public class LoadUnloadArea : MonoBehaviour
 
     public IEnumerator WaitForFix()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.125f);
         canToggle = true;
     }
 }
