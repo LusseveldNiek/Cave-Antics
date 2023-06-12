@@ -56,7 +56,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "doesDamage")
         {
