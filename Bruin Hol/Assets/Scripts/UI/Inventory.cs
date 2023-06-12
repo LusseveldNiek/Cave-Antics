@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
         foreach(GameObject material in objectsInInventory)
         {
-            if(material.gameObject != null)
+            if(material != null)
             {
                 if (material.tag == "Sulfur")
                 {
