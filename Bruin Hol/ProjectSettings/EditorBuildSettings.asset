@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/scenes/Menu.unity
     guid: f4d6b12dfd33cba43a289a6d1dc9ba52
-  - enabled: 1
+  - enabled: 0
     path: Assets/scenes/NiekGameTest.unity
     guid: 8e74bbbde1fa0ef41b148d19d5e6df53
+  - enabled: 1
+    path: Assets/scenes/niekTest2.unity
+    guid: fe2dee29f93d5b2458fede75ebe50c09
   m_configObjects: {}
