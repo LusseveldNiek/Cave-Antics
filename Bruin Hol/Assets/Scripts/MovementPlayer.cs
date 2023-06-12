@@ -345,7 +345,7 @@ public class MovementPlayer : MonoBehaviour
             speedPlayer -= rollingSpeed * rollingSpeed;
             rollingSpeed += rollingSpeed * Time.deltaTime;
 
-            speedPlayer = Mathf.Clamp(speedPlayer, 0, 1000);
+            speedPlayer = Mathf.Clamp(speedPlayer, 0, 7);
         }
 
         else
