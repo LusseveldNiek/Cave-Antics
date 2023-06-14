@@ -14,6 +14,7 @@ public class stalactiteTrigger : MonoBehaviour
             stalactite.isKinematic = false;
             stalactite.useGravity = true;
             animator.SetBool("Waiting", false);
+            animator.enabled = false;
         }
     }
 }
