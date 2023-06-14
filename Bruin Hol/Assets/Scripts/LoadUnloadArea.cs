@@ -18,8 +18,8 @@ public class LoadUnloadArea : MonoBehaviour
 
         else
         {
-            areaToDisable.SetActive(false);
-            areaToEnable.SetActive(true);
+            areaToDisable.SetActive(true);
+            areaToEnable.SetActive(false);
         }
         
     }
