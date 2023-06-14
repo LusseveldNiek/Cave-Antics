@@ -6,33 +6,21 @@ public class LoadUnloadArea : MonoBehaviour
 {
     public GameObject areaToDisable;
     public GameObject areaToEnable;
-    bool canToggle = true;
+    public GameObject player;
 
-    private void OnTriggerExit(Collider other)
+    public void Update()
     {
-        if (other.transform.gameObject.tag == "Player")
+        if(transform.position.x < player.transform.position.x)
         {
-            if (canToggle)
-            {
-                canToggle = false;
-                StartCoroutine(WaitForFix());
-                if (areaToDisable.activeInHierarchy)
-                {
-                    areaToDisable.SetActive(false);
-                    areaToEnable.SetActive(true);
-                }
-                else
-                {
-                    areaToDisable.SetActive(true);
-                    areaToEnable.SetActive(false);
-                }
-            }
+            areaToDisable.SetActive(false);
+            areaToEnable.SetActive(true);
         }
-    }
 
-    public IEnumerator WaitForFix()
-    {
-        yield return new WaitForSeconds(0.125f);
-        canToggle = true;
+        else
+        {
+            areaToDisable.SetActive(false);
+            areaToEnable.SetActive(true);
+        }
+        
     }
 }
