@@ -10,13 +10,15 @@ public class LoadUnloadArea : MonoBehaviour
 
     public void Update()
     {
-        if(transform.position.x < player.transform.position.x)
+        float rightDistance = transform.position.x + 4;
+
+        if(transform.position.x < player.transform.position.x && player.transform.position.x < rightDistance && transform.position.y - player.transform.position.y < 7)
         {
             areaToDisable.SetActive(false);
             areaToEnable.SetActive(true);
         }
 
-        else
+        else if(player.transform.position.x < rightDistance && transform.position.y - player.transform.position.y < 7)
         {
             areaToDisable.SetActive(true);
             areaToEnable.SetActive(false);
