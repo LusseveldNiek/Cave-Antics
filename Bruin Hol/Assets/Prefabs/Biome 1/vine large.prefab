@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 633077477674444250}
   - component: {fileID: 3399606207496130832}
   - component: {fileID: 4101730828806117204}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: vine large
   m_TagString: Untagged
   m_Icon: {fileID: 0}

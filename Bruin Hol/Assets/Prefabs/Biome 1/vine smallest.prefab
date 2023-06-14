@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6085768508702239943}
   - component: {fileID: 7195386208518382434}
   - component: {fileID: 4917881227797288872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: vine smallest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

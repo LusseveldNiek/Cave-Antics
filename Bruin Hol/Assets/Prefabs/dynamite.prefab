@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5287191775426311288}
   - component: {fileID: 7978997148760277170}
   - component: {fileID: 2191963503886446700}
+  - component: {fileID: 5748191852039104736}
   m_Layer: 7
   m_Name: dynamite
   m_TagString: Untagged
@@ -97,3 +98,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 1, z: 0.55}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &5748191852039104736
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483633609941033319}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5361c5206575ee34bb1f4a39f324e5f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1459902268537077208}
   - component: {fileID: 2588803381522821757}
   - component: {fileID: 290959073949484727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
