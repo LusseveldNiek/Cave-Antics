@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2346700623192128721}
   - component: {fileID: 7143189636899005887}
   - component: {fileID: 5736233266911913877}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: mushrooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +63,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 767cec65918cdd64791e1540d4868d74, type: 2}
+  - {fileID: 2100000, guid: e1c3408291c0d564c9fa0bc84ea97fba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6085768508702239943}
   - component: {fileID: 7195386208518382434}
   - component: {fileID: 4917881227797288872}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: vine smallest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: df4ca3e265896db4cbb84fd0474688e4, type: 2}
+  - {fileID: 2100000, guid: e1c3408291c0d564c9fa0bc84ea97fba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
