@@ -54,8 +54,8 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.5
-    - _ToonBrightness: 0.5
+    - _Smoothness: 0
+    - _ToonBrightness: 1
     - _ToonOffset: 1
     - _ToonSmoothness: 1
     m_Colors:

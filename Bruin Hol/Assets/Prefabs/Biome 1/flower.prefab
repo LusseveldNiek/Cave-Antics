@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8367964117306634430}
   - component: {fileID: 6035962931531089012}
   - component: {fileID: 2492467961068224989}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: flower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 096d19e3405fc3f40a04100a0175e97a, type: 2}
+  - {fileID: 2100000, guid: 9ac03650b5c24764d924cd6e1b0f3570, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
