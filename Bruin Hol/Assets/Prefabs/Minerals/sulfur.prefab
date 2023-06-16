@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d765108accfbc3d419cc6d9ad10b8991, type: 2}
+  - {fileID: 2100000, guid: aa81bd64b22202543ab06c2ac808ac8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,9 +129,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+<<<<<<< Updated upstream
   scoreSystem: {fileID: 0}
   particle: {fileID: 8004442228450178756, guid: a6dcfee87e184764e96b58c216ce331b,
     type: 3}
+=======
+  diamondScore: 0
+  scoreSystem: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1001 &3710006988249283700
 PrefabInstance:
   m_ObjectHideFlags: 0
