@@ -5,6 +5,9 @@ using UnityEngine;
 public class StrongStone : MonoBehaviour
 {
     public GameObject inventory;
+    public GameObject bomb;
+    public GameObject bombParticle;
+    public Transform bombPosition;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "pickaxe")
@@ -20,7 +23,9 @@ public class StrongStone : MonoBehaviour
                 }
                 inventory.GetComponent<Inventory>().hasCoal = false;
                 inventory.GetComponent<Inventory>().hasSulfur = false;
-                Destroy(gameObject);
+                GameObject prefabBomb = Instantiate(bomb, bombPosition.position, Quaternion.identity);
+                Destroy(prefabBomb, 2.5f);
+                Destroy(gameObject, 2.5f);
             }
         }
     }
