@@ -17,6 +17,7 @@ public class Flower : MonoBehaviour
     public float animationLimit;
     public float animationTime;
     private bool playingAnimation;
+
     void Update()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < flowerRange)
