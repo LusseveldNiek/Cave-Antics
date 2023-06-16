@@ -57,7 +57,6 @@ public class Cactus : MonoBehaviour
 
                 cactusActivated = false;
                 cactusIsWalking = true;
-                animator.SetBool("isGoingUp", false);
 
             }
         }
@@ -83,6 +82,7 @@ public class Cactus : MonoBehaviour
             {
                 cactusGoingDown = true;
                 cactusIsWalking = false;
+                animator.SetBool("isGoingUp", false);
                 //player out of sight while walking
                 beginHeight = transform.position.y - 2.4f;
             }

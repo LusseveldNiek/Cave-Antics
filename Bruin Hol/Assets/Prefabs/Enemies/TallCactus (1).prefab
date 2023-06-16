@@ -255,6 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8332446629867734495}
+  - component: {fileID: 8126340434971151788}
   m_Layer: 7
   m_Name: TallCactus 1
   m_TagString: Untagged
@@ -280,6 +281,26 @@ Transform:
   m_Father: {fileID: 7752516164986838487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8126340434971151788
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212508798098338511}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81ec8d7089ff43e448b7ecb792b420fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7752516164786024645
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 8126340434971151788}
   cactusUp: {fileID: 7752516164786024666}
   cactusActivated: 0
   upSpeed: 1
