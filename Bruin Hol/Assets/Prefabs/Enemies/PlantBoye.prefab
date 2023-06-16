@@ -72,6 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4717500868176660723}
+  - component: {fileID: 915411584210119995}
   m_Layer: 7
   m_Name: PlantBoye
   m_TagString: Untagged
@@ -96,6 +97,26 @@ Transform:
   m_Father: {fileID: 4516375006219193213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &915411584210119995
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375568680743890941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: afc27b7193d42cf4a918af42d7c5e337, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1372120883517475869
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,13 +640,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  bullet: {fileID: 2285770632837492466, guid: f2167573f45978c41926c8cd7ae0c71c, type: 3}
+  bullet: {fileID: 7549969793857861976, guid: f2167573f45978c41926c8cd7ae0c71c, type: 3}
   bulletTimerLimit: 2
   bulletLifetime: 4
   flowerRange: 7
   spawnPosition: {fileID: 4516375006254973242}
   upShooting: -4
   bulletSpeed: 1.4
+  animator: {fileID: 915411584210119995}
+  animationLimit: 1
+  animationTime: 0
 --- !u!1 &4516375006254973237
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,10 @@ public class Flower : MonoBehaviour
     public Transform spawnPosition;
     public float upShooting;
     public float bulletSpeed;
+    public Animator animator;
+    public float animationLimit;
+    public float animationTime;
+    private bool playingAnimation;
     void Update()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < flowerRange)
@@ -28,7 +32,32 @@ public class Flower : MonoBehaviour
                 bulletScript.ShootInDirection(direction);
                 Destroy(instantiatedBullet, bulletLifetime);
                 bulletTimer = 0;
+                animator.SetBool("schooting", true);
+                playingAnimation = true;
             }
+        }
+
+        if(playingAnimation)
+        {
+            animationTime += Time.deltaTime;
+            if(animationTime > animationLimit)
+            {
+                playingAnimation = false;
+                animator.SetBool("schooting", false);
+                animationTime = 0;
+            }
+        }
+
+        
+
+        if(player.transform.position.x > transform.position.x)
+        {
+            transform.localRotation = Quaternion.Euler(0, 90, 0);
+        }
+
+        else
+        {
+            transform.localRotation = Quaternion.Euler(0, -90, 0);
         }
     }
 
