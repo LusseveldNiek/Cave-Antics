@@ -129,3 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  scoreSystem: {fileID: 0}
+  diamondParticle: {fileID: 8004442228450178756, guid: a2cb64162fcdb114e971b62d9040ebe6,
+    type: 3}
+  sulfurParticle: {fileID: 8004442228450178756, guid: a6dcfee87e184764e96b58c216ce331b,
+    type: 3}
+  coalParticle: {fileID: 8004442228450178756, guid: 2c9261524c0296440b31cbc5b318d7a2,
+    type: 3}

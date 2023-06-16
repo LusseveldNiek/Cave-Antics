@@ -6,24 +6,42 @@ public class Material : MonoBehaviour
 {
     public GameObject inventory;
     public GameObject scoreSystem;
+
+    //particles
+    public GameObject particle;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "pickaxe")
+        if (other.gameObject.tag == "pickaxe" && gameObject.tag != "diamond")
         {
             inventory.GetComponent<Inventory>().objectsInInventory.Add(gameObject);
             print("material");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            if(gameObject.tag == "Coal")
+            {
+                GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+                Destroy(particlePrefab, 4f);
+            }
+
+            else if(gameObject.tag == "Sulfur")
+            {
+                GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+                Destroy(particlePrefab, 4f);
+            }
         }
 
-        if(other.gameObject.tag == "pickaxe" && gameObject.tag == "diamond")
+        else if(other.gameObject.tag == "pickaxe" && gameObject.tag == "diamond")
         {
             scoreSystem.GetComponent<ScoreSystem>().diamondMining = true;
 
+            GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(particlePrefab, 4f);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false); 
         }
 
-        if (other.gameObject.tag == "Player")
+        else if (other.gameObject.tag == "Player")
         {
             Physics.IgnoreCollision(other.GetComponent<BoxCollider>(), GetComponent<BoxCollider>());
         }

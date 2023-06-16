@@ -129,6 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  scoreSystem: {fileID: 0}
+  particle: {fileID: 8004442228450178756, guid: a6dcfee87e184764e96b58c216ce331b,
+    type: 3}
 --- !u!1001 &3710006988249283700
 PrefabInstance:
   m_ObjectHideFlags: 0
