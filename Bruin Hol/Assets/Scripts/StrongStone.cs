@@ -20,6 +20,7 @@ public class StrongStone : MonoBehaviour
                 for(int i = 0; i < inventory.GetComponent<Inventory>().inventory.Length; i ++)
                 {
                     inventory.GetComponent<Inventory>().inventory[i].texture = null;
+                    inventory.GetComponent<Inventory>().inventory[i].enabled = false;
                 }
                 inventory.GetComponent<Inventory>().hasCoal = false;
                 inventory.GetComponent<Inventory>().hasSulfur = false;
