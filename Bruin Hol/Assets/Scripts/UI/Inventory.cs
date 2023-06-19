@@ -27,6 +27,10 @@ public class Inventory : MonoBehaviour
                     {
                         if (inventory[i].texture == null && hasSulfur == false)
                         {
+                            Color imageColor = inventory[i].color;
+                            imageColor.a = 255;
+                            inventory[i].color = imageColor;
+
                             inventory[i].texture = sulfur;
                             print("sulfurCollected");
                             hasSulfur = true;
@@ -41,6 +45,10 @@ public class Inventory : MonoBehaviour
                     {
                         if (inventory[i].texture == null && hasCoal == false)
                         {
+                            Color imageColor = inventory[i].color;
+                            imageColor.a = 255;
+                            inventory[i].color = imageColor;
+
                             inventory[i].texture = coal;
                             print("coalCollected");
                             hasCoal = true;
