@@ -127,7 +127,12 @@ public class MovementPlayer : MonoBehaviour
         WallJumping();
         RollingAndCrouching();
         SlopeRotation();
-        RotatePlayerMesh();
+
+        //speler kan niet roteren wanneer wallJumping
+        if(!isOnLeftWall && !isOnRightWall)
+        {
+            RotatePlayerMesh();
+        }
     }
 
     void FixedUpdate()
@@ -143,6 +148,7 @@ public class MovementPlayer : MonoBehaviour
         if (Gamepad.all[0].buttonSouth.isPressed && isOnRightWall)
         {
             rightWallJumping = true;
+            animator.SetBool("wallJumping", true);
             isOnRightWall = false;
             playerRigidbody.AddForce(-Vector3.right * wallJumpSideForce);
             playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
@@ -152,6 +158,7 @@ public class MovementPlayer : MonoBehaviour
         if (Gamepad.all[0].buttonSouth.isPressed && isOnLeftWall)
         {
             leftWallJumping = true;
+            animator.SetBool("wallJumping", true);
             isOnLeftWall = false;
             playerRigidbody.AddForce(Vector3.right * wallJumpSideForce);
             playerRigidbody.AddForce(Vector3.up * wallJumpUpForce);
@@ -190,10 +197,12 @@ public class MovementPlayer : MonoBehaviour
         if(isOnRightWall && rightWallJumping)
         {
             rightWallJumping = false;
+            animator.SetBool("wallJumping", false);
         }
 
         else if(isOnLeftWall && leftWallJumping)
         {
+            animator.SetBool("wallJumping", false);
             leftWallJumping = false;
         }
 
@@ -205,13 +214,14 @@ public class MovementPlayer : MonoBehaviour
             if(wallLeft.collider.CompareTag("wall"))
             {
                 isOnLeftWall = true;
-                print("onWallLeft");
+                print("onWall");
             }
         }
 
         else
         {
             isOnLeftWall = false;
+            animator.SetBool("onWall", true);
         }
 
         if (raycastRightHit)
@@ -219,17 +229,19 @@ public class MovementPlayer : MonoBehaviour
             if(wallRight.collider.CompareTag("wall"))
             {
                 isOnRightWall = true;
-                print("onWallright");
+                print("onWall");
             }
         }
 
         else
         {
             isOnRightWall = false;
+            animator.SetBool("onWall", false);
         }
 
         if(isGrounded)
         {
+            animator.SetBool("wallJumping", false);
             leftWallJumping = false;
             rightWallJumping = false;
         }
@@ -244,6 +256,12 @@ public class MovementPlayer : MonoBehaviour
             vel.y = wallHangSpeed;
             playerRigidbody.velocity = vel;
             transform.rotation = Quaternion.identity;
+            animator.SetBool("onWall", true);
+
+            Quaternion target = Quaternion.Euler(playerMesh.transform.rotation.x, 90, playerMesh.transform.rotation.z);
+
+            // rotate player when turning
+            playerMesh.transform.localRotation = target;
         }
 
         if(isOnRightWall)
@@ -255,6 +273,12 @@ public class MovementPlayer : MonoBehaviour
             vel.y = wallHangSpeed;
             playerRigidbody.velocity = vel;
             transform.rotation = Quaternion.identity;
+            animator.SetBool("onWall", true);
+
+            Quaternion target = Quaternion.Euler(playerMesh.transform.rotation.x, -90, playerMesh.transform.rotation.z);
+
+            // rotate player when turning
+            playerMesh.transform.localRotation = target;
         }
     }
 

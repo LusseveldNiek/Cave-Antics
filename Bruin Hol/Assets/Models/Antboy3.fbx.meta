@@ -381,7 +381,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: rig|WallJump
+      name: rig|wallJump
       takeName: rig|WallJump
       internalID: 5376003085737154353
       firstFrame: 0
@@ -410,7 +410,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: rig|WallSlide
+      name: rig|wallSlide
       takeName: rig|WallSlide
       internalID: 1437870660531256783
       firstFrame: 0
