@@ -15,6 +15,9 @@ public class CylinderSteen : MonoBehaviour
     public float maxDeceleration;
     public float stoppingDistance = 1f;
 
+    public float targetDistance;
+    public float distance;
+
     public void Update()
     {
         if(goingLeft)
@@ -22,11 +25,11 @@ public class CylinderSteen : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(Vector3.left * speed * Time.deltaTime);
             if (hitLeft.transform != null)
             {
-                float distance = hitLeft.distance;
+                distance = hitLeft.distance;
 
-                float targetDistance = distance - stoppingDistance;
+                targetDistance = distance - stoppingDistance;
 
-                if (targetDistance <= 0f)
+                if (targetDistance <= 1)
                 {
                     // The object is already within the stopping distance, so stop it
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -57,7 +60,7 @@ public class CylinderSteen : MonoBehaviour
 
                 float targetDistance = distance - stoppingDistance;
 
-            if (targetDistance <= 0f)
+            if (targetDistance <= 1)
             {
                     // The object is already within the stopping distance, so stop it
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
