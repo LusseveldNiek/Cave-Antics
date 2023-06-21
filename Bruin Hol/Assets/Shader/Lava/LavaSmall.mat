@@ -39,7 +39,7 @@ Material:
     - _MovementSpeed: 0.74
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 5.06
+    - _Scale: 15.35
     - _StartTime: 14.89
     m_Colors:
     - _BaseColor: {r: 1, g: 0.2116599, b: 0, a: 0}
