@@ -72,12 +72,19 @@ public class MovementPlayer : MonoBehaviour
     public bool menuActive;
     public bool canDoDamage;
     public float playerRotationSpeed;
-    
+
+    Vector3 movementDirection; // Calculate the movement direction based on player input
+    float movementSpeed = 5f; // Set the movement speed (replace 5f with your desired speed value)
+
+    float distance;
+
 
     void Start()
     {
         beginPlayerSpeed = speedPlayer;
         beginRollingSpeed = rollingSpeed;
+
+        distance = movementSpeed * Time.deltaTime;
     }
 
     void Update()
@@ -91,10 +98,24 @@ public class MovementPlayer : MonoBehaviour
         if (!isOnRightWall && !isOnLeftWall && !rightWallJumping && !leftWallJumping && gameStarted && !menuActive && canDoDamage)
         {
             //horizontal movement
-            transform.Translate(Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime, 0, 0);
+            
+
+            float movement = Input.GetAxis("Horizontal") * speedPlayer * Time.deltaTime;
+            RaycastHit hit;
+            Vector3 movementDirection = new Vector3(movement, 0, 0);
+            if (Physics.Raycast(transform.position, movementDirection, out hit, movementDirection.magnitude))
+            {
+                // Adjust position to the point of collision
+                transform.position = hit.point;
+            }
+            else
+            {
+                // Move the player
+                transform.Translate(movementDirection);
+            }
 
             //walking animation
-            if(Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Horizontal") != 0)
             {
                 animator.SetBool("playerWalking", true);
                 if(Input.GetAxis("Horizontal") > 0)
@@ -115,9 +136,10 @@ public class MovementPlayer : MonoBehaviour
                 animator.SetBool("playerWalking", false);
             }
         }
+       
 
         //check if game started
-        if(gameStarted == false)
+        if (gameStarted == false)
         {
             gameStarted = startButton.GetComponent<StartButton>().startTimer;
         }
