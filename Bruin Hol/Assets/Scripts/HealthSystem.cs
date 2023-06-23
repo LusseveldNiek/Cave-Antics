@@ -13,6 +13,9 @@ public class HealthSystem : MonoBehaviour
     public float speed;
     public GameObject gameOverCanvas;
     public Button button;
+
+    private float gameOverTime;
+    public float gameOverTimeLimit;
     
 
     void Update()
@@ -22,8 +25,15 @@ public class HealthSystem : MonoBehaviour
         if(hearts[2].activeInHierarchy == false && canDoDamage == false)
         {
             print("gameOver");
-            gameOverCanvas.SetActive(true);
-            button.Select();
+            animator.SetBool("isDead", true);
+
+            gameOverTime += Time.deltaTime;
+            if (gameOverTime > gameOverTimeLimit)
+            {
+                gameOverCanvas.SetActive(true);
+                button.Select();
+                GetComponent<MovementPlayer>().enabled = false;
+            }
         }
 
         if(canDoDamage == false)
