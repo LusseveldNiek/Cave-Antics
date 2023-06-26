@@ -115,11 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ec107106617c94c85397a97f1b5132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 70
   goingLeft: 1
   goingRight: 0
   raycastDistance: 10
-  maxDeceleration: 4
+  maxDeceleration: 7
   stoppingDistance: 1
   targetDistance: 0
   distance: 0
