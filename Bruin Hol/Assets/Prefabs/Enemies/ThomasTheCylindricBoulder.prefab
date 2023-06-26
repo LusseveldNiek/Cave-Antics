@@ -118,9 +118,9 @@ MonoBehaviour:
   speed: 70
   goingLeft: 1
   goingRight: 0
-  raycastDistance: 10
-  maxDeceleration: 7
-  stoppingDistance: 1
+  raycastDistance: 4
+  maxDeceleration: 12
+  stoppingDistance: 2
   targetDistance: 0
   distance: 0
 --- !u!136 &409056186450902349
