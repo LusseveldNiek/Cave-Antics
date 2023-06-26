@@ -47,6 +47,7 @@ public class Sound : MonoBehaviour
 
         if(isDamaged && !damageSound.isPlaying)
         {
+            damageSound.time = 1;
             damageSound.Play();
         }
 
