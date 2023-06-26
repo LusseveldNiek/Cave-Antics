@@ -14,16 +14,17 @@ public class VierkantSteen : MonoBehaviour
 
     private RaycastHit hit;
     public Animator animator;
+    public float distance;
 
     void Update()
     {
         if(goingLeft)
         {
             
-            Physics.Raycast(raycastUp.position, Vector3.left, out hit, 0.1f);
-            Physics.Raycast(raycastDown.position, Vector3.left, out hit, 0.1f);
-            Physics.Raycast(raycastLeft.position, Vector3.left, out hit, 0.1f);
-            Physics.Raycast(raycastRight.position, Vector3.left, out hit, 0.1f);
+            Physics.Raycast(raycastUp.position, Vector3.left, out hit, distance);
+            Physics.Raycast(raycastDown.position, Vector3.left, out hit, distance);
+            Physics.Raycast(raycastLeft.position, Vector3.left, out hit, distance);
+            Physics.Raycast(raycastRight.position, Vector3.left, out hit, distance);
 
             if(hit.transform != null)
             {
@@ -42,10 +43,10 @@ public class VierkantSteen : MonoBehaviour
         if(goingRight)
         {
             
-            Physics.Raycast(raycastUp.position, Vector3.right, out hit, 0.1f);
-            Physics.Raycast(raycastDown.position, Vector3.right, out hit, 0.1f);
-            Physics.Raycast(raycastLeft.position, Vector3.right, out hit, 0.1f);
-            Physics.Raycast(raycastRight.position, Vector3.right, out hit, 0.1f);
+            Physics.Raycast(raycastUp.position, Vector3.right, out hit, distance);
+            Physics.Raycast(raycastDown.position, Vector3.right, out hit, distance);
+            Physics.Raycast(raycastLeft.position, Vector3.right, out hit, distance);
+            Physics.Raycast(raycastRight.position, Vector3.right, out hit, distance);
 
             if(hit.transform != null)
             {
