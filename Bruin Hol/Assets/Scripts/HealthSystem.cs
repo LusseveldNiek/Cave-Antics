@@ -13,6 +13,7 @@ public class HealthSystem : MonoBehaviour
     public float speed;
     public GameObject gameOverCanvas;
     public Button button;
+    public bool gettingDamage;
 
     private float gameOverTime;
     public float gameOverTimeLimit;
@@ -40,8 +41,10 @@ public class HealthSystem : MonoBehaviour
         {
             animator.SetBool("playerDamage", true);
             damageTimer += Time.deltaTime;
+            gettingDamage = true;
             if(damageTimer > damageWaitTime)
             {
+                gettingDamage = false;
                 canDoDamage = true;
                 animator.SetBool("playerDamage", false);
                 damageTimer = 0;
