@@ -22,12 +22,14 @@ public class Material : MonoBehaviour
             {
                 GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
                 Destroy(particlePrefab, 4f);
+                scoreSystem.GetComponent<ScoreSystem>().coalMining = true;
             }
 
             else if(gameObject.tag == "Sulfur")
             {
                 GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
                 Destroy(particlePrefab, 4f);
+                scoreSystem.GetComponent<ScoreSystem>().sulfurMining = true;
             }
         }
 
