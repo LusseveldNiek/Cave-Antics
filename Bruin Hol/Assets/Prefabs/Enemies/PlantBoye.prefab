@@ -650,7 +650,6 @@ MonoBehaviour:
   animator: {fileID: 915411584210119995}
   animationLimit: 1
   animationTime: 0
-  timeToSchoot: 0.7
 --- !u!1 &4516375006254973237
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +921,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e03f14d5dc8c53941b472a5057736795, type: 2}
+  - {fileID: 2100000, guid: 4aaf206de39856e45b5c3c0c5339af40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
