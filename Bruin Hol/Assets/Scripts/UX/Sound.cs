@@ -7,6 +7,8 @@ public class Sound : MonoBehaviour
     public bool sprinting;
     public bool isDamaged;
     public bool isMining;
+    public bool buttonPressed;
+    public GameObject buttonType;
 
     public GameObject player;
     public int runningSoundDelay;
@@ -16,6 +18,9 @@ public class Sound : MonoBehaviour
     public AudioSource runningSound;
     public AudioSource miningSound;
     public AudioSource damageSound;
+
+    public AudioSource backSound;
+    public AudioSource goSound;
 
 
     void Start()
@@ -51,6 +56,22 @@ public class Sound : MonoBehaviour
             damageSound.Play();
         }
 
-        
+        if(buttonPressed)
+        {
+            if(buttonType != null)
+            {
+                if (buttonType.tag == "buttonBack")
+                {
+                    backSound.Play();
+                }
+
+                if (buttonType.tag == "buttonGo")
+                {
+                    goSound.Play();
+                }
+            }
+
+            buttonPressed = false;
+        }
     }
 }

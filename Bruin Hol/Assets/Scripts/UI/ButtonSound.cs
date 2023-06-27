@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class ButtonSound : MonoBehaviour
 {
-    public AudioSource backSound;
-    public AudioSource goSound;
-    
+    public GameObject soundManager;
 
     
-    public void Back()
+    public void PlaySoundButton()
     {
-        backSound.Play();
+        soundManager.GetComponent<Sound>().buttonType = transform.gameObject;
+        soundManager.GetComponent<Sound>().buttonPressed = true;
     }
 
-    public void Go()
-    {
-        goSound.Play();
-    }
+    
 }
