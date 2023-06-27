@@ -7,10 +7,19 @@ public class ScoreSystem : MonoBehaviour
 {
     public float score;
     public TMPro.TMP_Text scoreText;
-    public bool diamondMining;
+
+    public GameObject coalImage;
+    public bool coalMining;
+    private float timerCoal;
+
+    public GameObject sulfurImage;
+    public bool sulfurMining;
+    private float timerSulfur;
+
     public float diamondScore;
     public GameObject diamondImage;
-    private float timer;
+    public bool diamondMining;
+    private float timerDiamond;
 
     void Update()
     {
@@ -19,14 +28,42 @@ public class ScoreSystem : MonoBehaviour
         {
             print("diamond");
             diamondImage.GetComponent<Animator>().SetBool("animation", true);
-            timer += Time.deltaTime;
-            if(timer > 1)
+            timerDiamond += Time.deltaTime;
+            if(timerDiamond > 3)
             {
                 score += diamondScore;
                 diamondImage.GetComponent<Animator>().SetBool("animation", false);
                 print("hoi");
                 diamondMining = false;
-                timer = 0;
+                timerDiamond = 0;
+            }
+        }
+
+        if(coalMining)
+        {
+            print("coal");
+            coalImage.GetComponent<Animator>().SetBool("animation", true);
+            timerCoal += Time.deltaTime;
+            if (timerCoal > 3)
+            {
+                coalImage.GetComponent<Animator>().SetBool("animation", false);
+                print("hoi");
+                coalMining = false;
+                timerCoal = 0;
+            }
+        }
+
+        if (sulfurMining)
+        {
+            print("sulfur");
+            sulfurImage.GetComponent<Animator>().SetBool("animation", true);
+            timerSulfur += Time.deltaTime;
+            if (timerSulfur > 3)
+            {
+                sulfurImage.GetComponent<Animator>().SetBool("animation", false);
+                print("hoi");
+                sulfurMining = false;
+                timerSulfur = 0;
             }
         }
     }

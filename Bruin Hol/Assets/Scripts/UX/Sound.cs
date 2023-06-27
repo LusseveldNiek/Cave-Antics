@@ -8,19 +8,22 @@ public class Sound : MonoBehaviour
     public bool isDamaged;
     public bool isMining;
     public bool buttonPressed;
-    public GameObject buttonType;
 
+    public GameObject buttonType;
     public GameObject player;
     public int runningSoundDelay;
+    public RaycastHit hit;
 
     [Header("audioSource")]
     public AudioSource theme;
     public AudioSource runningSound;
     public AudioSource miningSound;
     public AudioSource damageSound;
+    public AudioSource landingSound;
 
     public AudioSource backSound;
     public AudioSource goSound;
+    
 
 
     void Start()
@@ -33,6 +36,7 @@ public class Sound : MonoBehaviour
         sprinting = player.GetComponent<MovementPlayer>().sprinting;
         isDamaged = player.GetComponent<HealthSystem>().gettingDamage;
 
+        //sprinting
         if (sprinting && !runningSound.isPlaying)
         {
             runningSound.time = runningSoundDelay;
@@ -44,18 +48,21 @@ public class Sound : MonoBehaviour
             runningSound.Stop();
         }
 
+        //mining
         if(isMining && !miningSound.isPlaying)
         {
             miningSound.Play();
             isMining = false;
         }
 
+        //damage
         if(isDamaged && !damageSound.isPlaying)
         {
             damageSound.time = 1;
             damageSound.Play();
         }
 
+        //button
         if(buttonPressed)
         {
             if(buttonType != null)
@@ -73,5 +80,15 @@ public class Sound : MonoBehaviour
 
             buttonPressed = false;
         }
+
+        //landing
+        Physics.Raycast(Vector3.down, player.transform.position - new Vector3(0, 2, 0), out hit, 2);
+        
+        if(hit.distance > 1f && hit.distance < 1.4f)
+        {
+            //landingSound.Play();
+            //print("landing");
+        }
+        
     }
 }

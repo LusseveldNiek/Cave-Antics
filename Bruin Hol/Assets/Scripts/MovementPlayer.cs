@@ -451,15 +451,6 @@ public class MovementPlayer : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * slopeRotationSpeed);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            //GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
-            //Destroy(particle, 1);
-        }
-    }
-
     //is on ground
     private void OnTriggerStay(Collider other)
     {
