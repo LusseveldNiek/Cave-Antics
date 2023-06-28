@@ -9,11 +9,12 @@ public class LightPlayer : MonoBehaviour
     public GameObject rightLight;
     public float rotationAxis;
     public GameObject menuManager;
+    public GameObject player;
 
     void Update()
     {
         rotationAxis = Input.GetAxis("Horizontal");
-        if(menuManager.GetComponent<CheckMenu>().menuIsActive == false)
+        if(menuManager.GetComponent<CheckMenu>().menuIsActive == false && player.GetComponent<MovementPlayer>().isOnRightWall == false && player.GetComponent<MovementPlayer>().isOnLeftWall == false)
         {
             if (rotationAxis > 0)
             {
