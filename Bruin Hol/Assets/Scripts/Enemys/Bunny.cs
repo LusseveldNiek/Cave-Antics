@@ -6,6 +6,9 @@ public class Bunny : MonoBehaviour
 {
     public bool goingLeft;
     public bool goingRight;
+
+    public bool playSchootAnimation;
+    private float schootingTime;
     public float speed;
 
     public float jumpingTime;
@@ -17,6 +20,7 @@ public class Bunny : MonoBehaviour
 
     public GameObject lavaBubble;
     public GameObject bunnyMesh;
+    public Animator animator;
 
     void FixedUpdate()
     {
@@ -31,6 +35,17 @@ public class Bunny : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
 
+        if(playSchootAnimation)
+        {
+            animator.SetBool("schooting", true);
+            schootingTime += Time.deltaTime;
+            if(schootingTime > 1)
+            {
+                animator.SetBool("schooting", false);
+                playSchootAnimation = false;
+                schootingTime = 0;
+            }
+        }
 
         //jumping
         if(isGrounded)
@@ -40,58 +55,78 @@ public class Bunny : MonoBehaviour
         
         if(jumpingCounter > 1)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed * Time.deltaTime);
-            jumpingCounter = 0;
-
-            if(goingLeft)
+            //jumping
+            if(jumpingCounter < 1.1f)
             {
-                for (int i = 0; i < 2; i++)
-                {
-                    if(i == 0)
-                    {
-                        GameObject lavaBubblePrefabLeft = Instantiate(lavaBubble, transform.position + new Vector3(-3, 0, 0), Quaternion.identity);
-                        lavaBubblePrefabLeft.GetComponent<BunnyFireBall>().isLeft = true;
-                        Destroy(lavaBubblePrefabLeft, 2);
-                    }
-
-                    else
-                    {
-                        GameObject lavaBubblePrefabLeft = Instantiate(lavaBubble, transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
-                        lavaBubblePrefabLeft.GetComponent<BunnyFireBall>().isLeft = true;
-                        Destroy(lavaBubblePrefabLeft, 2);
-                    }
-                }
-
-                Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, -90, bunnyMesh.transform.rotation.z);
-
-                // rotate player when turning
-                bunnyMesh.transform.localRotation = target;
+                GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed * Time.deltaTime);
+                animator.SetBool("jumping", true);
             }
 
-            if (goingRight)
+            else
             {
-                for(int i = 0; i < 2; i++)
+                animator.SetBool("jumping", false);
+            }
+
+            jumpingCounter += Time.deltaTime;
+
+            //schooting
+            if (jumpingCounter > 2)
+            {
+                playSchootAnimation = true;
+
+                if (goingLeft)
                 {
-                    if(i == 0)
+                    for (int i = 0; i < 2; i++)
                     {
-                        GameObject lavaBubblePrefabRight = Instantiate(lavaBubble, transform.position + new Vector3(3, 0, 0), Quaternion.identity);
-                        lavaBubblePrefabRight.GetComponent<BunnyFireBall>().isRight = true;
-                        Destroy(lavaBubblePrefabRight, 2);
+                        if (i == 0)
+                        {
+                            GameObject lavaBubblePrefabLeft = Instantiate(lavaBubble, transform.position + new Vector3(-3, 0, 0), Quaternion.identity);
+                            lavaBubblePrefabLeft.GetComponent<BunnyFireBall>().isLeft = true;
+                            Destroy(lavaBubblePrefabLeft, 2);
+                        }
+
+                        else
+                        {
+                            GameObject lavaBubblePrefabLeft = Instantiate(lavaBubble, transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
+                            lavaBubblePrefabLeft.GetComponent<BunnyFireBall>().isLeft = true;
+                            Destroy(lavaBubblePrefabLeft, 2);
+                        }
                     }
 
-                    else
-                    {
-                        GameObject lavaBubblePrefabRight = Instantiate(lavaBubble, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-                        lavaBubblePrefabRight.GetComponent<BunnyFireBall>().isRight = true;
-                        Destroy(lavaBubblePrefabRight, 2);
-                    }
+                    Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, -90, bunnyMesh.transform.rotation.z);
+
+                    // rotate player when turning
+                    bunnyMesh.transform.localRotation = target;
                 }
 
-                Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, 90, bunnyMesh.transform.rotation.z);
+                if (goingRight)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (i == 0)
+                        {
+                            GameObject lavaBubblePrefabRight = Instantiate(lavaBubble, transform.position + new Vector3(3, 0, 0), Quaternion.identity);
+                            lavaBubblePrefabRight.GetComponent<BunnyFireBall>().isRight = true;
+                            Destroy(lavaBubblePrefabRight, 2);
+                        }
 
-                // rotate player when turning
-                bunnyMesh.transform.localRotation = target;
+                        else
+                        {
+                            GameObject lavaBubblePrefabRight = Instantiate(lavaBubble, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                            lavaBubblePrefabRight.GetComponent<BunnyFireBall>().isRight = true;
+                            Destroy(lavaBubblePrefabRight, 2);
+                        }
+                    }
+
+                    Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, 90, bunnyMesh.transform.rotation.z);
+
+                    // rotate player when turning
+                    bunnyMesh.transform.localRotation = target;
+                }
+                jumpingCounter = 0;
             }
+
+            
 
         }
 

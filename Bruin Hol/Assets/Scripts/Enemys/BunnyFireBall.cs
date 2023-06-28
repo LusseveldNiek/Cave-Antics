@@ -31,5 +31,10 @@ public class BunnyFireBall : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * lavaBubbleUpSpeed);
         }
+
+        if(collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }
