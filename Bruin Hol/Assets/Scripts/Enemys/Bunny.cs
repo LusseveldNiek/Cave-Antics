@@ -95,7 +95,6 @@ public class Bunny : MonoBehaviour
 
                     Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, -90, bunnyMesh.transform.rotation.z);
 
-                    // rotate player when turning
                     bunnyMesh.transform.localRotation = target;
                 }
 
@@ -120,7 +119,6 @@ public class Bunny : MonoBehaviour
 
                     Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, 90, bunnyMesh.transform.rotation.z);
 
-                    // rotate player when turning
                     bunnyMesh.transform.localRotation = target;
                 }
                 jumpingCounter = 0;
