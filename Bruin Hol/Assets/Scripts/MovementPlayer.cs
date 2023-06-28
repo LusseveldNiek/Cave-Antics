@@ -57,6 +57,7 @@ public class MovementPlayer : MonoBehaviour
     public bool isRolling;
     private float beginRollingSpeed;
     public float slowDownSliding;
+    public GameObject crouchCollider;
 
     public float crouchSpeed;
 
@@ -406,10 +407,14 @@ public class MovementPlayer : MonoBehaviour
         {
             speedPlayer = crouchSpeed;
             animator.SetBool("isCrouching", true);
+            GetComponent<BoxCollider>().enabled = false;
+            crouchCollider.GetComponent<BoxCollider>().enabled = true;
         }
 
         else
         {
+            GetComponent<BoxCollider>().enabled = true;
+            crouchCollider.GetComponent<BoxCollider>().enabled = false;
             animator.SetBool("isCrouching", false);
         }
 
