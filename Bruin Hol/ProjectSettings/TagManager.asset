@@ -19,6 +19,7 @@ TagManager:
   - wallRight
   - buttonBack
   - buttonGo
+  - fireBall
   layers:
   - Default
   - TransparentFX
