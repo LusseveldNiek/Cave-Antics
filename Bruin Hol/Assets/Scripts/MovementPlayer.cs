@@ -144,6 +144,11 @@ public class MovementPlayer : MonoBehaviour
         {
             gameStarted = startButton.GetComponent<StartButton>().startTimer;
         }
+
+        if (gameStarted)
+        {
+            animator.enabled = true;
+        }
         
         IncreaseMass();
         Sprinting();
@@ -152,7 +157,7 @@ public class MovementPlayer : MonoBehaviour
         SlopeRotation();
 
         //speler kan niet roteren wanneer wallJumping
-        if(!isOnLeftWall && !isOnRightWall)
+        if(!isOnLeftWall && !isOnRightWall && gameStarted)
         {
             RotatePlayerMesh();
         }
