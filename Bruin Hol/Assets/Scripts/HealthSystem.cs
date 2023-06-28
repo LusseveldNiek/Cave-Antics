@@ -17,7 +17,18 @@ public class HealthSystem : MonoBehaviour
 
     private float gameOverTime;
     public float gameOverTimeLimit;
-    
+
+    public Renderer playerRenderer; // Reference to the player's renderer component
+    public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
+    public float blinkInterval = 0.3f; // Interval between blinks
+
+    private UnityEngine.Material originalMaterial;
+
+
+    private void Start()
+    {
+        originalMaterial = playerRenderer.material;
+    }
 
     void Update()
     {
@@ -42,7 +53,8 @@ public class HealthSystem : MonoBehaviour
             animator.SetBool("playerDamage", true);
             damageTimer += Time.deltaTime;
             gettingDamage = true;
-            if(damageTimer > damageWaitTime)
+            StartCoroutine(BlinkCoroutine());
+            if (damageTimer > damageWaitTime)
             {
                 gettingDamage = false;
                 canDoDamage = true;
@@ -83,6 +95,25 @@ public class HealthSystem : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    private IEnumerator BlinkCoroutine()
+    {
+        // Continuously blink every blinkInterval seconds
+        while (gettingDamage)
+        {
+            // Swap to blinking material
+            playerRenderer.material = blinkingMaterial;
+
+            // Wait for the specified interval
+            yield return new WaitForSeconds(blinkInterval);
+
+            // Swap back to the original material
+            playerRenderer.material = originalMaterial;
+
+            // Wait for the specified interval
+            yield return new WaitForSeconds(blinkInterval);
         }
     }
 }
