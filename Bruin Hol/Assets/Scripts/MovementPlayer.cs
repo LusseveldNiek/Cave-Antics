@@ -23,6 +23,9 @@ public class MovementPlayer : MonoBehaviour
     private float particleTimer = 0f;
     private float particleSpawnDelay = 0.5f;
 
+    public float notGroundedTimer;
+
+
     [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
     public float fastSprintSpeed; //fast sprint snelheid
@@ -84,6 +87,7 @@ public class MovementPlayer : MonoBehaviour
 
     Vector3 movementDirection; // Calculate the movement direction based on player input
     float movementSpeed = 5f; // Set the movement speed (replace 5f with your desired speed value)
+    public bool inAir;
 
 
     void Start()
@@ -103,8 +107,25 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
+        if (isGrounded)
+        {
+            notGroundedTimer = 0f;
+            inAir = false;
+            // Player is grounded, continue with other actions
+        }
+        else
+        {
+            notGroundedTimer += Time.deltaTime;
+            if (notGroundedTimer >= 0.2f)
+            {
+                inAir = true;
+                // Player is not grounded for the specified delay
+                // Perform actions when player is not grounded for 0.3 seconds
+            }
+        }
+
         //player does not clip in walls
-        if(isCrouching == false)
+        if (isCrouching == false)
         {
             Collider[] colliders = Physics.OverlapBox(transform.position, boxSize / 2.0f, transform.rotation);
             foreach (Collider collider in colliders)
@@ -360,7 +381,7 @@ public class MovementPlayer : MonoBehaviour
     void Sprinting()
     {
         //sprinten
-        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && GetComponent<Rigidbody>().IsSleeping() == false)
+        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && GetComponent<Rigidbody>().IsSleeping() == false && inAir == false)
         {
             animator.SetBool("isRunning", true);
             sprinting = true;
