@@ -60,6 +60,7 @@ public class Vleermuis : MonoBehaviour
                 print("goingDown");
                 goingUp = true;
                 isAttacking = false;
+                animator.SetBool("gliding", false);
             }
 
         }
@@ -74,7 +75,6 @@ public class Vleermuis : MonoBehaviour
 
             else if(Vector3.Distance(player.transform.position, transform.position) > distance)
             {
-                animator.SetBool("gliding", false);
                 goingUp = false;
                 if (goingLeft)
                 {
