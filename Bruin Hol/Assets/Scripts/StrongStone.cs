@@ -8,6 +8,7 @@ public class StrongStone : MonoBehaviour
     public GameObject bomb;
     public GameObject bombParticle;
     public Transform bombPosition;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "pickaxe")
@@ -31,9 +32,16 @@ public class StrongStone : MonoBehaviour
                 inventory.GetComponent<Inventory>().hasCoal = false;
                 inventory.GetComponent<Inventory>().hasSulfur = false;
                 GameObject prefabBomb = Instantiate(bomb, bombPosition.position, Quaternion.identity);
-                Destroy(prefabBomb, 2.5f);
+                Invoke("InstantiateObject", 2.5f);
                 Destroy(gameObject, 2.5f);
+                Destroy(prefabBomb, 2.5f);
             }
         }
+    }
+
+    public void InstantiateObject()
+    {
+        GameObject particlePrefab = Instantiate(bombParticle, bombPosition.position, Quaternion.identity);
+        Destroy(particlePrefab, 0.7f);
     }
 }

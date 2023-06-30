@@ -130,13 +130,20 @@ public class MovementPlayer : MonoBehaviour
             Collider[] colliders = Physics.OverlapBox(transform.position, boxSize / 2.0f, transform.rotation);
             foreach (Collider collider in colliders)
             {
-                if (collider.gameObject.tag == "Ground" || collider.gameObject.tag == "wall" || collider.gameObject.tag == "ignoreCollisionPlayer")
+                if (collider.isTrigger) // Check if the collider is a trigger
                 {
-                    // Ignore colliders with "Ground" tag
+                    // Ignore trigger colliders
                     continue;
                 }
 
+                // Rest of the code for non-trigger colliders
+                if (collider.gameObject.CompareTag("Ground") || collider.gameObject.CompareTag("wall") || collider.gameObject.CompareTag("ignoreCollisionPlayer"))
+                {
+                    // Ignore colliders with specific tags
+                    continue;
+                }
 
+                // Perform avoidance logic for non-trigger colliders
                 Vector3 direction = transform.position - collider.transform.position;
                 float distance = direction.magnitude;
                 float avoidanceFactor = 1.0f - Mathf.Clamp01(distance / desiredDistance);

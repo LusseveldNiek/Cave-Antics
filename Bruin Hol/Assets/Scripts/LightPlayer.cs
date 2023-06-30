@@ -10,6 +10,11 @@ public class LightPlayer : MonoBehaviour
     public float rotationAxis;
     public GameObject menuManager;
     public GameObject player;
+    public float beginHeight;
+    private void Start()
+    {
+        beginHeight = transform.localPosition.y;
+    }
 
     void Update()
     {
@@ -29,5 +34,14 @@ public class LightPlayer : MonoBehaviour
             }
         }
         
+        if(player.GetComponent<MovementPlayer>().isRolling == true || player.GetComponent<MovementPlayer>().isCrouching == true)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, -0.5f, transform.localPosition.z);
+        }
+
+        else
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, beginHeight, transform.localPosition.z);
+        }
     }
 }
