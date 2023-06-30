@@ -20,6 +20,7 @@ public class CylinderSteen : MonoBehaviour
 
     public void Update()
     {
+        /*
         if(goingLeft)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.left * speed * Time.deltaTime);
@@ -82,6 +83,7 @@ public class CylinderSteen : MonoBehaviour
 
         Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.right, out hitRight, raycastDistance);
         Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.left, out hitLeft, raycastDistance);
+        */
 
     }
 

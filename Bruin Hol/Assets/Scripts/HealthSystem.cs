@@ -22,12 +22,11 @@ public class HealthSystem : MonoBehaviour
     public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
     public float blinkInterval = 0.3f; // Interval between blinks
 
-    private UnityEngine.Material originalMaterial;
 
 
     private void Start()
     {
-        originalMaterial = playerRenderer.material;
+        
     }
 
     void Update()
@@ -104,13 +103,13 @@ public class HealthSystem : MonoBehaviour
         while (gettingDamage)
         {
             // Swap to blinking material
-            playerRenderer.material = blinkingMaterial;
+            playerRenderer.GetComponent<SkinnedMeshRenderer>().enabled = false;
 
             // Wait for the specified interval
             yield return new WaitForSeconds(blinkInterval);
 
             // Swap back to the original material
-            playerRenderer.material = originalMaterial;
+            playerRenderer.GetComponent<SkinnedMeshRenderer>().enabled = true;
 
             // Wait for the specified interval
             yield return new WaitForSeconds(blinkInterval);
