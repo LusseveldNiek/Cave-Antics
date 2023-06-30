@@ -22,7 +22,7 @@ public class HealthSystem : MonoBehaviour
     public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
     public float blinkInterval = 0.3f; // Interval between blinks
 
-
+    public int overlappingColliders = 0;
 
     private void Start()
     {
@@ -63,9 +63,11 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "doesDamage")
+        if (other.gameObject.tag == "doesDamage")
         {
             for(int i = 0; i < hearts.Length; i++)
             {
@@ -78,6 +80,20 @@ public class HealthSystem : MonoBehaviour
                 }
             }
         }
+
+        if(other.gameObject.tag == "stenenRechthoek")
+        {
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
+                {
+                    hearts[i].SetActive(false);
+                    canDoDamage = false;
+                    break;
+                }
+            }
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)

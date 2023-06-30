@@ -314,7 +314,7 @@ public class MovementPlayer : MonoBehaviour
         //player hitting wall
         if (raycastLeftHit)
         {
-            if(wallLeft.collider.CompareTag("wall"))
+            if(!wallLeft.transform.gameObject.GetComponent<Collider>().isTrigger && wallLeft.collider.CompareTag("wall"))
             {
                 isOnLeftWall = true;
                 print("onWall");
@@ -329,7 +329,7 @@ public class MovementPlayer : MonoBehaviour
 
         if (raycastRightHit)
         {
-            if(wallRight.collider.CompareTag("wall"))
+            if(!wallRight.transform.gameObject.GetComponent<Collider>().isTrigger && wallRight.collider.CompareTag("wall"))
             {
                 isOnRightWall = true;
                 print("onWall");

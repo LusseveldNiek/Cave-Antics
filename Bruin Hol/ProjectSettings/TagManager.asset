@@ -22,6 +22,7 @@ TagManager:
   - fireBall
   - crouchColliders
   - ignoreCollisionPlayer
+  - stenenRechthoek
   layers:
   - Default
   - TransparentFX
