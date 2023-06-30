@@ -28,7 +28,7 @@ public class VierkantSteen : MonoBehaviour
 
             if(hit.transform != null)
             {
-                if (hit.transform.gameObject.tag == "wallLeft")
+                if (hit.transform.gameObject.tag == "wall")
                 {
                     animator.SetFloat("speed", -1);
                     goingRight = true;
@@ -50,7 +50,7 @@ public class VierkantSteen : MonoBehaviour
 
             if(hit.transform != null)
             {
-                if (hit.transform.gameObject.tag == "wallRight")
+                if (hit.transform.gameObject.tag == "wall")
                 {
                     animator.SetFloat("speed", 1);
                     goingRight = false;
