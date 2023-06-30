@@ -77,15 +77,13 @@ public class MovementPlayer : MonoBehaviour
     Vector3 movementDirection; // Calculate the movement direction based on player input
     float movementSpeed = 5f; // Set the movement speed (replace 5f with your desired speed value)
 
-    float distance;
-
 
     void Start()
     {
         beginPlayerSpeed = speedPlayer;
         beginRollingSpeed = rollingSpeed;
 
-        distance = movementSpeed * Time.deltaTime;
+        
     }
 
     void Update()
@@ -313,7 +311,7 @@ public class MovementPlayer : MonoBehaviour
     void Sprinting()
     {
         //sprinten
-        if (Gamepad.all[0].rightTrigger.ReadValue() > 0)
+        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && GetComponent<Rigidbody>().IsSleeping() == false)
         {
             animator.SetBool("isRunning", true);
             sprinting = true;
