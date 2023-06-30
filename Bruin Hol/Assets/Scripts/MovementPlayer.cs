@@ -17,8 +17,11 @@ public class MovementPlayer : MonoBehaviour
     public bool isGrounded;
     private RaycastHit groundHit;
     public float height; //hoogte tussen speler en grond
-    public GameObject groundParticle;
     public Transform bottomPlayer;
+
+    public GameObject groundParticle;
+    private float particleTimer = 0f;
+    private float particleSpawnDelay = 0.5f;
 
     [Header("Sprinting")]
     public float sprintSpeed; //sprint snelheid
@@ -58,6 +61,7 @@ public class MovementPlayer : MonoBehaviour
     private float beginRollingSpeed;
     public float slowDownSliding;
     public GameObject crouchCollider;
+    public bool isCrouching;
 
     public float crouchSpeed;
 
@@ -74,6 +78,10 @@ public class MovementPlayer : MonoBehaviour
     public bool canDoDamage;
     public float playerRotationSpeed;
 
+    public Vector3 boxSize = Vector3.one;
+    public float desiredDistance = 1.0f;
+    public float avoidanceForce = 1.0f;
+
     Vector3 movementDirection; // Calculate the movement direction based on player input
     float movementSpeed = 5f; // Set the movement speed (replace 5f with your desired speed value)
 
@@ -86,8 +94,39 @@ public class MovementPlayer : MonoBehaviour
         
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+    }
+
     void Update()
     {
+        //player does not clip in walls
+        if(isCrouching == false)
+        {
+            Collider[] colliders = Physics.OverlapBox(transform.position, boxSize / 2.0f, transform.rotation);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject.tag == "Ground" || collider.gameObject.tag == "wall" || collider.gameObject.tag == "ignoreCollisionPlayer")
+                {
+                    // Ignore colliders with "Ground" tag
+                    continue;
+                }
+
+
+                Vector3 direction = transform.position - collider.transform.position;
+                float distance = direction.magnitude;
+                float avoidanceFactor = 1.0f - Mathf.Clamp01(distance / desiredDistance);
+                Vector3 avoidanceForceVector = direction.normalized * avoidanceForce * avoidanceFactor;
+                transform.position += avoidanceForceVector * Time.deltaTime;
+            }
+        }
+        
+
+
+
         //pickaxe following player
         pickaxe.transform.position = transform.position;
 
@@ -106,6 +145,7 @@ public class MovementPlayer : MonoBehaviour
             {
                 // Adjust position to the point of collision
                 transform.position = hit.point;
+                speedPlayer = Mathf.Clamp(speedPlayer, 0, 7);
             }
             else
             {
@@ -191,10 +231,19 @@ public class MovementPlayer : MonoBehaviour
         }
 
         //jump particle
-        if(height > 1 && height < 1.2)
+        particleTimer += Time.deltaTime;
+        if (height > 1 && height < 1.2)
         {
-            GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
-            Destroy(particle, 1);
+            // Check if enough time has passed since the last particle was spawned
+            if (particleTimer >= particleSpawnDelay)
+            {
+                // Spawn a particle
+                GameObject particle = Instantiate(groundParticle, transform.GetChild(0).position, Quaternion.identity);
+                Destroy(particle, 1);
+
+                // Reset the timer
+                particleTimer = 0f;
+            }
         }
 
     }
@@ -408,6 +457,7 @@ public class MovementPlayer : MonoBehaviour
         //crouching
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && isRolling == false)
         {
+            isCrouching = true;
             speedPlayer = crouchSpeed;
             animator.SetBool("isCrouching", true);
             GetComponent<BoxCollider>().enabled = false;
@@ -416,6 +466,7 @@ public class MovementPlayer : MonoBehaviour
 
         else
         {
+            isCrouching = false;
             GetComponent<BoxCollider>().enabled = true;
             crouchCollider.GetComponent<BoxCollider>().enabled = false;
             animator.SetBool("isCrouching", false);
@@ -474,6 +525,14 @@ public class MovementPlayer : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(isCrouching && collision.gameObject.tag == "crouchColliders")
+        {
+            Physics.IgnoreCollision(crouchCollider.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
         }
     }
 }
