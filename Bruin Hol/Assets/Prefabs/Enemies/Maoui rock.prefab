@@ -141,7 +141,7 @@ MonoBehaviour:
   raycastRight: {fileID: 2099401680334177271}
   raycastLeft: {fileID: 4549920496681574013}
   animator: {fileID: 348006498289995870}
-  distance: 1
+  distance: 0.6
 --- !u!95 &348006498289995870
 Animator:
   serializedVersion: 5
