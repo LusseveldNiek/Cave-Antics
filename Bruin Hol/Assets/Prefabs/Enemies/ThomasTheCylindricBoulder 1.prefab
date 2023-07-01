@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3151912625817464371}
   - component: {fileID: 889778257966914297}
   - component: {fileID: 2618797140806234012}
-  - component: {fileID: 8804730159289967087}
   - component: {fileID: 9196210496653791670}
+  - component: {fileID: 8184823772563582290}
   m_Layer: 7
   m_Name: ThomasTheCylindricBoulder 1
   m_TagString: Untagged
@@ -99,30 +99,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 48
   m_CollisionDetection: 0
---- !u!114 &8804730159289967087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682618844995418924}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ec107106617c94c85397a97f1b5132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 70
-  goingLeft: 0
-  goingRight: 1
-  raycastDistance: 4
-  maxDeceleration: 12
-  stoppingDistance: 2
-  targetDistance: 0
-  distance: 0
 --- !u!136 &9196210496653791670
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -137,3 +117,16 @@ CapsuleCollider:
   m_Height: 3.1119695
   m_Direction: 2
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8184823772563582290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682618844995418924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1aca9c5838ee42b84454f57038306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumSpeed: 4

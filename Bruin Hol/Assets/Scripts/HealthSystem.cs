@@ -22,7 +22,7 @@ public class HealthSystem : MonoBehaviour
     public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
     public float blinkInterval = 0.3f; // Interval between blinks
 
-    public int overlappingColliders = 0;
+    public GameObject crushingObject;
 
     private void Start()
     {
@@ -53,12 +53,20 @@ public class HealthSystem : MonoBehaviour
             damageTimer += Time.deltaTime;
             gettingDamage = true;
             StartCoroutine(BlinkCoroutine());
+            if(crushingObject != null)
+            {
+                Physics.IgnoreCollision(GetComponent<Collider>(), crushingObject.transform.parent.gameObject.GetComponent<Collider>());
+            }
+
             if (damageTimer > damageWaitTime)
             {
                 gettingDamage = false;
                 canDoDamage = true;
                 animator.SetBool("playerDamage", false);
                 damageTimer = 0;
+                Physics.IgnoreCollision(GetComponent<Collider>(), crushingObject.transform.parent.gameObject.GetComponent<Collider>(), false);
+                crushingObject = null;
+                
             }
         }
     }
@@ -76,6 +84,7 @@ public class HealthSystem : MonoBehaviour
                     hearts[i].SetActive(false);
                     canDoDamage = false;
                     GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - other.transform.position.x) * speed);
+                    crushingObject = other.gameObject;
                     break;
                 }
             }
