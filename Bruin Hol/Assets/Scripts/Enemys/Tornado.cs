@@ -22,29 +22,32 @@ public class Tornado : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(inTornado)
         {
             player.transform.position = transform.position + new Vector3(0, 1, 0);
             tornadoTime += Time.deltaTime;
-            if(tornadoTime > timeInTornado)
-            {
-                tornadoTime = 0;
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * forceUp * Time.deltaTime);
-                inTornado = false;
-                player.GetComponent<MovementPlayer>().enabled = true;
-                tornadoCoolingDown = true;
-            }
         }
 
-        
+        if (tornadoTime > timeInTornado)
+        {
+            tornadoTime = 0;
+            inTornado = false;
+            player.GetComponent<MovementPlayer>().enabled = true;
+            tornadoCoolingDown = true;
+        }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (tornadoCoolingDown)
         {
+            if(tornadoCooldownTime < 0.3f)
+            {
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * forceUp * Time.deltaTime);
+            }
+
             tornadoCooldownTime += Time.deltaTime;
             if (tornadoCooldownTime > tornadoCooldown)
             {

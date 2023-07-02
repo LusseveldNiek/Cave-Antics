@@ -270,6 +270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeInTornado: 2
-  forceUp: 400
+  forceUp: 3100
   player: {fileID: 0}
   tornadoCooldown: 2
