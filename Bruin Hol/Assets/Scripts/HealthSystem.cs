@@ -23,6 +23,12 @@ public class HealthSystem : MonoBehaviour
     public float blinkInterval = 0.3f; // Interval between blinks
 
     public GameObject crushingObject;
+    private bool isGrounded;
+    public Vector3 lastGroundedPosition;
+    private float previousTime;
+    public bool inSpike;
+
+
 
     private void Start()
     {
@@ -69,6 +75,34 @@ public class HealthSystem : MonoBehaviour
                 
             }
         }
+
+        isGrounded = GetComponent<MovementPlayer>().isGrounded;
+        if (isGrounded)
+        {
+            // Update the last known grounded position
+            if (Time.time - previousTime >= 1f)
+            {
+                lastGroundedPosition = transform.position;
+                previousTime = Time.time;
+            }
+
+        }
+
+        if(inSpike)
+        {
+            StartCoroutine(BlinkCoroutine());
+            transform.position = Vector3.Lerp(transform.position, lastGroundedPosition, 2 * Time.deltaTime);
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<MovementPlayer>().enabled = false;
+            if(transform.position == lastGroundedPosition)
+            {
+                GetComponent<BoxCollider>().enabled = true;
+                GetComponent<Rigidbody>().useGravity = true;
+                GetComponent<MovementPlayer>().enabled = true;
+                inSpike = false;
+            }
+        }
     }
 
     
@@ -77,14 +111,18 @@ public class HealthSystem : MonoBehaviour
     {
         if (other.gameObject.tag == "doesDamage")
         {
-            for(int i = 0; i < hearts.Length; i++)
+            //check health
+            for (int i = 0; i < hearts.Length; i++)
             {
                 if(hearts[i].gameObject.activeInHierarchy && canDoDamage)
                 {
                     hearts[i].SetActive(false);
                     canDoDamage = false;
                     GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - other.transform.position.x) * speed);
-                    crushingObject = other.gameObject;
+                    if(other.isTrigger)
+                    {
+                        crushingObject = other.gameObject;
+                    }
                     break;
                 }
             }
@@ -92,6 +130,7 @@ public class HealthSystem : MonoBehaviour
 
         if(other.gameObject.tag == "stenenRechthoek")
         {
+            //check health
             for (int i = 0; i < hearts.Length; i++)
             {
                 if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
@@ -109,6 +148,14 @@ public class HealthSystem : MonoBehaviour
     {
         if (collision.gameObject.tag == "doesDamage")
         {
+            //check if object touches spike
+            if (collision.gameObject.GetComponent<StekelOpGrond>() != null)
+            {
+                inSpike = true;
+                print("works");
+            }
+
+            //check health
             for (int i = 0; i < hearts.Length; i++)
             {
                 if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
@@ -119,6 +166,9 @@ public class HealthSystem : MonoBehaviour
                     break;
                 }
             }
+
+
+            
         }
     }
 

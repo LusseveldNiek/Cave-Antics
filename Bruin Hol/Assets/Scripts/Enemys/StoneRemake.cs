@@ -28,6 +28,8 @@ public class StoneRemake : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<BoxCollider>().enabled = false;
+            gameObject.tag = "doesDamage";
         }
     }
 

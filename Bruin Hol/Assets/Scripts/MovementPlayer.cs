@@ -215,6 +215,11 @@ public class MovementPlayer : MonoBehaviour
         {
             animator.enabled = true;
         }
+
+        else
+        {
+            animator.enabled = false;
+        }
         
         IncreaseMass();
         Sprinting();
