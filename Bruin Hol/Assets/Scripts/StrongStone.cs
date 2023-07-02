@@ -43,5 +43,6 @@ public class StrongStone : MonoBehaviour
     {
         GameObject particlePrefab = Instantiate(bombParticle, bombPosition.position, Quaternion.identity);
         Destroy(particlePrefab, 0.7f);
+        particlePrefab.GetComponent<AudioSource>().Play();
     }
 }
