@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 6249104575447142571}
   - component: {fileID: 7105339113840090846}
   - component: {fileID: -56372538101331341}
+  - component: {fileID: -5936915221280780216}
   m_Layer: 7
   m_Name: TornadoEnemy2
   m_TagString: Untagged
@@ -256,3 +257,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &-5936915221280780216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6769639405486066193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849dff3d1e125464ba260b06ad34d729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeInTornado: 2
+  forceUp: 400
+  player: {fileID: 0}
+  tornadoCooldown: 2
