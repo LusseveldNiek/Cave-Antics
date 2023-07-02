@@ -8,6 +8,7 @@ public class Sound : MonoBehaviour
     public bool isDamaged;
     public bool isMining;
     public bool buttonPressed;
+    public bool isRolling;
 
     public GameObject buttonType;
     public GameObject player;
@@ -20,6 +21,7 @@ public class Sound : MonoBehaviour
     public AudioSource miningSound;
     public AudioSource damageSound;
     public AudioSource landingSound;
+    public AudioSource rollingSound;
 
     public AudioSource backSound;
     public AudioSource goSound;
@@ -35,6 +37,7 @@ public class Sound : MonoBehaviour
     {
         sprinting = player.GetComponent<MovementPlayer>().sprinting;
         isDamaged = player.GetComponent<HealthSystem>().gettingDamage;
+        isRolling = player.GetComponent<MovementPlayer>().isRolling;
 
         //sprinting
         if (sprinting && !runningSound.isPlaying)
@@ -53,6 +56,12 @@ public class Sound : MonoBehaviour
         {
             miningSound.Play();
             isMining = false;
+        }
+
+        //rolling
+        if(isRolling)
+        {
+            rollingSound.Play();
         }
 
         //damage
