@@ -17,7 +17,7 @@ public class Flower : MonoBehaviour
     public float animationLimit;
     public float animationTime;
     private bool playingAnimation;
-
+    public AudioSource flower;
     void Update()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < flowerRange)
@@ -35,6 +35,7 @@ public class Flower : MonoBehaviour
                 bulletTimer = 0;
                 animator.SetBool("schooting", true);
                 playingAnimation = true;
+                flower.Play();
             }
         }
 
