@@ -15,6 +15,8 @@ public class Vleermuis : MonoBehaviour
     public float goingDownSpeed;
     private float targetHeight;
     public bool goingUp;
+    private RaycastHit leftHit;
+    private RaycastHit rightHit;
     void Start()
     {
         targetHeight = transform.position.y;
@@ -30,6 +32,15 @@ public class Vleermuis : MonoBehaviour
             Quaternion target = Quaternion.Euler(-90, -90, playerMesh.transform.rotation.z);
 
             playerMesh.transform.localRotation = target;
+            Physics.Raycast(transform.position + new Vector3(-1, 0, 0), Vector3.left, out leftHit, 1);
+            if(leftHit.transform != null)
+            {
+                if(leftHit.transform.gameObject.tag == "wall")
+                {
+                    goingLeft = false;
+                    goingRight = true;
+                }
+            }
         }
 
         if(goingRight)
@@ -39,6 +50,15 @@ public class Vleermuis : MonoBehaviour
             Quaternion target = Quaternion.Euler(-90, 90, playerMesh.transform.rotation.z);
 
             playerMesh.transform.localRotation = target;
+            Physics.Raycast(transform.position + new Vector3(1, 0, 0), Vector3.right, out rightHit, 1);
+            if (rightHit.transform != null)
+            {
+                if (rightHit.transform.gameObject.tag == "wall")
+                {
+                    goingLeft = true;
+                    goingRight = false;
+                }
+            }
         }
 
         if (Vector3.Distance(player.transform.position, transform.position) < distance && goingUp == false)

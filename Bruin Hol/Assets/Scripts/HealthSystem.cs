@@ -64,7 +64,7 @@ public class HealthSystem : MonoBehaviour
             StartCoroutine(BlinkCoroutine());
             if(crushingObject != null)
             {
-                Physics.IgnoreCollision(GetComponent<Collider>(), crushingObject.transform.parent.gameObject.GetComponent<Collider>());
+                crushingObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
             }
 
             if (damageTimer > damageWaitTime)
@@ -73,7 +73,7 @@ public class HealthSystem : MonoBehaviour
                 canDoDamage = true;
                 animator.SetBool("playerDamage", false);
                 damageTimer = 0;
-                Physics.IgnoreCollision(GetComponent<Collider>(), crushingObject.transform.parent.gameObject.GetComponent<Collider>(), false);
+                crushingObject.transform.parent.gameObject.GetComponent<Collider>().enabled = true;
                 crushingObject = null;
                 
             }
