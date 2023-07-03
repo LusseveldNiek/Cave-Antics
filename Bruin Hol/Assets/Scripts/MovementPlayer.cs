@@ -85,10 +85,6 @@ public class MovementPlayer : MonoBehaviour
     public float desiredDistance = 1.0f;
     public float avoidanceForce = 1.0f;
 
-    Vector3 movementDirection; // Calculate the movement direction based on player input
-    float movementSpeed = 5f; // Set the movement speed (replace 5f with your desired speed value)
-    public bool inAir;
-
 
     void Start()
     {
@@ -107,22 +103,7 @@ public class MovementPlayer : MonoBehaviour
 
     void Update()
     {
-        if (isGrounded)
-        {
-            notGroundedTimer = 0f;
-            inAir = false;
-            // Player is grounded, continue with other actions
-        }
-        else
-        {
-            notGroundedTimer += Time.deltaTime;
-            if (notGroundedTimer >= 0.2f)
-            {
-                inAir = true;
-                // Player is not grounded for the specified delay
-                // Perform actions when player is not grounded for 0.3 seconds
-            }
-        }
+        
 
         //player does not clip in walls
         if (isCrouching == false)
@@ -393,7 +374,7 @@ public class MovementPlayer : MonoBehaviour
     void Sprinting()
     {
         //sprinten
-        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && GetComponent<Rigidbody>().IsSleeping() == false && inAir == false)
+        if (Gamepad.all[0].rightTrigger.ReadValue() > 0 && GetComponent<Rigidbody>().IsSleeping() == false)
         {
             animator.SetBool("isRunning", true);
             sprinting = true;

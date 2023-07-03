@@ -23,10 +23,13 @@ public class HealthSystem : MonoBehaviour
     public float blinkInterval = 0.3f; // Interval between blinks
 
     public GameObject crushingObject;
+
     private bool isGrounded;
     public Vector3 lastGroundedPosition;
     private float previousTime;
     public bool inSpike;
+    private RaycastHit hit;
+    public Transform bottomPlayer;
 
 
 
@@ -76,7 +79,27 @@ public class HealthSystem : MonoBehaviour
             }
         }
 
-        isGrounded = GetComponent<MovementPlayer>().isGrounded;
+        Physics.Raycast(bottomPlayer.position, -transform.up, out hit, 1);
+        if(hit.transform != null)
+        {
+            print("ground");
+            if(hit.transform.gameObject.GetComponent<Rigidbody>() == null && hit.transform.gameObject.tag == "Ground")
+            {
+                isGrounded = true;
+            }
+
+            else
+            {
+                isGrounded = false;
+            }
+        }
+
+        else
+        {
+            isGrounded = false;
+        }
+            
+        
         if (isGrounded)
         {
             // Update the last known grounded position

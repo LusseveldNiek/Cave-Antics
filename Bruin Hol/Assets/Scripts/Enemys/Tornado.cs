@@ -28,6 +28,7 @@ public class Tornado : MonoBehaviour
         {
             player.transform.position = transform.position + new Vector3(0, 1, 0);
             tornadoTime += Time.deltaTime;
+            player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", true);
         }
 
         if (tornadoTime > timeInTornado)
@@ -36,6 +37,7 @@ public class Tornado : MonoBehaviour
             inTornado = false;
             player.GetComponent<MovementPlayer>().enabled = true;
             tornadoCoolingDown = true;
+            player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", false);
         }
     }
 
