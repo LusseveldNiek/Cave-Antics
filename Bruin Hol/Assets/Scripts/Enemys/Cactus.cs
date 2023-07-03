@@ -72,6 +72,7 @@ public class Cactus : MonoBehaviour
             else if (transform.position.y < beginHeight)
             {
                 cactusGoingDown = false;
+                animator.SetBool("isGoingUp", false);
                 //cactus in ground again
             }
         }
@@ -82,7 +83,6 @@ public class Cactus : MonoBehaviour
             {
                 cactusGoingDown = true;
                 cactusIsWalking = false;
-                animator.SetBool("isGoingUp", false);
                 //player out of sight while walking
                 beginHeight = transform.position.y - 2.4f;
             }

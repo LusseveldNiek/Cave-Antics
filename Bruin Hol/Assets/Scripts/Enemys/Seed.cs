@@ -82,6 +82,11 @@ public class Seed : MonoBehaviour
                 goingLeft = false;
             }
         }
+
+        if(collision.gameObject.tag == "pickaxe")
+        {
+            Destroy(gameObject);
+        }
     }
 
     void RandomManager()

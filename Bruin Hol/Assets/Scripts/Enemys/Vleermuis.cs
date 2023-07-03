@@ -119,4 +119,12 @@ public class Vleermuis : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "pickaxe")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
