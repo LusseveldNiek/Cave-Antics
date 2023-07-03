@@ -25,7 +25,7 @@ public class Tornado : MonoBehaviour
     {
         if(inTornado)
         {
-            player.transform.position = transform.position + new Vector3(0, 1, 0);
+            player.transform.position = transform.position + new Vector3(0, 2, 0);
             player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", true);
             tornadoCoolingDown = true;
         }
