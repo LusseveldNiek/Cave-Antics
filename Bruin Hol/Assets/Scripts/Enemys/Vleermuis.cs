@@ -78,15 +78,23 @@ public class Vleermuis : MonoBehaviour
                 goingUp = false;
                 if (goingLeft)
                 {
-                    goingLeft = false;
-                    goingRight = true;
-                    print("turn");
+                    if(player.transform.position.x > transform.position.x)
+                    {
+                        goingLeft = false;
+                        goingRight = true;
+                        print("turn");
+                    }
+                    
                 }
 
                 else if (goingRight)
                 {
-                    goingLeft = true;
-                    goingRight = false;
+                    if(player.transform.position.x < transform.position.x)
+                    {
+                        goingLeft = true;
+                        goingRight = false;
+                    }
+                    
                 }
             }
         }
