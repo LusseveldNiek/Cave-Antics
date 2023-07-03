@@ -17,7 +17,6 @@ public class Tornado : MonoBehaviour
         if(other.gameObject.tag == "Player" && tornadoCoolingDown == false)
         {
             player = other.gameObject;
-            player.GetComponent<MovementPlayer>().enabled = false;
             inTornado = true;
         }
     }
@@ -27,17 +26,8 @@ public class Tornado : MonoBehaviour
         if(inTornado)
         {
             player.transform.position = transform.position + new Vector3(0, 1, 0);
-            tornadoTime += Time.deltaTime;
             player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", true);
-        }
-
-        if (tornadoTime > timeInTornado)
-        {
-            tornadoTime = 0;
-            inTornado = false;
-            player.GetComponent<MovementPlayer>().enabled = true;
             tornadoCoolingDown = true;
-            player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", false);
         }
     }
 
@@ -45,10 +35,18 @@ public class Tornado : MonoBehaviour
     {
         if (tornadoCoolingDown)
         {
+            inTornado = false;
             if(tornadoCooldownTime < 0.3f)
             {
                 player.GetComponent<Rigidbody>().AddForce(Vector3.up * forceUp * Time.deltaTime);
             }
+
+            else
+            {
+                player.GetComponent<MovementPlayer>().animator.SetBool("isJumping", false);
+            }
+
+
 
             tornadoCooldownTime += Time.deltaTime;
             if (tornadoCooldownTime > tornadoCooldown)
