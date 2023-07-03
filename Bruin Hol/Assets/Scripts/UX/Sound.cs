@@ -40,13 +40,13 @@ public class Sound : MonoBehaviour
         isRolling = player.GetComponent<MovementPlayer>().isRolling;
 
         //sprinting
-        if (sprinting && !runningSound.isPlaying)
+        if (sprinting && !runningSound.isPlaying && isRolling == false)
         {
             runningSound.time = runningSoundDelay;
             runningSound.Play();
 
         }
-        else if (!sprinting && runningSound.isPlaying)
+        else if (isRolling && runningSound.isPlaying || !sprinting && runningSound.isPlaying)
         {
             runningSound.Stop();
         }
@@ -59,10 +59,18 @@ public class Sound : MonoBehaviour
         }
 
         //rolling
-        if(isRolling)
+        if(isRolling && !rollingSound.isPlaying)
         {
             rollingSound.Play();
+            print("rollingSound");
         }
+
+        else if(isRolling == false && rollingSound.isPlaying)
+        {
+            rollingSound.Stop();
+        }
+
+        
 
         //damage
         if(isDamaged && !damageSound.isPlaying)
