@@ -172,7 +172,7 @@ public class HealthSystem : MonoBehaviour
         if (collision.gameObject.tag == "doesDamage")
         {
             //check if object touches spike
-            if (collision.gameObject.GetComponent<StekelOpGrond>() != null)
+            if (collision.gameObject.GetComponent<RespawnGround>() != null)
             {
                 inSpike = true;
                 print("works");

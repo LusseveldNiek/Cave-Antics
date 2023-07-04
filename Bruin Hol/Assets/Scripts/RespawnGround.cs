@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StekelOpGrond : MonoBehaviour
+public class RespawnGround : MonoBehaviour
 {
     public float force;
     private void OnCollisionStay(Collision collision)
