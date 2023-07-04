@@ -165,6 +165,11 @@ public class Bunny : MonoBehaviour
                 goingLeft = false;
             }
         }
+
+        if (other.gameObject.tag == "pickaxe")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

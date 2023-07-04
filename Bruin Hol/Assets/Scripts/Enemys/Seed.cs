@@ -6,33 +6,21 @@ public class Seed : MonoBehaviour
 {
     public Animator animator;
     public float speed;
-    public float jumpSpeed;
-    private float idleTime;
-    private float maxIdleTime;
+    private float maxJumpSpeed;
     private float walkTime;
     private float maxWalkTime;
     public bool isWalking;
-    public bool isIdle;
+    public bool isJumping;
     public bool goingRight;
     public bool goingLeft;
     public float lowestSpeed;
     public float highestSpeed;
-    private float jumpTime;
     public GameObject mesh;
    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     
     void Update()
     {
-        
-        
-
         RandomManager();
         if(isWalking)
         {
@@ -40,7 +28,7 @@ public class Seed : MonoBehaviour
             animator.SetBool("isWalking", true);
             if(goingLeft)
             {
-                Quaternion target = Quaternion.Euler(-90, -90, mesh.transform.rotation.z);
+                Quaternion target = Quaternion.Euler(-90, 90, mesh.transform.rotation.z);
 
                 // rotate when turning
                 mesh.transform.rotation = target;
@@ -50,7 +38,7 @@ public class Seed : MonoBehaviour
 
             else if(goingRight)
             {
-                Quaternion target = Quaternion.Euler(-90, 90, mesh.transform.rotation.z);
+                Quaternion target = Quaternion.Euler(-90, -90, mesh.transform.rotation.z);
 
                 // rotate when turning
                 mesh.transform.rotation = target;
@@ -60,10 +48,6 @@ public class Seed : MonoBehaviour
             }
         }
 
-        if(isIdle)
-        {
-            animator.SetBool("isWalking", false);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -83,7 +67,12 @@ public class Seed : MonoBehaviour
             }
         }
 
-        if(collision.gameObject.tag == "pickaxe")
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "pickaxe")
         {
             Destroy(gameObject);
         }
@@ -91,51 +80,39 @@ public class Seed : MonoBehaviour
 
     void RandomManager()
     {
-        jumpTime += Time.deltaTime;
-        if(4 < jumpTime)
-        {
-            jumpTime = 0;
-            jumpSpeed = Random.Range(10, 70);
-            GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed);
-        }
-        
-
         if (isWalking)
         {
-            maxIdleTime = Random.Range(2, 7);
+            maxJumpSpeed = Random.Range(10, 70);
             walkTime += Time.deltaTime;
             if(walkTime > maxWalkTime)
             {
-                isIdle = true;
+                isJumping = true;
                 isWalking = false;
                 walkTime = 0;
             }
 
         }
 
-        if(isIdle)
+        if(isJumping)
         {
-            
+            GetComponent<Rigidbody>().AddForce(Vector3.up * maxJumpSpeed);
             speed = Random.Range(lowestSpeed, highestSpeed);
             maxWalkTime = Random.Range(2, 7);
-            idleTime += Time.deltaTime;
-            if (idleTime > maxIdleTime)
+            
+            isJumping = false;
+            isWalking = true;
+            if (goingLeft)
             {
-                idleTime = 0;
-                isIdle = false;
-                isWalking = true;
-                if(goingLeft)
-                {
-                    goingLeft = false;
-                    goingRight = true;
-                }
-
-                else if(goingRight)
-                {
-                    goingLeft = true;
-                    goingRight = false;
-                }
+                goingLeft = false;
+                goingRight = true;
             }
+
+            else if (goingRight)
+            {
+                goingLeft = true;
+                goingRight = false;
+            }
+            
         }
     }
 

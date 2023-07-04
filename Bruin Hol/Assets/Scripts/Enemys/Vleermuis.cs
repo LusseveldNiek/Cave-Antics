@@ -133,14 +133,17 @@ public class Vleermuis : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "pickaxe")
-        {
-            Destroy(gameObject);
-        }
-
         if(collision.gameObject.tag == "Player")
         {
             isColliding = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "pickaxe")
+        {
+            Destroy(gameObject);
         }
     }
 }
