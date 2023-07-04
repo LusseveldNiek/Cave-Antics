@@ -118,8 +118,8 @@ MonoBehaviour:
   goingRight: 1
   goingLeft: 0
   lowestSpeed: 0
-  highestSpeed: 0.5
-  mesh: {fileID: 0}
+  highestSpeed: 0.2
+  mesh: {fileID: 8508760276093966804}
 --- !u!95 &-6241286375247726410
 Animator:
   serializedVersion: 5

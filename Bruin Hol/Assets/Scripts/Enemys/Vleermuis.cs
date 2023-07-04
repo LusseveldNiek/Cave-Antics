@@ -17,6 +17,9 @@ public class Vleermuis : MonoBehaviour
     public bool goingUp;
     private RaycastHit leftHit;
     private RaycastHit rightHit;
+    private RaycastHit downHit;
+    public bool isColliding;
+    private float collisionReset;
     void Start()
     {
         targetHeight = transform.position.y;
@@ -69,14 +72,15 @@ public class Vleermuis : MonoBehaviour
         if(isAttacking)
         {
             animator.SetBool("gliding", true);
-
-            if(player.transform.position.y < transform.position.y)
+            Physics.Raycast(transform.position, Vector3.down, out downHit, 0.4f);
+            if(player.transform.position.y < transform.position.y && downHit.transform == null && isColliding == false)
             {
                 transform.Translate(Vector3.down * goingDownSpeed * Time.deltaTime);
             }
             
             else
             {
+                downHit = new RaycastHit();
                 print("goingDown");
                 goingUp = true;
                 isAttacking = false;
@@ -118,6 +122,17 @@ public class Vleermuis : MonoBehaviour
                 }
             }
         }
+
+        //reset collision timer
+        if(isColliding)
+        {
+            collisionReset += Time.deltaTime;
+            if(collisionReset > 0.2f)
+            {
+                isColliding = false;
+                collisionReset = 0;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -125,6 +140,11 @@ public class Vleermuis : MonoBehaviour
         if(collision.gameObject.tag == "pickaxe")
         {
             Destroy(gameObject);
+        }
+
+        if(collision.gameObject.tag == "Player")
+        {
+            isColliding = true;
         }
     }
 }
