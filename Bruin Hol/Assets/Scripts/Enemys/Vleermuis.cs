@@ -38,11 +38,10 @@ public class Vleermuis : MonoBehaviour
             Physics.Raycast(transform.position + new Vector3(-1, 0, 0), Vector3.left, out leftHit, 1);
             if(leftHit.transform != null)
             {
-                if(leftHit.transform.gameObject.tag == "wall")
-                {
-                    goingLeft = false;
-                    goingRight = true;
-                }
+                goingLeft = false;
+                goingRight = true;
+
+
             }
         }
 
@@ -56,11 +55,8 @@ public class Vleermuis : MonoBehaviour
             Physics.Raycast(transform.position + new Vector3(1, 0, 0), Vector3.right, out rightHit, 1);
             if (rightHit.transform != null)
             {
-                if (rightHit.transform.gameObject.tag == "wall")
-                {
-                    goingLeft = true;
-                    goingRight = false;
-                }
+                goingLeft = true;
+                goingRight = false;
             }
         }
 
