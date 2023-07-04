@@ -219,7 +219,7 @@ public class MovementPlayer : MonoBehaviour
     void FixedUpdate()
     {
         //jumping
-        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted && !menuActive)
+        if (Gamepad.all[0].buttonSouth.isPressed && isGrounded && gameStarted && !menuActive && !isRolling && !isCrouching)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce);
             animator.SetBool("isJumping", true);
@@ -439,24 +439,24 @@ public class MovementPlayer : MonoBehaviour
         //isRolling
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
-            print("rolling");
+            
             isRolling = true;
             animator.SetBool("isSliding", true);
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 2))
             {
                 if (hit.transform != null)
                 {
-                    print("1");
+                    
                     if (hit.transform.gameObject.tag == "Ground")
                     {
-                        print("2");
+                        
                         if (hit.transform.parent != null)
                         {
-                            print("3");
+                            
                             if (hit.transform.parent.gameObject.tag == "leftSliding")
                             {
                                 //goingLeft
-                                print("goingLeft");
+                                
                                 transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / slowDownSliding);
                                 speedPlayer = beginPlayerSpeed * 2;
                             }
@@ -464,7 +464,7 @@ public class MovementPlayer : MonoBehaviour
                             else if (hit.transform.parent.gameObject.tag == "rightSliding")
                             {
                                 //goingRight
-                                print("goingRight");
+                                
                                 float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / slowDownSliding);
                                 transform.Translate(Vector3.right * positiveNumber);
                                 speedPlayer = beginPlayerSpeed * 2;
@@ -496,16 +496,27 @@ public class MovementPlayer : MonoBehaviour
             isCrouching = true;
             speedPlayer = crouchSpeed;
             animator.SetBool("isCrouching", true);
+            
+        }
+
+        else
+        {
+            isCrouching = false;
+            animator.SetBool("isCrouching", false);
+
+        }
+
+        if(isCrouching || isRolling)
+        {
             GetComponent<BoxCollider>().enabled = false;
             crouchCollider.GetComponent<BoxCollider>().enabled = true;
         }
 
         else
         {
-            isCrouching = false;
             GetComponent<BoxCollider>().enabled = true;
             crouchCollider.GetComponent<BoxCollider>().enabled = false;
-            animator.SetBool("isCrouching", false);
+            
         }
 
         
@@ -566,9 +577,12 @@ public class MovementPlayer : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if(isCrouching && collision.gameObject.tag == "crouchColliders")
+        if(isCrouching && collision.gameObject.tag == "crouchColliders" || isRolling && collision.gameObject.tag == "crouchColliders")
         {
             Physics.IgnoreCollision(crouchCollider.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
+            GetComponent<BoxCollider>().enabled = false;
+            crouchCollider.GetComponent<BoxCollider>().enabled = true;
+            print("hoi");
         }
     }
 }
