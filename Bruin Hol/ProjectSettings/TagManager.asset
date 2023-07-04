@@ -23,6 +23,8 @@ TagManager:
   - crouchColliders
   - ignoreCollisionPlayer
   - stenenRechthoek
+  - leftSliding
+  - rightSliding
   layers:
   - Default
   - TransparentFX

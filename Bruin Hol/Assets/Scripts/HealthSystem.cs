@@ -82,7 +82,7 @@ public class HealthSystem : MonoBehaviour
         Physics.Raycast(bottomPlayer.position, -transform.up, out hit, 1);
         if(hit.transform != null)
         {
-            print("ground");
+            
             if(hit.transform.gameObject.GetComponent<Rigidbody>() == null && hit.transform.gameObject.tag == "Ground")
             {
                 isGrounded = true;

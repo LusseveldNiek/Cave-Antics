@@ -67,6 +67,7 @@ public class MovementPlayer : MonoBehaviour
     public bool isCrouching;
 
     public float crouchSpeed;
+    public RaycastHit hit;
 
     [Header("SlopeRotation")]
     public float slopeRotationSpeed;
@@ -438,27 +439,48 @@ public class MovementPlayer : MonoBehaviour
         //isRolling
         if (Gamepad.all[0].buttonEast.ReadValue() > 0 && sprinting)
         {
+            print("rolling");
             isRolling = true;
             animator.SetBool("isSliding", true);
-            if (transform.rotation.z > 1)
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 2))
             {
-                //goingLeft
-                transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / slowDownSliding);
-                speedPlayer = beginPlayerSpeed * 2;
+                if (hit.transform != null)
+                {
+                    print("1");
+                    if (hit.transform.gameObject.tag == "Ground")
+                    {
+                        print("2");
+                        if (hit.transform.parent != null)
+                        {
+                            print("3");
+                            if (hit.transform.parent.gameObject.tag == "leftSliding")
+                            {
+                                //goingLeft
+                                print("goingLeft");
+                                transform.Translate(Vector3.left * (transform.rotation.z * speedPlayer) / slowDownSliding);
+                                speedPlayer = beginPlayerSpeed * 2;
+                            }
+
+                            else if (hit.transform.parent.gameObject.tag == "rightSliding")
+                            {
+                                //goingRight
+                                print("goingRight");
+                                float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / slowDownSliding);
+                                transform.Translate(Vector3.right * positiveNumber);
+                                speedPlayer = beginPlayerSpeed * 2;
+                            }
+
+                            speedPlayer -= rollingSpeed * rollingSpeed;
+                            rollingSpeed += rollingSpeed * Time.deltaTime;
+
+                            speedPlayer = Mathf.Clamp(speedPlayer, 0, 7);
+                        }
+
+                    }
+                }
             }
-
-            else if (transform.rotation.z < 1)
-            {
-                //goingRight
-                float positiveNumber = Mathf.Abs((transform.rotation.z * speedPlayer) / slowDownSliding);
-                transform.Translate(Vector3.right * positiveNumber);
-                speedPlayer = beginPlayerSpeed * 2;
-            }
-
-            speedPlayer -= rollingSpeed * rollingSpeed;
-            rollingSpeed += rollingSpeed * Time.deltaTime;
-
-            speedPlayer = Mathf.Clamp(speedPlayer, 0, 7);
+            
+            
         }
 
         else
