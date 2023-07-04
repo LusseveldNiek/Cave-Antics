@@ -5,7 +5,7 @@ using UnityEngine;
 public class Vleermuis : MonoBehaviour
 {
     public GameObject player;
-    public GameObject playerMesh;
+    public GameObject mesh;
     public float distance;
     public Animator animator;
     public bool isAttacking;
@@ -29,9 +29,9 @@ public class Vleermuis : MonoBehaviour
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-            Quaternion target = Quaternion.Euler(-90, -90, playerMesh.transform.rotation.z);
+            Quaternion target = Quaternion.Euler(-90, -90, mesh.transform.rotation.z);
 
-            playerMesh.transform.localRotation = target;
+            mesh.transform.localRotation = target;
             Physics.Raycast(transform.position + new Vector3(-1, 0, 0), Vector3.left, out leftHit, 1);
             if(leftHit.transform != null)
             {
@@ -47,9 +47,9 @@ public class Vleermuis : MonoBehaviour
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
 
-            Quaternion target = Quaternion.Euler(-90, 90, playerMesh.transform.rotation.z);
+            Quaternion target = Quaternion.Euler(-90, 90, mesh.transform.rotation.z);
 
-            playerMesh.transform.localRotation = target;
+            mesh.transform.localRotation = target;
             Physics.Raycast(transform.position + new Vector3(1, 0, 0), Vector3.right, out rightHit, 1);
             if (rightHit.transform != null)
             {
