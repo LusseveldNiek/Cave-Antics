@@ -55,9 +55,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _ToonBrightness: 1
-    - _ToonOffset: 1
-    - _ToonSmoothness: 1
+    - _ToonBrightness: 0.25
+    - _ToonOffset: 0
+    - _ToonSmoothness: 0
     m_Colors:
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

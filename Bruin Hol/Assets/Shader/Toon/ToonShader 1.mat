@@ -42,7 +42,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.5
-    - _ToonBrightness: 0.5
+    - _ToonBrightness: 0.25
     - _ToonOffset: 0
     - _ToonSmoothness: 0
     m_Colors:
