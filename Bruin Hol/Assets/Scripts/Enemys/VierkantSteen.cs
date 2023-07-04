@@ -15,6 +15,8 @@ public class VierkantSteen : MonoBehaviour
     private RaycastHit hit;
     public Animator animator;
     public float distance;
+    
+    
 
     void Update()
     {
@@ -28,13 +30,14 @@ public class VierkantSteen : MonoBehaviour
 
             if(hit.transform != null)
             {
-                if (hit.transform.gameObject.tag == "wall")
+                if (hit.transform.gameObject.tag == "wall" && hit.transform.gameObject.GetComponent<Collider>().isTrigger)
                 {
                     animator.SetFloat("speed", -1);
                     goingRight = true;
                     goingLeft = false;
                     hit = new RaycastHit();
                     print("hitWall");
+                    
                 }
             }
             
@@ -50,14 +53,17 @@ public class VierkantSteen : MonoBehaviour
 
             if(hit.transform != null)
             {
-                if (hit.transform.gameObject.tag == "wall")
+                if (hit.transform.gameObject.tag == "wall" && hit.transform.gameObject.GetComponent<Collider>().isTrigger)
                 {
                     animator.SetFloat("speed", 1);
                     goingRight = false;
                     goingLeft = true;
                     hit = new RaycastHit();
+                    
                 }
             }
+
+            
             
         }
         
@@ -69,7 +75,10 @@ public class VierkantSteen : MonoBehaviour
         {
             transform.position += new Vector3(-9.288f, 0, 0);
             print("teleportingLeft");
+            
         }
+
+        
     }
 
     public void Rightreset()
@@ -78,6 +87,7 @@ public class VierkantSteen : MonoBehaviour
         {
             transform.position += new Vector3(9.288f, 0, 0);
             print("teleportingRight");
+            
         }
     }
 
