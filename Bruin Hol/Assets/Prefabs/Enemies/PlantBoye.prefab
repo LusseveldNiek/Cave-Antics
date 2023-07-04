@@ -652,6 +652,8 @@ MonoBehaviour:
   animationLimit: 1
   animationTime: 0
   flower: {fileID: -2863917312877976342}
+  particle: {fileID: 8149235306126610572, guid: 43719d61a329b674fa0ed5bb755b2aeb,
+    type: 3}
 --- !u!82 &-2863917312877976342
 AudioSource:
   m_ObjectHideFlags: 0

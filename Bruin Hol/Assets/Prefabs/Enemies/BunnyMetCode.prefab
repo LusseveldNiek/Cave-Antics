@@ -155,6 +155,8 @@ MonoBehaviour:
     type: 3}
   bunnyMesh: {fileID: 1027755112583450544}
   animator: {fileID: 3570972626646880376}
+  particle: {fileID: 8149235306126610572, guid: 43719d61a329b674fa0ed5bb755b2aeb,
+    type: 3}
 --- !u!1001 &3570972626936002573
 PrefabInstance:
   m_ObjectHideFlags: 0

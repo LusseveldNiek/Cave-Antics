@@ -719,6 +719,8 @@ MonoBehaviour:
   goingDownSpeed: 4
   goingUp: 0
   isColliding: 0
+  particle: {fileID: 8149235306126610572, guid: 43719d61a329b674fa0ed5bb755b2aeb,
+    type: 3}
 --- !u!65 &1986757359581138786
 BoxCollider:
   m_ObjectHideFlags: 0

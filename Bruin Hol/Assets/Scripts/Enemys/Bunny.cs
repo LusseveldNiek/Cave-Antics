@@ -21,7 +21,7 @@ public class Bunny : MonoBehaviour
     public GameObject lavaBubble;
     public GameObject bunnyMesh;
     public Animator animator;
-
+    public GameObject particle;
     void FixedUpdate()
     {
         //movement
@@ -169,6 +169,8 @@ public class Bunny : MonoBehaviour
         if (other.gameObject.tag == "pickaxe")
         {
             Destroy(gameObject);
+            GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(particlePrefab, 1);
         }
     }
 

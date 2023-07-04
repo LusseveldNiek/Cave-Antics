@@ -422,6 +422,8 @@ MonoBehaviour:
   groundOffset: 0.04
   hittingWall: 0
   wallHitTimeOutTime: 1
+  particle: {fileID: 8149235306126610572, guid: 43719d61a329b674fa0ed5bb755b2aeb,
+    type: 3}
 --- !u!1 &8328351682297263385
 GameObject:
   m_ObjectHideFlags: 0

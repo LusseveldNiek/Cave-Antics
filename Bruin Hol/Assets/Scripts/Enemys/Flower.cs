@@ -18,6 +18,7 @@ public class Flower : MonoBehaviour
     public float animationTime;
     private bool playingAnimation;
     public AudioSource flower;
+    public GameObject particle;
     void Update()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < flowerRange)
@@ -68,6 +69,8 @@ public class Flower : MonoBehaviour
         if(other.gameObject.tag == "pickaxe")
         {
             Destroy(gameObject);
+            GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(particlePrefab, 1);
         }
     }
 }

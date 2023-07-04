@@ -20,6 +20,7 @@ public class Vleermuis : MonoBehaviour
     private RaycastHit downHit;
     public bool isColliding;
     private float collisionReset;
+    public GameObject particle;
     void Start()
     {
         targetHeight = transform.position.y;
@@ -144,6 +145,8 @@ public class Vleermuis : MonoBehaviour
         if (other.gameObject.tag == "pickaxe")
         {
             Destroy(gameObject);
+            GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(particlePrefab, 1);
         }
     }
 }

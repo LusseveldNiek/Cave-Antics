@@ -19,6 +19,7 @@ public class Cactus : MonoBehaviour
     public bool hittingWall;
     private float wallHitTimeOut;
     public float wallHitTimeOutTime;
+    public GameObject particle;
     void Start()
     {
         beginHeight = transform.position.y;
@@ -111,6 +112,8 @@ public class Cactus : MonoBehaviour
         if (other.gameObject.tag == "pickaxe" && cactusIsWalking)
         {
             Destroy(gameObject);
+            GameObject particlePrefab = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(particlePrefab, 1);
         }
     }
 
