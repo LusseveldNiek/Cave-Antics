@@ -8,7 +8,16 @@ public class StartButton : MonoBehaviour
     public GameObject mainMenu;
     private float timer;
     public bool startTimer;
+    public Button button;
 
+    private void Start()
+    {
+        if(button != null)
+        {
+            button.Select();
+        }
+        
+    }
     public void PlayAnimation()
     {
         // Trigger the animation transition
