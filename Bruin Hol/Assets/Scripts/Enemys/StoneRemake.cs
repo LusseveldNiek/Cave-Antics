@@ -6,6 +6,7 @@ public class StoneRemake : MonoBehaviour
 {
     public float maximumSpeed;
     private bool isRolling;
+    public GameObject player;
     
     private void Update()
     {
@@ -21,17 +22,15 @@ public class StoneRemake : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
+        if(Vector3.Distance(player.transform.position, transform.position) < 4)
         {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<BoxCollider>().enabled = false;
-            gameObject.tag = "doesDamage";
         }
     }
+
+    
 
     private void OnCollisionEnter(Collision collision)
     {
