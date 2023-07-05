@@ -30,13 +30,14 @@ public class LavaEnemy : MonoBehaviour
         }
     }
 
-    
-
-    
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("wall"))
+        if(collision.gameObject.tag == "doesDamage")
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+
+        if (collision.gameObject.CompareTag("wall"))
         {
             if (goingLeft)
             {
@@ -44,20 +45,12 @@ public class LavaEnemy : MonoBehaviour
                 goingLeft = false;
             }
 
-            if (goingRight)
+            else if (goingRight)
             {
                 goingLeft = true;
                 goingRight = false;
             }
-            
-        }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "doesDamage")
-        {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
 }
