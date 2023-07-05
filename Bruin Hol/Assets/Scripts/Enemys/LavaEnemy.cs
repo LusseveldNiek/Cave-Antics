@@ -55,7 +55,7 @@ public class LavaEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "doesDamage")
+        if(collision.gameObject.tag != "wall")
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
