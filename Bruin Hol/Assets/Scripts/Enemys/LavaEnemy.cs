@@ -8,6 +8,8 @@ public class LavaEnemy : MonoBehaviour
     public bool goingRight;
     public float speed;
     public GameObject mesh;
+    public Transform player;
+    public Animator animator;
 
     private void Update()
     {
@@ -18,6 +20,11 @@ public class LavaEnemy : MonoBehaviour
 
             // rotate player when turning
             mesh.gameObject.transform.localRotation = target;
+
+            if (Vector3.Distance(player.position, transform.position) < 4)
+            {
+                animator.SetBool("attack", true);
+            }
         }
 
         if (goingRight)
