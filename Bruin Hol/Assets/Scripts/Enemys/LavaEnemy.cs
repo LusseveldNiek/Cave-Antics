@@ -11,8 +11,25 @@ public class LavaEnemy : MonoBehaviour
     public Transform player;
     public Animator animator;
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
+        if (Vector3.Distance(player.position, transform.position) < 7)
+        {
+
+            animator.SetFloat("speed", 1);
+        }
+
+        else
+        {
+            animator.SetFloat("speed", -1);
+
+        }
+
         if (goingLeft)
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
@@ -21,10 +38,7 @@ public class LavaEnemy : MonoBehaviour
             // rotate player when turning
             mesh.gameObject.transform.localRotation = target;
 
-            if (Vector3.Distance(player.position, transform.position) < 4)
-            {
-                animator.SetBool("attack", true);
-            }
+            
         }
 
         if (goingRight)
@@ -34,6 +48,8 @@ public class LavaEnemy : MonoBehaviour
 
             // rotate player when turning
             mesh.gameObject.transform.localRotation = target;
+
+            
         }
     }
 
