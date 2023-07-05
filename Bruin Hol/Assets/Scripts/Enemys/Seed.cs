@@ -85,7 +85,7 @@ public class Seed : MonoBehaviour
     {
         if (isWalking)
         {
-            maxJumpSpeed = Random.Range(10, 70);
+            maxJumpSpeed = Random.Range(10, 40);
             walkTime += Time.deltaTime;
             if(walkTime > maxWalkTime)
             {
