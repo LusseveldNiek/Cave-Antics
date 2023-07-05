@@ -111,14 +111,19 @@ public class HealthSystem : MonoBehaviour
 
         }
 
-        if(inSpike)
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (inSpike)
         {
             StartCoroutine(BlinkCoroutine());
-            transform.position = Vector3.Lerp(transform.position, lastGroundedPosition, 2 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, lastGroundedPosition, 4 * Time.deltaTime);
             GetComponent<BoxCollider>().enabled = false;
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<MovementPlayer>().enabled = false;
-            if(transform.position == lastGroundedPosition)
+            if (transform.position == lastGroundedPosition)
             {
                 GetComponent<BoxCollider>().enabled = true;
                 GetComponent<Rigidbody>().useGravity = true;
@@ -128,7 +133,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
