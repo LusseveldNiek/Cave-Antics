@@ -34,7 +34,7 @@ public class LevelSound : MonoBehaviour
                     audioSource.Stop();
                 }
                 soundManager.GetComponent<Sound>().runningSound = caveWalk;
-                player.GetComponent<MovementPlayer>().groundParticle = desertJumpParticle;
+                player.GetComponent<MovementPlayer>().groundParticle = caveJumpParticle;
             }
 
             if (player.transform.position.x > transform.position.x)
