@@ -69,28 +69,22 @@ public class VierkantSteen : MonoBehaviour
         
     }
 
-    public void Leftreset()
+    
+
+    public void EndOfAnimation()
     {
-        if(goingLeft)
+        if (goingLeft)
         {
             transform.position += new Vector3(-9.288f, 0, 0);
             print("teleportingLeft");
-            
+
         }
 
-        
-    }
-
-    public void Rightreset()
-    {
-        if (goingRight)
+        else if(goingRight)
         {
             transform.position += new Vector3(9.288f, 0, 0);
             print("teleportingRight");
-            
         }
     }
-
-    
 
 }
