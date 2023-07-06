@@ -20,6 +20,7 @@ public class ScoreSystem : MonoBehaviour
     public GameObject diamondImage;
     public bool diamondMining;
     private float timerDiamond;
+    public GameObject[] particles;
 
     void Update()
     {
@@ -36,6 +37,15 @@ public class ScoreSystem : MonoBehaviour
                 print("hoi");
                 diamondMining = false;
                 timerDiamond = 0;
+
+                for(int i = 0; i < particles.Length; i++)
+                {
+                    if(particles[i].activeInHierarchy == false)
+                    {
+                        particles[i].SetActive(true);
+                        break;
+                    }
+                }
             }
         }
 
