@@ -68,7 +68,10 @@ public class Seed : MonoBehaviour
             }
         }
 
-        
+        if(collision.gameObject.tag == "doesDamage")
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
