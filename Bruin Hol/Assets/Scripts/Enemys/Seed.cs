@@ -17,6 +17,8 @@ public class Seed : MonoBehaviour
     public GameObject particle;
 
     private float walkingTime;
+    private bool wallTimer;
+    private float wallTime;
    
 
     
@@ -45,22 +47,33 @@ public class Seed : MonoBehaviour
             transform.Translate(Vector3.right * speed);
         }
 
+        if(wallTimer)
+        {
+            wallTime += Time.deltaTime;
+            if(wallTime > 1)
+            {
+                wallTime = 0;
+                wallTimer = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "wall")
+        if(collision.gameObject.tag == "wall" && wallTimer == false)
         {
             if(goingRight)
             {
                 goingRight = false;
                 goingLeft = true;
+                wallTimer = true;
             }
 
             else if(goingLeft)
             {
                 goingRight = true;
                 goingLeft = false;
+                wallTimer = true;
             }
         }
 
@@ -90,8 +103,11 @@ public class Seed : MonoBehaviour
             jumpTime = 0;
         }
        
-
-        walkingTime += Time.deltaTime;
+        if(wallTimer == false)
+        {
+            walkingTime += Time.deltaTime;
+        }
+        
         if(walkingTime > 1)
         {
             int random = Random.Range(0, 2);
