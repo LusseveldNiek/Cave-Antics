@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour
 
     public GameObject prefabAttack1;
     public GameObject prefabAttack2;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +27,19 @@ public class Boss : MonoBehaviour
         if(reset)
         {
             resetTime += Time.deltaTime;
-            if(resetTime > 2)
+            if(resetTime > 5)
             {
                 attack1 = true;
                 resetTime = 0;
-                reset = false;
             }
         }
 
         if(attack1)
         {
             animator.SetBool("attack1", true);
-
+            attack1 = false;
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,7 +54,8 @@ public class Boss : MonoBehaviour
 
     public void Schoot()
     {
+        print("schootingWorks");
+        animator.SetBool("attack1", false);
         GameObject prefab = Instantiate(prefabAttack1, transform.position, Quaternion.identity);
-        prefab.transform.Translate(Vector3.right * fireSpeed);
     }
 }
