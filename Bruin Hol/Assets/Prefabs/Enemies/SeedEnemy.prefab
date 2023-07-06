@@ -111,13 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: -6241286375247726410}
-  speed: 0
-  isWalking: 1
+  speed: 0.1
+  maxJumpSpeed: 17
   isJumping: 0
   goingRight: 1
   goingLeft: 0
-  lowestSpeed: 0
-  highestSpeed: 0.2
   mesh: {fileID: 8508760276093966804}
   particle: {fileID: 8149235306126610572, guid: 43719d61a329b674fa0ed5bb755b2aeb,
     type: 3}

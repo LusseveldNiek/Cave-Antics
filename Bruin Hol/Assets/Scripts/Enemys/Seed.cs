@@ -6,47 +6,43 @@ public class Seed : MonoBehaviour
 {
     public Animator animator;
     public float speed;
-    private float maxJumpSpeed;
-    private float walkTime;
-    private float maxWalkTime;
-    public bool isWalking;
+    public float maxJumpSpeed;
+    private float jumpTime;
+    private float maxJumpTime;
+
     public bool isJumping;
     public bool goingRight;
     public bool goingLeft;
-    public float lowestSpeed;
-    public float highestSpeed;
     public GameObject mesh;
     public GameObject particle;
+
+    private float walkingTime;
    
 
     
     void Update()
     {
         RandomManager();
-        if(isWalking)
+        animator.SetBool("isWalking", true);
+        if (goingLeft)
         {
+            Quaternion target = Quaternion.Euler(-90, 90, mesh.transform.rotation.z);
 
-            animator.SetBool("isWalking", true);
-            if(goingLeft)
-            {
-                Quaternion target = Quaternion.Euler(-90, 90, mesh.transform.rotation.z);
+            // rotate when turning
+            mesh.transform.rotation = target;
 
-                // rotate when turning
-                mesh.transform.rotation = target;
+            transform.Translate(Vector3.left * speed);
+        }
 
-                transform.Translate(Vector3.left * speed);
-            }
+        else if (goingRight)
+        {
+            Quaternion target = Quaternion.Euler(-90, -90, mesh.transform.rotation.z);
 
-            else if(goingRight)
-            {
-                Quaternion target = Quaternion.Euler(-90, -90, mesh.transform.rotation.z);
+            // rotate when turning
+            mesh.transform.rotation = target;
 
-                // rotate when turning
-                mesh.transform.rotation = target;
 
-                
-                transform.Translate(Vector3.right * speed);
-            }
+            transform.Translate(Vector3.right * speed);
         }
 
     }
@@ -86,39 +82,35 @@ public class Seed : MonoBehaviour
 
     void RandomManager()
     {
-        if (isWalking)
-        {
-            maxJumpSpeed = Random.Range(10, 40);
-            walkTime += Time.deltaTime;
-            if(walkTime > maxWalkTime)
-            {
-                isJumping = true;
-                isWalking = false;
-                walkTime = 0;
-            }
-
-        }
-
-        if(isJumping)
+        jumpTime += Time.deltaTime;
+        if (jumpTime > maxJumpTime)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * maxJumpSpeed);
-            speed = Random.Range(lowestSpeed, highestSpeed);
-            maxWalkTime = Random.Range(2, 7);
-            
-            isJumping = false;
-            isWalking = true;
-            if (goingLeft)
+            maxJumpTime = Random.Range(2, 7);
+            jumpTime = 0;
+        }
+       
+
+        walkingTime += Time.deltaTime;
+        if(walkingTime > 1)
+        {
+            int random = Random.Range(0, 2);
+            if(random == 0)
             {
-                goingLeft = false;
-                goingRight = true;
+                if(goingLeft)
+                {
+                    goingLeft = false;
+                    goingRight = true;
+                }
+
+                else if (goingRight)
+                {
+                    goingLeft = true;
+                    goingRight = false;
+                }
             }
 
-            else if (goingRight)
-            {
-                goingLeft = true;
-                goingRight = false;
-            }
-            
+            walkingTime = 0;
         }
     }
 
