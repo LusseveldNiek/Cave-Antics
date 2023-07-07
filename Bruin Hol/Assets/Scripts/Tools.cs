@@ -27,19 +27,22 @@ public class Tools : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            for (int i = 0; i < score.GetComponent<ScoreSystem>().particles.Length; i++)
+            if (score.GetComponent<ScoreSystem>().enabledDiamonds == 8)
             {
-                if (score.GetComponent<ScoreSystem>().particles[i].activeInHierarchy == true)
-                {
-                    if (i == 8)
-                    {
-                        score.GetComponent<ScoreSystem>().animator.SetBool("ending", true);
-                        score.GetComponent<ScoreSystem>().canvasBeginTime = true;
-
-
-                    }
-                }
+                score.GetComponent<ScoreSystem>().animator.SetBool("ending", true);
+                score.GetComponent<ScoreSystem>().canvasBeginTime = true;
             }
+            //for (int i = 0; i < score.GetComponent<ScoreSystem>().particles.Length; i++)
+            //{
+            //    if (score.GetComponent<ScoreSystem>().particles[i].activeInHierarchy == true)
+            //    {
+            //        if (i == 8)
+            //        {
+
+
+            //        }
+            //    }
+            //}
         }
     }
 }

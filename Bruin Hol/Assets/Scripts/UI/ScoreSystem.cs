@@ -23,6 +23,7 @@ public class ScoreSystem : MonoBehaviour
     public bool diamondMining;
     private float timerDiamond;
     public GameObject[] particles;
+    public int enabledDiamonds = 0;
     public Animator animator;
 
     public GameObject endingCanvas;
@@ -59,6 +60,7 @@ public class ScoreSystem : MonoBehaviour
                     if(particles[i].activeInHierarchy == false)
                     {
                         particles[i].SetActive(true);
+                        enabledDiamonds++;
                         break;
                     }
                 }
