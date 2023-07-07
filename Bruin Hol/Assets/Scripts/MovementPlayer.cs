@@ -85,6 +85,7 @@ public class MovementPlayer : MonoBehaviour
     public Vector3 boxSize = Vector3.one;
     public float desiredDistance = 1.0f;
     public float avoidanceForce = 1.0f;
+    private float sleepTime;
 
 
     void Start()
@@ -213,6 +214,21 @@ public class MovementPlayer : MonoBehaviour
         if(!isOnLeftWall && !isOnRightWall && !menuActive)
         {
             RotatePlayerMesh();
+        }
+
+        if(GetComponent<Rigidbody>().IsSleeping())
+        {
+            sleepTime += Time.deltaTime;
+            if(sleepTime > 20)
+            {
+                animator.SetBool("sitting", true);
+            }
+        }
+
+        else
+        {
+            sleepTime = 0;
+            animator.SetBool("sitting", false);
         }
     }
 
