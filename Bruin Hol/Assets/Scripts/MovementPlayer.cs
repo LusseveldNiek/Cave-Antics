@@ -219,9 +219,25 @@ public class MovementPlayer : MonoBehaviour
         if(GetComponent<Rigidbody>().IsSleeping())
         {
             sleepTime += Time.deltaTime;
-            if(sleepTime > 20)
+            if(sleepTime > 10)
             {
                 animator.SetBool("sitting", true);
+                if(sleepTime > 12)
+                {
+                    animator.SetBool("sitting", false);
+                    animator.SetBool("loopSitting", true);
+                    if(sleepTime > 20)
+                    {
+                        animator.SetBool("sleeping", true);
+                        animator.SetBool("loopSitting", false);
+                        if(sleepTime > 22)
+                        {
+                            animator.SetBool("loopSleeping", true);
+                            animator.SetBool("sleeping", false);
+                        }
+
+                    }
+                }
             }
         }
 
@@ -229,6 +245,9 @@ public class MovementPlayer : MonoBehaviour
         {
             sleepTime = 0;
             animator.SetBool("sitting", false);
+            animator.SetBool("loopSitting", false);
+            animator.SetBool("Sleeping", false);
+            animator.SetBool("loopSleeping", false);
         }
     }
 
