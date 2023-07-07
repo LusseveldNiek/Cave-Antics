@@ -19,7 +19,7 @@ public class LavaEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.position, transform.position) < 4)
+        if (Vector3.Distance(player.position, transform.position) < 7)
         {
             
             animator.SetFloat("speed", 1);
