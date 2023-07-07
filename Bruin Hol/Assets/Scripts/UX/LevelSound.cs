@@ -23,18 +23,21 @@ public class LevelSound : MonoBehaviour
     {
         if(Vector3.Distance(player.transform.position, transform.position) < 3)
         {
+            AudioSource[] audioSources = GetComponents<AudioSource>();
+
+            foreach (AudioSource audioSource in audioSources)
+            {
+                audioSource.Stop();
+            }
             if (player.transform.position.x < transform.position.x)
             {
                 player.GetComponent<MovementPlayer>().sprintParticle = sprintParticle;
                 player.GetComponent<MovementPlayer>().sprintParticle1 = sprintParticle1;
-                AudioSource[] audioSources = GetComponents<AudioSource>();
-
-                foreach (AudioSource audioSource in audioSources)
-                {
-                    audioSource.Stop();
-                }
+                
                 soundManager.GetComponent<Sound>().runningSound = caveWalk;
                 player.GetComponent<MovementPlayer>().groundParticle = caveJumpParticle;
+
+                
             }
 
             if (player.transform.position.x > transform.position.x)
@@ -42,14 +45,11 @@ public class LevelSound : MonoBehaviour
                 player.GetComponent<MovementPlayer>().sprintParticle = desertParticle;
                 player.GetComponent<MovementPlayer>().sprintParticle1 = desertParticle;
 
-                AudioSource[] audioSources = GetComponents<AudioSource>();
-
-                foreach (AudioSource audioSource in audioSources)
-                {
-                    audioSource.Stop();
-                }
+                
                 soundManager.GetComponent<Sound>().runningSound = desertWalk;
                 player.GetComponent<MovementPlayer>().groundParticle = desertJumpParticle;
+
+                
             }
         }
         
