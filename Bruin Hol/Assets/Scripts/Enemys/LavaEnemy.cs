@@ -10,6 +10,7 @@ public class LavaEnemy : MonoBehaviour
     public GameObject mesh;
     public Transform player;
     public Animator animator;
+    private float time;
     
     private void Start()
     {
@@ -18,16 +19,18 @@ public class LavaEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.position, transform.position) < 7)
+        if (Vector3.Distance(player.position, transform.position) < 4)
         {
             
             animator.SetFloat("speed", 1);
+            time += Time.deltaTime;
 
         }
 
-        else if(Vector3.Distance(player.position, transform.position) < 10)
+        else if(time > 0)
         {
             animator.SetFloat("speed", -1);
+            time -= Time.deltaTime;
             
         }
 

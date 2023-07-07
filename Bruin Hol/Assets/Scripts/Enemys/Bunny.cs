@@ -70,7 +70,7 @@ public class Bunny : MonoBehaviour
             jumpingCounter += Time.deltaTime;
 
             //schooting
-            if (jumpingCounter > 2)
+            if (jumpingCounter > 4)
             {
                 playSchootAnimation = true;
 
