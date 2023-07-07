@@ -7,6 +7,7 @@ public class StoneRemake : MonoBehaviour
     public float maximumSpeed;
     private bool isRolling;
     public GameObject player;
+    public Transform position;
     
     private void Update()
     {
@@ -23,7 +24,7 @@ public class StoneRemake : MonoBehaviour
             }
         }
 
-        if(Vector3.Distance(player.transform.position, transform.position) < 4)
+        if(Vector3.Distance(player.transform.position, position.position) < 3)
         {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<BoxCollider>().enabled = false;

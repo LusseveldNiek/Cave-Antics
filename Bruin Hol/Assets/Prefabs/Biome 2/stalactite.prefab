@@ -197,9 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155e9301b72e45543b9e94aa3955a22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 4042617687304629330, guid: 3cd8b21af3ae8104b9752f1297dac471,
+  particle: {fileID: 4042617687304629330, guid: 1a825b13101bec149bc5852b0cbaa2b6,
     type: 3}
-  sound: {fileID: 0}
 --- !u!65 &1918523785533449681
 BoxCollider:
   m_ObjectHideFlags: 0
