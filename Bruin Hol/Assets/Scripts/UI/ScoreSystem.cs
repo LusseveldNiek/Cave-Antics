@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class ScoreSystem : MonoBehaviour
 {
@@ -32,6 +33,13 @@ public class ScoreSystem : MonoBehaviour
 
     void Update()
     {
+        if (Gamepad.all[0].leftShoulder.ReadValue() > 0)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i].SetActive(true);
+            }
+        }
         scoreText.text = "Diamonds " + score.ToString();
         if(diamondMining)
         {
