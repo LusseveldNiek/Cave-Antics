@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class ScoreSystem : MonoBehaviour
     private float timerDiamond;
     public GameObject[] particles;
     public Animator animator;
+
+    public GameObject endingCanvas;
+    public Button button;
+    private float canvasTime;
+    private bool canvasBeginTime;
+    public GameObject player;
 
     void Update()
     {
@@ -77,6 +84,17 @@ public class ScoreSystem : MonoBehaviour
                 timerSulfur = 0;
             }
         }
+
+        if(canvasBeginTime)
+        {
+            canvasTime += Time.deltaTime;
+            if (canvasTime > 2)
+            {
+                endingCanvas.SetActive(true);
+                button.Select();
+                player.GetComponent<MovementPlayer>().enabled = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,6 +108,9 @@ public class ScoreSystem : MonoBehaviour
                     if(i == 8)
                     {
                         animator.SetBool("ending", true);
+                        canvasBeginTime = true;
+                        
+                        
                     }
                 }
             }
