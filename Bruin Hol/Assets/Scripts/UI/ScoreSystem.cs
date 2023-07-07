@@ -77,4 +77,21 @@ public class ScoreSystem : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                if (particles[i].activeInHierarchy == true)
+                {
+                    if(i == 8)
+                    {
+
+                    }
+                }
+            }
+        }
+    }
 }
