@@ -32,7 +32,7 @@ public class ScoreSystem : MonoBehaviour
 
     void Update()
     {
-        scoreText.text = score.ToString();
+        scoreText.text = "Diamonds " + score.ToString();
         if(diamondMining)
         {
             print("diamond");
