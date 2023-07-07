@@ -57,6 +57,6 @@ public class Boss : MonoBehaviour
         print("schootingWorks");
         animator.SetBool("attack1", false);
         GameObject prefab = Instantiate(prefabAttack1, transform.position, Quaternion.identity);
-        Destroy(prefab, 4);
+        Destroy(prefab, 2);
     }
 }
