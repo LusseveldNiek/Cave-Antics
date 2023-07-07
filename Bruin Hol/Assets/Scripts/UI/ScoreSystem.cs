@@ -21,6 +21,7 @@ public class ScoreSystem : MonoBehaviour
     public bool diamondMining;
     private float timerDiamond;
     public GameObject[] particles;
+    public Animator animator;
 
     void Update()
     {
@@ -88,7 +89,7 @@ public class ScoreSystem : MonoBehaviour
                 {
                     if(i == 8)
                     {
-
+                        animator.SetBool("ending", true);
                     }
                 }
             }
