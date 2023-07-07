@@ -28,7 +28,7 @@ public class ScoreSystem : MonoBehaviour
     public GameObject endingCanvas;
     public Button button;
     private float canvasTime;
-    private bool canvasBeginTime;
+    public bool canvasBeginTime;
     public GameObject player;
 
     void Update()
