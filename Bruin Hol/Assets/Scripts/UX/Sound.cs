@@ -9,6 +9,7 @@ public class Sound : MonoBehaviour
     public bool isMining;
     public bool buttonPressed;
     public bool isRolling;
+    public bool isGrounded;
 
     public GameObject buttonType;
     public GameObject player;
@@ -38,15 +39,16 @@ public class Sound : MonoBehaviour
         sprinting = player.GetComponent<MovementPlayer>().sprinting;
         isDamaged = player.GetComponent<HealthSystem>().gettingDamage;
         isRolling = player.GetComponent<MovementPlayer>().isRolling;
+        isGrounded = player.GetComponent<MovementPlayer>().isGrounded;
 
         //sprinting
-        if (sprinting && !runningSound.isPlaying && isRolling == false)
+        if (sprinting && !runningSound.isPlaying && isRolling == false && isGrounded)
         {
             runningSound.time = runningSoundDelay;
             runningSound.Play();
 
         }
-        else if (isRolling && runningSound.isPlaying || !sprinting && runningSound.isPlaying)
+        else if (isRolling && runningSound.isPlaying || !sprinting && runningSound.isPlaying || isGrounded == false)
         {
             runningSound.Stop();
         }
