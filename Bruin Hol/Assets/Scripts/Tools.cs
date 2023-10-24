@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Tools : MonoBehaviour
 {
     public GameObject player;
-    public GameObject score;
+    public ScoreSystem score;
     
     // Start is called before the first frame update
     void Start()
@@ -27,22 +27,19 @@ public class Tools : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (score.GetComponent<ScoreSystem>().enabledDiamonds == 9)
+            for (int i = 0; i < score.particles.Length; i++)
             {
-                score.GetComponent<ScoreSystem>().animator.SetBool("ending", true);
-                score.GetComponent<ScoreSystem>().canvasBeginTime = true;
+                if (score.particles[i].activeInHierarchy == true)
+                {
+                    if (i == 8)
+                    {
+                        score.animator.SetBool("ending", true);
+                        score.canvasBeginTime = true;
+
+
+                    }
+                }
             }
-            //for (int i = 0; i < score.GetComponent<ScoreSystem>().particles.Length; i++)
-            //{
-            //    if (score.GetComponent<ScoreSystem>().particles[i].activeInHierarchy == true)
-            //    {
-            //        if (i == 8)
-            //        {
-
-
-            //        }
-            //    }
-            //}
         }
     }
 }
