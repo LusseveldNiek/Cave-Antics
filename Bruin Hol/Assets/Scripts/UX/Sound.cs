@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Sound : MonoBehaviour
 {
@@ -26,7 +28,10 @@ public class Sound : MonoBehaviour
 
     public AudioSource backSound;
     public AudioSource goSound;
-    
+
+    public Slider soundSlider;
+    public static float GlobalVolume = 1f;
+
 
 
     void Start()
@@ -36,6 +41,15 @@ public class Sound : MonoBehaviour
 
     private void Update()
     {
+        GlobalVolume = Mathf.Clamp01(soundSlider.value);
+
+        // Update the volume of all audio sources in the scene
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.volume = GlobalVolume;
+        }
+
         sprinting = player.GetComponent<MovementPlayer>().sprinting;
         isDamaged = player.GetComponent<HealthSystem>().gettingDamage;
         isRolling = player.GetComponent<MovementPlayer>().isRolling;

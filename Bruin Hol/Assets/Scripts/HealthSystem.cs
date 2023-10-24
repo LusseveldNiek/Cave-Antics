@@ -5,24 +5,20 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
+    public bool gameOver;
+
     public GameObject[] hearts;
     private float damageTimer;
     public float damageWaitTime;
     public bool canDoDamage;
-    public Animator animator;
     public float speed;
-    public GameObject gameOverCanvas;
-    public Button button;
     public bool gettingDamage;
 
     private float gameOverTime;
     public float gameOverTimeLimit;
 
-    public Renderer playerRenderer; // Reference to the player's renderer component
-    public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
-    public float blinkInterval = 0.3f; // Interval between blinks
-
     public GameObject crushingObject;
+    private bool crushedByCrusherObject;
 
     private bool isGrounded;
     public Vector3 lastGroundedPosition;
@@ -30,6 +26,15 @@ public class HealthSystem : MonoBehaviour
     public bool inSpike;
     private RaycastHit hit;
     public Transform bottomPlayer;
+
+    [Header("UI")]
+    public Renderer playerRenderer; // Reference to the player's renderer component
+    public UnityEngine.Material blinkingMaterial; // Material to be used when blinking
+    public float blinkInterval = 0.3f; // Interval between blinks
+
+    public Animator animator;
+    public GameObject gameOverCanvas;
+    public Button button;
 
 
 
@@ -42,20 +47,26 @@ public class HealthSystem : MonoBehaviour
     {
         GetComponent<MovementPlayer>().canDoDamage = canDoDamage;
 
+        //game over
         if(hearts[2].activeInHierarchy == false && canDoDamage == false)
         {
             print("gameOver");
             animator.SetBool("isDead", true);
+            GetComponent<MovementPlayer>().enabled = false;
+            gameOver = true;
+        }
 
+        if(gameOver)
+        {
             gameOverTime += Time.deltaTime;
             if (gameOverTime > gameOverTimeLimit)
             {
                 gameOverCanvas.SetActive(true);
                 button.Select();
-                GetComponent<MovementPlayer>().enabled = false;
             }
         }
 
+        //player damage timeout
         if(canDoDamage == false)
         {
             animator.SetBool("playerDamage", true);
@@ -65,6 +76,7 @@ public class HealthSystem : MonoBehaviour
             if(crushingObject != null)
             {
                 crushingObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
+                crushedByCrusherObject = true;
             }
 
             if (damageTimer > damageWaitTime)
@@ -73,12 +85,17 @@ public class HealthSystem : MonoBehaviour
                 canDoDamage = true;
                 animator.SetBool("playerDamage", false);
                 damageTimer = 0;
-                crushingObject.transform.parent.gameObject.GetComponent<Collider>().enabled = true;
-                crushingObject = null;
+                if(crushedByCrusherObject)
+                {
+                    crushingObject.transform.parent.gameObject.GetComponent<Collider>().enabled = true;
+                    crushingObject = null;
+                    crushedByCrusherObject = false;
+                }
                 
             }
         }
-
+        
+        //check if grounded
         Physics.Raycast(bottomPlayer.position, -transform.up, out hit, 1);
         if(hit.transform != null)
         {
@@ -116,6 +133,7 @@ public class HealthSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //remove player from spike
         if (inSpike)
         {
             StartCoroutine(BlinkCoroutine());
@@ -137,35 +155,38 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "doesDamage")
+        if(gameOver == false)
         {
-            //check health
-            for (int i = 0; i < hearts.Length; i++)
+            if (other.gameObject.tag == "doesDamage")
             {
-                if(hearts[i].gameObject.activeInHierarchy && canDoDamage)
+                //check health
+                for (int i = 0; i < hearts.Length; i++)
                 {
-                    hearts[i].SetActive(false);
-                    canDoDamage = false;
-                    GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - other.transform.position.x) * speed);
-                    if(other.isTrigger)
+                    if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
                     {
-                        crushingObject = other.gameObject;
+                        hearts[i].SetActive(false);
+                        canDoDamage = false;
+                        GetComponent<Rigidbody>().AddForce(Vector3.right * (transform.position.x - other.transform.position.x) * speed);
+                        if (other.isTrigger)
+                        {
+                            crushingObject = other.gameObject;
+                        }
+                        break;
                     }
-                    break;
                 }
             }
-        }
 
-        if(other.gameObject.tag == "stenenRechthoek")
-        {
-            //check health
-            for (int i = 0; i < hearts.Length; i++)
+            if (other.gameObject.tag == "stenenRechthoek")
             {
-                if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
+                //check health
+                for (int i = 0; i < hearts.Length; i++)
                 {
-                    hearts[i].SetActive(false);
-                    canDoDamage = false;
-                    break;
+                    if (hearts[i].gameObject.activeInHierarchy && canDoDamage)
+                    {
+                        hearts[i].SetActive(false);
+                        canDoDamage = false;
+                        break;
+                    }
                 }
             }
         }
@@ -180,7 +201,6 @@ public class HealthSystem : MonoBehaviour
             if (collision.gameObject.GetComponent<RespawnGround>() != null)
             {
                 inSpike = true;
-                print("works");
             }
 
             //check health
