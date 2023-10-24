@@ -109,7 +109,7 @@ public class MovementPlayer : MonoBehaviour
         
 
         //player does not clip in walls
-        if (isCrouching == false)
+        if (isCrouching == false && isRolling == false)
         {
             Collider[] colliders = Physics.OverlapBox(transform.position, boxSize / 2.0f, transform.rotation);
             foreach (Collider collider in colliders)
