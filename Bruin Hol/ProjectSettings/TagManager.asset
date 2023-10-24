@@ -25,6 +25,7 @@ TagManager:
   - stenenRechthoek
   - leftSliding
   - rightSliding
+  - TextGuide
   layers:
   - Default
   - TransparentFX

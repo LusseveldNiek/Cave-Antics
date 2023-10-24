@@ -65,6 +65,7 @@ public class MovementPlayer : MonoBehaviour
     public float slowDownSliding;
     public GameObject crouchCollider;
     public bool isCrouching;
+    public Crouching crouching;
 
     public float crouchSpeed;
     public RaycastHit hit;
@@ -518,7 +519,7 @@ public class MovementPlayer : MonoBehaviour
             
         }
 
-        else
+        else if(crouching.enoughHeightToStopCrouching)
         {
             isRolling = false;
             rollingSpeed = beginRollingSpeed;
@@ -534,7 +535,7 @@ public class MovementPlayer : MonoBehaviour
             
         }
 
-        else
+        else if(crouching.enoughHeightToStopCrouching)
         {
             isCrouching = false;
             animator.SetBool("isCrouching", false);

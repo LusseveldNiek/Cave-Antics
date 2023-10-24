@@ -27,7 +27,7 @@ public class Tools : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (score.GetComponent<ScoreSystem>().enabledDiamonds == 8)
+            if (score.GetComponent<ScoreSystem>().enabledDiamonds == 9)
             {
                 score.GetComponent<ScoreSystem>().animator.SetBool("ending", true);
                 score.GetComponent<ScoreSystem>().canvasBeginTime = true;
