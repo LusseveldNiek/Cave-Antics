@@ -52,11 +52,11 @@ public class Bunny : MonoBehaviour
         {
             jumpingCounter += Time.deltaTime;
         }
-        
-        if(jumpingCounter > 1)
+
+        if (jumpingCounter > 1)
         {
             //jumping
-            if(jumpingCounter < 1.1f)
+            if (jumpingCounter < 1.1f)
             {
                 GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed * Time.deltaTime);
                 animator.SetBool("jumping", true);
@@ -92,10 +92,6 @@ public class Bunny : MonoBehaviour
                             Destroy(lavaBubblePrefabLeft, 2);
                         }
                     }
-
-                    Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, -90, bunnyMesh.transform.rotation.z);
-
-                    bunnyMesh.transform.localRotation = target;
                 }
 
                 if (goingRight)
@@ -116,17 +112,26 @@ public class Bunny : MonoBehaviour
                             Destroy(lavaBubblePrefabRight, 2);
                         }
                     }
-
-                    Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, 90, bunnyMesh.transform.rotation.z);
-
-                    bunnyMesh.transform.localRotation = target;
                 }
                 jumpingCounter = 0;
             }
-
-            
-
         }
+
+        if (goingLeft)
+        {
+            Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, -90, bunnyMesh.transform.rotation.z);
+
+            bunnyMesh.transform.localRotation = target;
+        }
+
+        else if (goingRight)
+        {
+            Quaternion target = Quaternion.Euler(bunnyMesh.transform.rotation.x, 90, bunnyMesh.transform.rotation.z);
+
+            bunnyMesh.transform.localRotation = target;
+        }
+
+
 
         //isGrounded
         Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance);
