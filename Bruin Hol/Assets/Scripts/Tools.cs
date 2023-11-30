@@ -17,14 +17,17 @@ public class Tools : MonoBehaviour
     
     void Update()
     {
+        /*
         if (Gamepad.all[0].leftTrigger.ReadValue() > 0)
         {
             player.transform.position = transform.position;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.tag == "Player")
         {
             for (int i = 0; i < score.particles.Length; i++)
